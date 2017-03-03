@@ -3,6 +3,7 @@
 @section('app-content')
   <div class="row">
     <div class="col-md-4">
+      @if(1 == 2)
       <p class="card-title">Run for elections</p>
       <div class="panel panel-primary">
         <div class="panel-body">
@@ -40,6 +41,7 @@
           </form>
         </div><!-- .panel-body -->
       </div><!-- .panel -->
+      @endif
     </div><!-- .col-md-4 -->
 
     <div class="col-md-8">
