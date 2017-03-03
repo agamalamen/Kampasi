@@ -1,0 +1,162 @@
+
+
+<!-- values container -->
+<div class="values-container">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-md-4">
+          <img class="slideanim" src="{{ URL::to('src/img/values/paint-brush.png') }}" />
+          <h4>Flat Design</h4>
+          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur occaecat cupidatat non proident.</p>
+      </div><!-- .col-md-4 -->
+      <div class="col-md-4">
+        <img class="slideanim" src="{{ URL::to('src/img/values/imac.png') }}" />
+        <h4>Responsive layout</h4>
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur occaecat cupidatat non proident.</p>
+      </div><!-- .col-md-4 -->
+      <div class="col-md-4">
+          <img class="slideanim" src="{{ URL::to('src/img/values/support.png') }}" />
+          <h4>Cross browser</h4>
+          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur occaecat cupidatat non proident.</p>
+      </div><!-- .col-md-4 -->
+    </div><!-- .row -->
+  </div><!-- .container -->
+</div><!-- .values-container -->
+
+<div id="features" class="features-container">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-6">
+        <img class="img-responsive slideanim" src="{{ URL::to('src/img/features/features.png') }}" />
+      </div><!-- .col-md-6 -->
+
+      <div class="col-md-6">
+        <h2 class="text-center">Our features</h2>
+        <p>Lorem ipsum dolor sit amet, consequat aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+        <hr>
+        <div class="row">
+          <div class="col-md-6">
+            <ul class="list-unstyled">
+              <li><i class="fa fa-check" aria-hidden="true"></i> Meeting time</li>
+              <li><i class="fa fa-check" aria-hidden="true"></i> Invite people</li>
+              <li><i class="fa fa-check" aria-hidden="true"></i> Share location</li>
+              <li><i class="fa fa-check" aria-hidden="true"></i> Reminder</li>
+            </ul>
+          </div><!-- .col-md-6 -->
+          <div class="col-md-6">
+            <ul class="list-unstyled">
+              <li><i class="fa fa-check" aria-hidden="true"></i> Notification by email</li>
+              <li><i class="fa fa-check" aria-hidden="true"></i> List of meeting materials</li>
+              <li><i class="fa fa-check" aria-hidden="true"></i> Made very important</li>
+              <li><i class="fa fa-check" aria-hidden="true"></i> Go out and take holiday</li>
+            </ul>
+          </div><!-- .col-md-6 -->
+        </div><!-- .row -->
+
+      </div><!-- .col-md-6 -->
+
+    </div><!-- .row -->
+  </div><!-- .container -->
+</div><!-- .features-container -->
+
+<!-- .stats container -->
+<div class="stats-container">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-md-3">
+        <img class="slideanim" src="{{ URL::to('src/img/stats/stats.png') }}" />
+        <h4>147K</h4>
+        <p>times downloaded</p>
+      </div><!-- .col-md-3 -->
+      <div class="col-md-3">
+        <img class="slideanim" src="{{ URL::to('src/img/stats/clock.png') }}" />
+        <h4>98K</h4>
+        <p>hours of development</p>
+      </div><!-- .col-md-3 -->
+      <div class="col-md-3">
+        <img class="slideanim" src="{{ URL::to('src/img/stats/user.png') }}" />
+        <h4>203K</h4>
+        <p>created accounts</p>
+      </div><!-- .col-md-3 -->
+      <div class="col-md-3">
+        <img class="slideanim" src="{{ URL::to('src/img/stats/coffe-cup.png') }}" />
+        <h4>51K</h4>
+        <p>Cups of coffe</p>
+      </div><!-- .col-md-3 -->
+    </div><!-- .row -->
+  </div><!-- .container -->
+</div><!-- .stats-container -->
+
+<div id="testimonials" class="testimonials-container">
+<div class="container">
+  <h2 class="text-center">Testimonials</h2>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-default testimonial slideanim">
+        <div class="panel-body">
+          <p>"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Perspiciatis unde iste natus error sit voluptatem accusantium doloremque laudantium."</p>
+        </div><!-- .panel-body -->
+        <div class="panel-footer">
+          <h3>Bill Gates</h3>
+          <p>Microsoft</p>
+          <img class="img-responsive img-circle pull-right" src="{{ URL::to('src/img/testimonials/bill-gates.jpeg') }}" />
+        </div><!-- .panel-footer -->
+      </div><!-- .panel-default -->
+    </div><!-- .col-md-6 -->
+
+    <div class="col-md-6">
+      <div class="panel panel-default testimonial slideanim">
+        <div class="panel-body">
+          <p>"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Perspiciatis unde iste natus error sit voluptatem accusantium doloremque laudantium."</p>
+        </div><!-- .panel-body -->
+        <div class="panel-footer">
+          <h3>Bill Gates</h3>
+          <p>Microsoft</p>
+          <img class="img-responsive img-circle pull-right" src="{{ URL::to('src/img/testimonials/bill-gates.jpeg') }}" />
+        </div><!-- .panel-footer -->
+      </div><!-- .panel-default -->
+    </div><!-- .col-md-6 -->
+
+  </div><!-- .row -->
+  <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-default testimonial slideanim">
+        <div class="panel-body">
+          <p>"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Perspiciatis unde iste natus error sit voluptatem accusantium doloremque laudantium."</p>
+        </div><!-- .panel-body -->
+        <div class="panel-footer">
+          <h3>Bill Gates</h3>
+          <p>Microsoft</p>
+          <img class="img-responsive img-circle pull-right" src="{{ URL::to('src/img/testimonials/bill-gates.jpeg') }}" />
+        </div><!-- .panel-footer -->
+      </div><!-- .panel-default -->
+    </div><!-- .col-md-6 -->
+
+    <div class="col-md-6">
+      <div class="panel panel-default testimonial slideanim">
+        <div class="panel-body">
+          <p>"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Perspiciatis unde iste natus error sit voluptatem accusantium doloremque laudantium."</p>
+        </div><!-- .panel-body -->
+        <div class="panel-footer">
+          <h3>Bill Gates</h3>
+          <p>Microsoft</p>
+          <img class="img-responsive img-circle pull-right" src="{{ URL::to('src/img/testimonials/bill-gates.jpeg') }}" />
+        </div><!-- .panel-footer -->
+      </div><!-- .panel-default -->
+    </div><!-- .col-md-6 -->
+
+  </div><!-- .row -->
+</div><!-- .container -->
+</div><!-- .testimonials-container -->
+
+<div class="calltoaction-container">
+  <div class="container text-center">
+    <h4>Start using suborah now</h4>
+    <p>Lorem ipsum dolor sit amet, consequat aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <div class="home-buttons">
+      <a class="btn btn-default btn-lg" href="{{route('get.login')}}">Login</a>
+      <a class="btn btn-default btn-lg" href="{{route('get.signup')}}">Signup</a>
+    </div><!-- .home-buttons -->
+  </div><!-- .container -->
+</div><!-- .calltoaction-container -->

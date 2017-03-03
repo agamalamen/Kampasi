@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Support\Facades\Auth;
+use App\School;
+
+class EnrolledToSchool
+{
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
+     */
+    public function handle($request, Closure $next)
+    {
+        $school = School::where('username', $request->username)->first();
+        if(Auth::User()->school != $school) {
+          return redirect()->route('home');
+        }
+        return $next($request);
+    }
+}
