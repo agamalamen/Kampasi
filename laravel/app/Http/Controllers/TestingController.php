@@ -14,7 +14,8 @@ class TestingController extends Controller
 {
     public function testingUrl()
     {
-      $x = 1;
+      return 'hello world!';
+      /*$x = 1;
       foreach(Auth::User()->school->users as $user) {
         if($user->avatar == 'default.jpg') {
           $user->avatar = 'default_' . strval($x) . '.png';
@@ -24,6 +25,6 @@ class TestingController extends Controller
         if($x == 13) {
           $x = 1;
         }
-      }
+      }*/
     }
 }
