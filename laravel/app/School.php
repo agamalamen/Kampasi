@@ -196,4 +196,9 @@ class School extends Model
       return $this->hasMany('App\AvailableChaperone');
     }
 
+    public function electionsComments()
+    {
+      return $this->hasMany('App\ElectionsComment')->orderBy('id', 'DESC');
+    }
+
 }

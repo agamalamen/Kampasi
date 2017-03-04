@@ -168,4 +168,9 @@ class User extends Authenticatable
     {
       return $this->hasMany('App\AvailableChaperone');
     }
+
+    public function electionsComments()
+    {
+      return $this->hasMany('App\ElectionsComment');
+    }
 }

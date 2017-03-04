@@ -3,6 +3,29 @@
 @section('app-content')
   <div class="row">
     <div class="col-md-4">
+      <p class="card-title">Comments</p>
+      <div class="panel panel-primary">
+        <div class="panel-body">
+          <form class="form-inline text-center" method="post" action="{{route('post.elections.comment', 2017)}}">
+            <input type="text" name="content" style="width: 70%" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="Your comment goes here..">
+            <button type="submit" class="btn btn-primary">Post</button>
+            {{csrf_field()}}
+          </form>
+          <hr>
+          @if(Auth::User()->school->ElectionsComments == '[]')
+            <p style="color: grey; font-style: italic;" class="text-center">There are no comments to show</p>
+          @endif
+          <ul class="list-unstyled">
+          @foreach(Auth::User()->school->ElectionsComments as $comment)
+            <li>
+              <a href="{{route('dashboard', $comment->user->username)}}">{{$comment->user->name}}</a>
+              <p>{{$comment->content}}</p>
+            </li>
+            <hr>
+          @endforeach
+          </ul>
+        </div><!-- .panel-body -->
+      </div><!-- .panel-body -->
       @if(1 == 2)
       <p class="card-title">Run for elections</p>
       <div class="panel panel-primary">

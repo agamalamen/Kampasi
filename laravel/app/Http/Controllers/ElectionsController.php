@@ -10,6 +10,7 @@ use App\Candidate;
 use App\Election;
 use App\Vote;
 use App\User;
+use App\ElectionsComment;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -21,6 +22,21 @@ class ElectionsController extends Controller
       $ITreps = $school->elections;
       return view('elections.elections')->with(['ITreps' => $ITreps]);
     }*/
+
+    public function postElectionsComment(Request $request, $feedback_id)
+    {
+      $this->validate($request, [
+        'content' => 'required'
+      ]);
+
+      $comment = new ElectionsComment();
+      $comment->content = $request['content'];
+      $comment->user_id = Auth::User()->id;
+      $comment->school_id = Auth::User()->school->id;
+      $comment->save();
+      return redirect()->back();
+    }
+
 
     public function getElections($date) {
       return view('app.school.elections.elections');
