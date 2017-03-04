@@ -17,7 +17,7 @@ class DashboardController extends Controller
     public function getWelcome()
     {
       if(Auth::User()) {
-        return redirect()->route('dashboard', ['ala']);
+        return redirect()->route('dashboard', ['ala'])->with(['background_cover' => 'hello']);
       } else {
         return view('welcome');
       }
@@ -55,7 +55,7 @@ class DashboardController extends Controller
               }
             }
 
-            return view('app.school.school-dashboard')->with(['school' => $school, 'request' => $latest_request, 'requested_by' => $requested_by]);
+            return view('app.school.school-dashboard')->with(['school' => $school, 'request' => $latest_request, 'requested_by' => $requested_by, 'background_cover' => 'hello']);
           } else {
             return redirect()->route('home');
           }
