@@ -97,12 +97,12 @@ $birthday_guys = substr($birthday_guys, 0, strlen($birthday_guys) - 2);
                 <!--<li><a href="{{route('change.language', 'en')}}">En</a></li>
                 <li style="margin-right: 50px;"><a href="{{route('change.language', 'fr')}}">Fr</a></li>-->
               <li>
-                <img style="cursor: pointer; padding-top: 9px; padding-right: 20px;" class="dropdown-toggle rotating-icon" data-toggle="dropdown" src="{{URL::to('src/img/icons/settings.svg')}}" style="width: 25px; height: 25px;">
+                <img style="cursor: pointer; padding-top: 9px; padding-right: 20px;" class="dropdown-toggle" data-toggle="dropdown" src="{{URL::to('src/img/icons/settings.svg')}}" style="width: 25px; height: 25px;">
               </li>
               <li>
                 <div class="dropdown">
                   @if(Auth::User()->unseenNotifications == '[]')
-                  <img id="settings-icon" style="cursor: pointer; padding-top: 9px;" class="dropdown-toggle rotating-icon" data-toggle="dropdown" src="{{URL::to('src/img/icons/notification.svg')}}" style="width: 25px; height: 25px;">
+                  <img id="settings-icon" style="cursor: pointer; padding-top: 9px;" class="dropdown-toggle" data-toggle="dropdown" src="{{URL::to('src/img/icons/notification.svg')}}" style="width: 25px; height: 25px;">
                   @else
                   <span class="badge" style="background-color: #e74c3c">{{Auth::User()->unseenNotifications->count()}}</span>
                   <img id="settings-icon" style="cursor: pointer; padding-top: 9px;" class="dropdown-toggle rotating-icon" data-toggle="dropdown" src="{{URL::to('src/img/icons/notification.svg')}}" style="width: 25px; height: 25px;">
