@@ -105,7 +105,7 @@ $birthday_guys = substr($birthday_guys, 0, strlen($birthday_guys) - 2);
                   <img id="settings-icon" style="cursor: pointer; padding-top: 9px;" class="dropdown-toggle" data-toggle="dropdown" src="{{URL::to('src/img/icons/notification.svg')}}" style="width: 25px; height: 25px;">
                   @else
                   <span class="badge" style="background-color: #e74c3c">{{Auth::User()->unseenNotifications->count()}}</span>
-                  <img id="settings-icon" style="cursor: pointer; padding-top: 9px;" class="dropdown-toggle rotating-icon" data-toggle="dropdown" src="{{URL::to('src/img/icons/notification.svg')}}" style="width: 25px; height: 25px;">
+                  <img id="settings-icon" style="cursor: pointer; padding-top: 9px;" class="dropdown-toggle" data-toggle="dropdown" src="{{URL::to('src/img/icons/notification.svg')}}" style="width: 25px; height: 25px;">
                   @endif
                   <ul class="dropdown-menu" style="margin-top: 5px; width: 350px;">
                     @foreach(Auth::User()->notifications as $notification)
