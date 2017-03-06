@@ -5,7 +5,7 @@
   <meta name="keywords" content="Education,Campus,African Leadership Academy, Elearning">
 @endsection
 
-@section('title') Welcome to Kampasi @endsection
+@section('title') Kampasi • All your school in one place, online! @endsection
 
 @section('content')
 
