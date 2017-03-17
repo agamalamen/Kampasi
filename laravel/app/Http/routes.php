@@ -16,6 +16,12 @@ Route::get('/anzisha/twitter', function() {
   return view('anzisha.twitter');
 });
 
+//Pricing
+Route::get('/pricing/packages', [
+  'uses' => 'DashboardController@getPricing',
+  'as' => 'get.pricing'
+]);
+
 
 //community art project
 Route::get('/community-art-project/soul-mate', [

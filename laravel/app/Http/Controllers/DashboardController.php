@@ -70,4 +70,9 @@ class DashboardController extends Controller
     {
       return view('about-us');
     }
+
+    public function getPricing()
+    {
+      return view('pricing');
+    }
 }

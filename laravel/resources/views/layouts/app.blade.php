@@ -25,7 +25,7 @@
     <![endif]-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style type="text/css" media="print">
       .no-print {display: none; }
     </style>

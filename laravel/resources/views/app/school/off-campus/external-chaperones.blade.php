@@ -14,6 +14,8 @@
               @else
                 @if(Auth::User()->role == 'student_life')
                   <a style="font-size: 12px;" href="{{route('get.approve.external.chaperone', $chaperone->id)}}">(Approve)</a>
+                @else
+                <span style="font-size: 12px; color: grey">Not approved</span>
                 @endif
               @endif
             </h3>
