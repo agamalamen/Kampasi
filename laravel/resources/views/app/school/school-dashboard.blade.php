@@ -230,7 +230,7 @@
         }
 
         </style>
-        <ul class="list-unstyled" id="style-1" style="overflow-y: auto; overflow-x: hidden; height: 200px;">
+        <ul class="list-unstyled" id="style-1" style="overflow-y: auto; overflow-x: hidden; height: 120px;">
           @foreach($school->recentUsers as $user)
             <li>
               <div class="row">
