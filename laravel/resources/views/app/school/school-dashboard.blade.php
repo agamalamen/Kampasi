@@ -261,7 +261,7 @@
 
 <div class="row">
   <div class="col-md-6">
-    <p class="card-title">Tutoring program</p>
+    <p class="card-title">Tutoring program <span style="color: #f1c40f;"><i class="fa fa-star" aria-hidden="true"></i> New</span></p>
     <div class="panel panel-primary">
       <div class="panel-body">
           @if(Auth::User()->school->todayTutorings == '[]')
