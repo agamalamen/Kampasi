@@ -201,4 +201,28 @@ class School extends Model
       return $this->hasMany('App\ElectionsComment')->orderBy('id', 'DESC');
     }
 
+    public function tutors()
+    {
+      return $this->hasMany('App\Tutor')->orderBy('id', 'DESC');
+    }
+
+    public function tutorings()
+    {
+      return $this->hasMany('App\Tutoring')->orderBy('date', 'ASEC');
+    }
+
+    public function todayTutorings()
+    {
+      return $this->hasMany('App\Tutoring')->where('date', date('Y-m-d'))->orderBy('date', 'ASEC');
+    }
+
+    public function tutoringPeriods()
+    {
+      return $this->hasMany('App\TutoringPeriod');
+    }
+
+    public function tutoringSubjects()
+    {
+      return $this->hasMany('App\TutoringSubject');
+    }
 }

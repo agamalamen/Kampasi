@@ -173,4 +173,9 @@ class User extends Authenticatable
     {
       return $this->hasMany('App\ElectionsComment');
     }
+
+    public function tutor()
+    {
+      return $this->hasOne('App\Tutor');
+    }
 }

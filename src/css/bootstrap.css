@@ -7033,6 +7033,11 @@ footer p {
     padding-left: 10px;
 }
 
+.no-results {
+  color: grey;
+  font-style: italic;
+}
+
 
 .rotating-icon {
   border-radius: 100%;

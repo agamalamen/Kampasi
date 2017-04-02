@@ -23,6 +23,55 @@ Route::get('/pricing/packages', [
 ]);
 
 
+//Tutoring routing
+Route::get('/{school_username}/tutoring', [
+  'uses' => 'TutoringController@getTutoring',
+  'as'   => 'get.tutoring',
+  'middleware' => 'auth'
+]);
+
+Route::get('/{school_username}/tutoring/tutors', [
+  'uses' => 'TutoringController@getTutors',
+  'as'   => 'get.tutors',
+  'middleware' => 'auth'
+]);
+
+Route::get('/{school_username}/tutoring/actions/signup/{tutoring_id}', [
+  'uses' => 'TutoringController@getSignupTutoring',
+  'as'   => 'get.signup.tutoring',
+  'middleware' => 'auth'
+]);
+
+Route::post('/{school_username}/tutoring/actions/post-tutoring', [
+  'uses' => 'TutoringController@postTutoring',
+  'as'   => 'post.tutoring',
+  'middleware' => 'auth'
+]);
+
+Route::post('/{school_username}/tutoring/actions/post-tutor', [
+  'uses' => 'TutoringController@postTutor',
+  'as'   => 'post.tutor',
+  'middleware' => 'auth'
+]);
+
+Route::post('/{school_username}/tutoring/actions/post-tutor-subject', [
+  'uses' => 'TutoringController@postTutorSubject',
+  'as'   => 'post.tutor.subject',
+  'middleware' => 'auth'
+]);
+
+Route::get('{school_username}/tutoring/actions/tutor-not-here/{tutoring_id}', [
+  'uses' => 'TutoringController@tutorNotHere',
+  'as' => 'tutor.not.here',
+  'middleware' => 'auth'
+]);
+
+Route::get('{school_username}/tutoring/actions/tutee-not-here/{tutoring_id}', [
+  'uses' => 'TutoringController@tuteeNotHere',
+  'as' => 'tutee.not.here',
+  'middleware' => 'auth'
+]);
+
 //community art project
 Route::get('/community-art-project/soul-mate', [
   'uses' => 'SoulMateController@getSoulMate',

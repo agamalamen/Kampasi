@@ -259,6 +259,47 @@
   </div><!-- .col-md-4 -->
 </div><!-- .row -->
 
+<div class="row">
+  <div class="col-md-6">
+    <p class="card-title">Tutoring program</p>
+    <div class="panel panel-primary">
+      <div class="panel-body">
+          @if(Auth::User()->school->todayTutorings == '[]')
+            <p class="no-results text-center">There are no tutoring slots for today.</p>
+          @else
+          <ul class="list-inline text-center">
+            @foreach(Auth::User()->school->todayTutorings as $tutoring)
+              <li style="margin-right: 20px;">
+                <img class="img-circle" style="width: 50px; height: 50px;" src="{{route('get.avatar', $tutoring->tutor->user->avatar)}}">
+              </li>
+            @endforeach
+          </ul>
+          <p class="text-center">
+            @if(Auth::User()->school->Todaytutorings->count() == 1)
+              is
+            @else
+              are
+            @endif
+             tutoring today for
+             <?php
+              $subjectsTutoredToday = '';
+              ?>
+             @foreach(Auth::User()->School->todayTutorings as $tutoring)
+                <?php $subjectsTutoredToday .= $tutoring->tutorSubject->tutoringSubject->name . ', '; ?>
+             @endforeach
+             <?php
+                $subjectsTutoredToday = substr($subjectsTutoredToday, 0, strlen($subjectsTutoredToday) - 2);
+              ?>
+             <span style="font-family: lato; font-size: 18px; color: #27ae60; font-weight: bold;">{{$subjectsTutoredToday}}</span>
+           </p>
+          @endif
+        <hr>
+        <a href="{{route('get.tutoring', [Auth::User()->school->username])}}">Go to tutoring</a>
+      </div><!-- .panel-body -->
+    </div><!-- .panel -->
+  </div><!-- .col-md-6 -->
+</div><!-- .row -->
+
 
 <!--<div class="row">
   <div class="col-md-8">
