@@ -152,6 +152,68 @@
 <div class="row">
 
   <div class="col-md-4">
+    <p class="card-title">Members</p>
+    <div class="panel panel-primary">
+      <div class="panel-body">
+        <form id="search-members-form">
+          <input type="text" id="search-members-input" style="margin-bottom: 10px; border-radius: 3px;" placeholder="Search for members..." class="form-control" >
+        </form>
+
+
+        <script>
+        var searchMembersRoute = "{{route('search.members')}}";
+        var membersLoading = "{{URL::to('src/img/loading/rolling.gif')}}";
+        </script>
+
+        <style>
+        #style-1::-webkit-scrollbar-track
+        {
+          border-radius: 10px;
+          background-color: #bdc3c7;
+        }
+
+        #style-1::-webkit-scrollbar
+        {
+          width: 8px;
+          background-color: #F5F5F5;
+        }
+
+        #style-1::-webkit-scrollbar-thumb
+        {
+          border-radius: 10px;
+          background-color: #555;
+        }
+
+        </style>
+        <ul class="list-unstyled" id="style-1" style="overflow-y: auto; overflow-x: hidden; height: 120px;">
+          @foreach($school->recentUsers as $user)
+          <li>
+            <div class="row">
+              <div class="col-xs-2">
+                <img class="img-circle" style="width: 50px; height: 50px;" src="{{route('get.avatar', $user->avatar)}}">
+              </div><!-- .col-md-4 -->
+              <div class="col-xs-8" style="text-align: left;">
+                <a href="{{route('dashboard', $user->username)}}">{{$user->name}}</a>
+                <?php
+                $bio = $user->bio;
+                if(strlen($bio) > 35) {
+                  $bio = substr($bio, 0, 35) . '...';
+                }
+                ?>
+                <p>{{$bio}}</p>
+              </div><!-- .col-md-8 -->
+            </div><!-- .row -->
+            <hr>
+          </li>
+          @endforeach
+        </ul>
+        <hr>
+        <a href="{{route('get.members', ['all'])}}">See all members</a>
+      </div><!-- .panel-body -->
+    </div><!-- .panel-default -->
+  </div><!-- .col-md-4 -->
+
+  <div class="col-md-4">
     <p class="card-title">Feedback system</p>
     <div class="panel panel-primary" style="border: 0px;">
       <div class="panel-body" style="min-height: 140px;">
@@ -195,68 +257,6 @@
         </div><!-- .panel-body -->
       </div><!-- .panel-default -->
     </div><!-- .col-md-4 -->
-
-  <div class="col-md-4">
-    <p class="card-title">Members</p>
-    <div class="panel panel-primary">
-      <div class="panel-body">
-        <form id="search-members-form">
-          <input type="text" id="search-members-input" style="margin-bottom: 10px; border-radius: 3px;" placeholder="Search for members..." class="form-control" >
-        </form>
-
-
-        <script>
-          var searchMembersRoute = "{{route('search.members')}}";
-          var membersLoading = "{{URL::to('src/img/loading/rolling.gif')}}";
-        </script>
-
-        <style>
-        #style-1::-webkit-scrollbar-track
-        {
-        border-radius: 10px;
-        background-color: #bdc3c7;
-        }
-
-        #style-1::-webkit-scrollbar
-        {
-        width: 8px;
-        background-color: #F5F5F5;
-        }
-
-        #style-1::-webkit-scrollbar-thumb
-        {
-        border-radius: 10px;
-        background-color: #555;
-        }
-
-        </style>
-        <ul class="list-unstyled" id="style-1" style="overflow-y: auto; overflow-x: hidden; height: 120px;">
-          @foreach($school->recentUsers as $user)
-            <li>
-              <div class="row">
-                <div class="col-xs-2">
-                  <img class="img-circle" style="width: 50px; height: 50px;" src="{{route('get.avatar', $user->avatar)}}">
-                </div><!-- .col-md-4 -->
-                <div class="col-xs-8" style="text-align: left;">
-                  <a href="{{route('dashboard', $user->username)}}">{{$user->name}}</a>
-                  <?php
-                    $bio = $user->bio;
-                    if(strlen($bio) > 35) {
-                      $bio = substr($bio, 0, 35) . '...';
-                    }
-                   ?>
-                  <p>{{$bio}}</p>
-                </div><!-- .col-md-8 -->
-              </div><!-- .row -->
-              <hr>
-            </li>
-          @endforeach
-        </ul>
-        <hr>
-        <a href="{{route('get.members', ['all'])}}">See all members</a>
-      </div><!-- .panel-body -->
-    </div><!-- .panel-default -->
-  </div><!-- .col-md-4 -->
 </div><!-- .row -->
 
 <div class="row">
