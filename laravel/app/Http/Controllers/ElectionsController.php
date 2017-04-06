@@ -56,6 +56,18 @@ class ElectionsController extends Controller
     }
 
     public function postVote(Request $request) {
+      $date = date('m/d/Y h:i:s a', time());
+      $startDate = "04/09/2017 09:00:00 am";
+      $endDate = "04/09/2017 01:00:00 pm";
+
+      if(strtotime($date) < strtotime($startDate)) {
+        return redirect()->back()->with(['message' => 'Voting did not start yet! Come back on 9th April at 9 AM', 'status' => 'alert-danger', 'dismiss' => true]);
+      }
+
+      if(strtotime($date) > strtotime($endDate)) {
+        return redirect()->back()->with(['message' => 'Voting is over!', 'status' => 'alert-danger', 'dismiss' => true]);
+      }
+
       if(Auth::User()->voted) {
         return redirect()->back()->with(['message' => 'You already voted before!', 'status' => 'alert-danger', 'dismiss' => true]);
       }

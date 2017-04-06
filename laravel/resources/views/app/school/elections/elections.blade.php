@@ -26,7 +26,8 @@
           </ul>
         </div><!-- .panel-body -->
       </div><!-- .panel-body -->
-      @if(1 == 2)
+
+<!--
       <p class="card-title">Run for elections</p>
       <div class="panel panel-primary">
         <div class="panel-body">
@@ -42,7 +43,7 @@
             <button type="submit" class="btn btn-primary btn-block btn-lg">Run! Run!</button>
             {{csrf_field()}}
           </form>
-        </div><!-- .panel-body -->
+        </div><!-- .panel-body
       </div><!-- .panel-primairy -->
 
       <p class="card-title">Vote for candidates</p>
@@ -64,7 +65,6 @@
           </form>
         </div><!-- .panel-body -->
       </div><!-- .panel -->
-      @endif
     </div><!-- .col-md-4 -->
 
     <div class="col-md-8">
