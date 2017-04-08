@@ -75,15 +75,16 @@ class ElectionsController extends Controller
       $x = count($inputs);
       $i = 1;
       while($x > $i) {
-        $vote = new Vote();
-        $vote->user_id = Auth::User()->id;
-        $vote->candidate_id = $inputs[$i];
-        $vote->save();
+        if($inputs[$i] != 0) {
+          $vote = new Vote();
+          $vote->user_id = Auth::User()->id;
+          $vote->candidate_id = $inputs[$i];
+          $vote->save();
 
-        $candidate = Candidate::find($inputs[$i]);
-        $candidate->votes = $candidate->votes + 1;
-        $candidate->update();
-
+          $candidate = Candidate::find($inputs[$i]);
+          $candidate->votes = $candidate->votes + 1;
+          $candidate->update();
+        }
         $i += 1;
       }
 
