@@ -3,6 +3,21 @@
 @section('app-content')
   <div class="row">
     <div class="col-md-4">
+      @if(Auth::User()->voted)
+      <p class="card-title">Your vote</p>
+      <div class="panel panel-primary">
+        <div class="panel-body">
+          <ul class="list-unstyled">
+          @foreach(Auth::User()->votes as $vote)
+            @if($vote->candidate)
+              <li><b>{{$vote->candidate->user->name}}</b> for {{$vote->candidate->position->name}}</li>
+            @endif
+          @endforeach
+          </ul>
+        </div><!-- .panel-body -->
+      </div><!-- .panel -->
+
+      @endif
       <p class="card-title">Comments</p>
       <div class="panel panel-primary">
         <div class="panel-body">
@@ -78,6 +93,7 @@
                 <div class="col-md-4 text-center">
                   <img id="avatar" class="img-circle" style="margin-top: 10px; width: 80px; height: 80px;" src="{{route('get.avatar', $candidate->user->avatar)}}">
                   <h3 style="font-family: Montserrat; font-size: 16px;"><a href="{{route('get.candidate', ['2017', $candidate->user->username])}}">{{$candidate->user->name}}</a></h3>
+                  {{$candidate->votes}}
                 </div><!-- .col-md-4 -->
               @endforeach
             </div><!-- .row -->

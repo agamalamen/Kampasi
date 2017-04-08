@@ -164,6 +164,11 @@ class User extends Authenticatable
       return $this->hasOne('App\Candidate');
     }
 
+    public function votes()
+    {
+      return $this->hasMany('App\Vote');
+    }
+
     public function availableChaperones()
     {
       return $this->hasMany('App\AvailableChaperone');

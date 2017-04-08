@@ -11,6 +11,11 @@ class Candidate extends Model
       return $this->belongsTo('App\User');
     }
 
+    public function votes()
+    {
+      return $this->hasMany('App\Vote');
+    }
+
     public function position()
     {
       return $this->belongsTo('App\Position');

@@ -56,17 +56,21 @@ class ElectionsController extends Controller
     }
 
     public function postVote(Request $request) {
+      if(Auth::User()->role != 'student') {
+        return redirect()->back()->with(['message' => 'Sorry only students are allowed to vote.', 'status' => 'alert-danger', 'dismiss' => true]);
+      }
+
       $date = date('m/d/Y h:i:s a', time());
       $startDate = "04/09/2017 09:00:00 am";
-      $endDate = "04/09/2017 01:00:00 pm";
+      $endDate = "04/09/2017 01:30:00 pm";
 
-      if(strtotime($date) < strtotime($startDate)) {
+      /*if(strtotime($date) < strtotime($startDate)) {
         return redirect()->back()->with(['message' => 'Voting did not start yet! Come back on 9th April at 9 AM', 'status' => 'alert-danger', 'dismiss' => true]);
       }
 
       if(strtotime($date) > strtotime($endDate)) {
         return redirect()->back()->with(['message' => 'Voting is over!', 'status' => 'alert-danger', 'dismiss' => true]);
-      }
+      }*/
 
       if(Auth::User()->voted) {
         return redirect()->back()->with(['message' => 'You already voted before!', 'status' => 'alert-danger', 'dismiss' => true]);
@@ -75,12 +79,12 @@ class ElectionsController extends Controller
       $x = count($inputs);
       $i = 1;
       while($x > $i) {
-        if($inputs[$i] != 0) {
-          $vote = new Vote();
-          $vote->user_id = Auth::User()->id;
-          $vote->candidate_id = $inputs[$i];
-          $vote->save();
 
+        $vote = new Vote();
+        $vote->user_id = Auth::User()->id;
+        $vote->candidate_id = $inputs[$i];
+        $vote->save();
+        if($inputs[$i] != 0) {
           $candidate = Candidate::find($inputs[$i]);
           $candidate->votes = $candidate->votes + 1;
           $candidate->update();
