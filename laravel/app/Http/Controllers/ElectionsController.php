@@ -99,15 +99,15 @@ class ElectionsController extends Controller
     }
 
     public function getCandidate($date, $candidate_username) {
-      foreach(Auth::User()->school->users as $user) {
+      /*foreach(Auth::User()->school->users as $user) {
         if ($user->voted) {
           echo $user->name;
           echo '<br>';
         }
-      }
-      /*$user = User::where('username', $candidate_username)->first();
+      }*/
+      $user = User::where('username', $candidate_username)->first();
       $candidate = Candidate::where('user_id', $user->id)->first();
-      return view('app.school.elections.candidate')->with(['candidate' => $candidate]);*/
+      return view('app.school.elections.candidate')->with(['candidate' => $candidate]);
     }
 
     public function postCandidateDescription($date, Request $request) {
