@@ -113,7 +113,7 @@
                   <img id="avatar" class="img-circle" style="margin-top: 10px; width: 80px; height: 80px;" src="{{route('get.avatar', $candidate->user->avatar)}}">
                   <h3 style="font-family: Montserrat; font-size: 16px;"><a href="{{route('get.candidate', ['2017', $candidate->user->username])}}">{{$candidate->user->name}}</a></h3>
                   @if($won)
-                    1
+                    <p style="color: #27ae60;"><i class="fa fa-check-circle" aria-hidden="true"></i> Won</p>
                   @endif
                   @if(Auth::User()->username == 'Afarag16' || Auth::User()->username == 'OJafter16')
                     {{$candidate->votes}}
