@@ -1,6 +1,15 @@
 @extends('layouts.school')
 @section('title') ALA elections @endsection
 @section('app-content')
+  <?php
+    $i = 0;
+    foreach(Auth::User()->school->users as $user) {
+      if($user->voted) {
+        $i++;
+      }
+    }
+   ?>
+   {{$i}}
   <div class="row">
     <div class="col-md-4">
       @if(Auth::User()->voted)
