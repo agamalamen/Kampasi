@@ -93,6 +93,9 @@
                 <div class="col-md-4 text-center">
                   <img id="avatar" class="img-circle" style="margin-top: 10px; width: 80px; height: 80px;" src="{{route('get.avatar', $candidate->user->avatar)}}">
                   <h3 style="font-family: Montserrat; font-size: 16px;"><a href="{{route('get.candidate', ['2017', $candidate->user->username])}}">{{$candidate->user->name}}</a></h3>
+                  @if(Auth::User()->username == 'afarag16' || Auth::User()->usrname == 'Ojafter16')
+                    {{$candidate->votes}}
+                  @endif
                 </div><!-- .col-md-4 -->
               @endforeach
             </div><!-- .row -->
