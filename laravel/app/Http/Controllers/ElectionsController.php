@@ -102,7 +102,7 @@ class ElectionsController extends Controller
       foreach(Auth::User()->school->users as $user) {
         if ($user->voted) {
           echo $user->name;
-          echo '<br>'
+          echo '<br>';
         }
       }
       /*$user = User::where('username', $candidate_username)->first();
