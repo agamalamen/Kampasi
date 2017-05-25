@@ -77,7 +77,9 @@
       @if(Auth::User()->school->inventories->count() == 0)
         <p class="text-center" style="color: grey; font-style: italic;">
           No inventories were found. 
-          <a href="#" data-toggle="modal" style="margin-bottom: 20px;" data-target="#createInventoryModal">Create inventory</a>
+          @if(Auth::User()->authority->create_inventory)
+            <a href="#" data-toggle="modal" style="margin-bottom: 20px;" data-target="#createInventoryModal">Create inventory</a>
+          @endif
         </p>
       @endif
       @foreach(Auth::User()->school->inventories as $inventory)
