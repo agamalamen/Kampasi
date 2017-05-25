@@ -74,6 +74,12 @@
     </div><!-- .col-md-3 -->
 
     <div class="col-md-9" id="inventories">
+      @if(Auth::User()->school->inventories->count() == 0)
+        <p class="text-center" style="color: grey; font-style: italic;">
+          No inventories were found. 
+          <a href="#" data-toggle="modal" style="margin-bottom: 20px;" data-target="#createInventoryModal">Create inventory</a>
+        </p>
+      @endif
       @foreach(Auth::User()->school->inventories as $inventory)
         <div class="col-md-6">
           <div class="panel panel-primary" style="border: 0px; border-radius: 5px;">
