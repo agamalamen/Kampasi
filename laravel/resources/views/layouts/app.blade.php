@@ -16,6 +16,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="{{ URL::to('src/css/bootstrap.css') }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -48,8 +49,11 @@
     <script src="{{ URL::to('src/js/app-jquery.js') }}"></script>
     <script src="{{ URL::to('src/js/animation-jquery.js') }}"></script>
     <script src="{{ URL::to('src/js/ajax-validation.js') }}"></script>
+    <script src="{{ URL::to('src/js/inventory-jquery.js') }}"></script>
     <!-- Bootstrap Javascript -->
     <script src="{{ URL::to('src/js/bootstrap.js') }}"></script>
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+
   </body>
 </html>

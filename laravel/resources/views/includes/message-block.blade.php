@@ -7,7 +7,7 @@
       @if(!Session::has('dismiss'))
       <div class="col-md-4 col-md-offset-4 alert {{ Session::get('status') }}" role="alert">
       @endif
-      {{ Session::get('message') }}
+      {!! Session::get('message') !!}
     </div>
   </div>
 @endif

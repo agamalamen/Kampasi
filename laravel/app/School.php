@@ -225,4 +225,19 @@ class School extends Model
     {
       return $this->hasMany('App\TutoringSubject');
     }
+
+    public function inventories()
+    {
+      return $this->hasMany('App\Inventory');
+    }
+
+    public function items()
+    {
+      return $this->hasMany('App\Item');
+    }
+
+    public function allocatedCosts()
+    {
+      return $this->hasMany('App\UserAllocatedCost');
+    }
 }

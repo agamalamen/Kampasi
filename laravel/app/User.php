@@ -183,4 +183,24 @@ class User extends Authenticatable
     {
       return $this->hasOne('App\Tutor');
     }
+
+    public function items()
+    {
+      return $this->belongsToMany('App\Item')->withPivot('received_date', 'return_date');
+    }
+
+    public function inventories()
+    {
+      return $this->hasMany('App\Inventory');
+    }
+
+    public function allocatedCosts()
+    {
+      return $this->hasMany('App\UserAllocatedCost')->where('paid', 0);
+    }
+
+    public function paidAllocatedCosts()
+    {
+      return $this->hasMany('App\UserAllocatedCost')->where('paid', 1);
+    }
 }

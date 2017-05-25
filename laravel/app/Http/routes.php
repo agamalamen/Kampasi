@@ -22,6 +22,132 @@ Route::get('/pricing/packages', [
   'as' => 'get.pricing'
 ]);
 
+//inventory routing
+Route::get('/{school_username}/inventory', [
+  'uses'       => 'InventoryController@getInventories',
+  'as'         => 'get.inventories',
+  'middleware' => 'auth'
+]);
+
+Route::post('/{school_username}/inventory', [
+  'uses'       => 'InventoryController@postInventory',
+  'as'         => 'post.inventory',
+  'middleware' => 'auth'
+]);
+
+Route::get('/{school_username}/inventory/{name}', [
+  'uses'       => 'InventoryController@getInventory',
+  'as'         => 'get.inventory',
+  'middleware' => 'auth'
+]);
+
+Route::post('/{school_username}/inventory/{name}/add-item/{inventory_id}', [
+  'uses'       => 'InventoryController@postItem',
+  'as'         => 'post.item',
+  'middleware' => 'auth'
+]);
+
+Route::get('/{school_username}/inventory/tools/delete-item/{item_id}', [
+  'uses'       => 'InventoryController@deleteItem',
+  'as'         => 'delete.item',
+  'middleware' => 'auth'
+]);
+
+Route::get('/{school_username}/inventory/tools/undo-delete-item/{item_id}', [
+  'uses'       => 'InventoryController@getUndoDeleteItem',
+  'as'         => 'get.undo.delete.item',
+  'middleware' => 'auth'
+]);
+
+Route::post('/{school_username}/inventory/{name}/add-attribute/{inventory_id}', [
+  'uses'       => 'InventoryController@postInventoryAttribute',
+  'as'         => 'post.inventory.attribute',
+  'middleware' => 'auth'
+]);
+
+Route::get('/{school_username}/inventory/{inventory_name}/{item_name}', [
+  'uses'       => 'InventoryController@getItem',
+  'as'         => 'get.item',
+  'middleware' => 'auth'
+]);
+
+Route::get('/{school_username}/inventory/{inventory_name}/{item_name}/edit-item', [
+  'uses'       => 'InventoryController@getEditItem',
+  'as'         => 'get.edit.item',
+  'middleware' => 'auth'
+]);
+
+Route::post('/{school_username}/inventory/{inventory_name}/{item_name}/edit-item', [
+  'uses'       => 'InventoryController@postEditItem',
+  'as'         => 'post.edit.item',
+  'middleware' => 'auth'
+]);
+
+Route::post('/{school_username}/inventory/{inventory_name}/{item_name}/lend-item', [
+  'uses'       => 'InventoryController@postLendItem',
+  'as'         => 'post.lend.item',
+  'middleware' => 'auth'
+]);
+
+Route::get('/{school_username}/inventory/users/my-inventory/{user_username}', [
+  'uses'       => 'InventoryController@getUserInventory',
+  'as'         => 'get.user.inventory',
+  'middleware' => 'auth'
+]);
+
+Route::get('/{school_username}/inventory/users/my-allocated-costs/{user_username}', [
+  'uses'       => 'InventoryController@getUserAllocatedCosts',
+  'as'         => 'get.user.allocated.costs',
+  'middleware' => 'auth'
+]);
+
+Route::get('/{school_username}/inventory/tools/track/items', [
+  'uses'       => 'InventoryController@getTrackItems',
+  'as'         => 'get.track.items',
+  'middleware' => 'auth'
+]);
+
+Route::post('/{school_username}/inventory/tools/track/items/item-returned', [
+  'uses'       => 'InventoryController@postItemReturned',
+  'as'         => 'post.item.returned',
+  'middleware' => 'auth'
+]);
+
+Route::post('/{school_username}/inventory/tools/track/items/item-paid', [
+  'uses'       => 'InventoryController@postItemPaid',
+  'as'         => 'post.item.paid',
+  'middleware' => 'auth'
+]);
+
+Route::post('/{school_username}/inventory/tools/track/items/all-items-paid', [
+  'uses'       => 'InventoryController@postAllItemsPaid',
+  'as'         => 'post.all.items.paid',
+  'middleware' => 'auth'
+]);
+
+Route::post('/{school_username}/inventory/tools/track/items/item-missing', [
+  'uses'       => 'InventoryController@postItemMissing',
+  'as'         => 'post.item.missing',
+  'middleware' => 'auth'
+]);
+
+Route::post('/{school_username}/inventory/tools/add/owner', [
+  'uses'       => 'InventoryController@postInventoryOwner',
+  'as'         => 'post.inventory.owner',
+  'middleware' => 'auth'
+]);
+
+Route::get('/{school_username}/inventory/tools/search/all', [
+  'uses'       => 'InventoryController@getSearchInventory',
+  'as'         => 'get.search.inventory',
+  'middleware' => 'auth'
+]);
+
+Route::get('/{school_username}/export', [
+  'uses'       => 'InventoryController@exportExcel',
+  'as'         => 'export.excel',
+  'middleware' => 'auth'
+]);
 
 //Tutoring routing
 Route::get('/{school_username}/tutoring', [
