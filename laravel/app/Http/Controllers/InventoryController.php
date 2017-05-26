@@ -216,14 +216,14 @@ class InventoryController extends Controller
     public function postInventoryAttribute(Request $request, $school_username, $inventory_name, $inventory_id)
     {
       $this->validate($request, [
-        'name' => 'required|unique:inventory_attributes'
+        'name' => 'required'
       ]);
 
       $inventory = Inventory::where('name', $inventory_name)->first();
-
+      //return $inventory;
       $authorized = 0;
       foreach($inventory->users as $user) {
-        if($user == Auth::User()) {
+        if(Auth::User()->id == $user->id) {
           $authorized = 1;
           break;
         }
