@@ -75,9 +75,10 @@ class InventoryController extends Controller
     public function postItem(Request $request, $school_username, $name, $inventory_id)
     {
       $inventory = Inventory::find($inventory_id);
+      
       $authorized = 0;
       foreach($inventory->users as $user) {
-        if($user == Auth::User()) {
+        if(Auth::User()->id == $user->id) {
           $authorized = 1;
           break;
         }
