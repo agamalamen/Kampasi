@@ -233,7 +233,7 @@ class School extends Model
 
     public function items()
     {
-      return $this->hasMany('App\Item');
+      return $this->hasMany('App\Item')->where('deleted', 0);
     }
 
     public function allocatedCosts()
