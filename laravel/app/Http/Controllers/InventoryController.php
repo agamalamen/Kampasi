@@ -120,7 +120,7 @@ class InventoryController extends Controller
 
       $authorized = 0;
       foreach($inventory->users as $user) {
-        if($user == Auth::User()) {
+        if(Auth::User()->id == $user->id) {
           $authorized = 1;
           break;
         }
@@ -157,7 +157,7 @@ class InventoryController extends Controller
 
       $authorized = 0;
       foreach($inventory->users as $user) {
-        if($user == Auth::User()) {
+        if(Auth::User()->id == $user->id) {
           $authorized = 1;
           break;
         }
@@ -179,7 +179,7 @@ class InventoryController extends Controller
 
       $authorized = 0;
       foreach($inventory->users as $user) {
-        if($user == Auth::User()) {
+        if(Auth::User()->id == $user->id) {
           $authorized = 1;
           break;
         }
@@ -201,7 +201,7 @@ class InventoryController extends Controller
 
       $authorized = 0;
       foreach($inventory->users as $user) {
-        if($user == Auth::User()) {
+        if(Auth::User()->id == $user->id) {
           $authorized = 1;
           break;
         }
@@ -254,9 +254,8 @@ class InventoryController extends Controller
     {
       $inventory = Inventory::where('name', $inventory_name)->first();
       $authorized = 0;
-
       foreach($inventory->users as $user) {
-        if($user == Auth::User()) {
+        if(Auth::User()->id == $user->id) {
           $authorized = 1;
           break;
         }
@@ -307,7 +306,7 @@ class InventoryController extends Controller
 
       $authorized = 0;
       foreach($inventory->users as $user) {
-        if($user == Auth::User()) {
+        if(Auth::User()->id == $user->id) {
           $authorized = 1;
           break;
         }
