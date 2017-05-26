@@ -228,7 +228,7 @@ class School extends Model
 
     public function inventories()
     {
-      return $this->hasMany('App\Inventory');
+      return $this->hasMany('App\Inventory')->where('deleted', 0);
     }
 
     public function items()

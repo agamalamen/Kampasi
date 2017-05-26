@@ -65,6 +65,31 @@ Route::post('/{school_username}/inventory/{name}/add-attribute/{inventory_id}', 
   'middleware' => 'auth'
 ]);
 
+Route::get('/{school_username}/inventory/{inventory_name}/settings/all', [
+  'uses'       => 'InventoryController@getInventorySettings',
+  'as'         => 'get.inventory.settings',
+  'middleware' => 'auth'
+]);
+
+Route::post('/{school_username}/inventory/{inventory_name}/settings/update-name', [
+  'uses'       => 'InventoryController@postUpdateInventoryName',
+  'as'         => 'post.update.inventory.name',
+  'middleware' => 'auth'
+]);
+
+Route::post('/{school_username}/inventory/{inventory_name}/settings/delete', [
+  'uses'       => 'InventoryController@postDeleteInventory',
+  'as'         => 'post.delete.inventory',
+  'middleware' => 'auth'
+]);
+
+Route::get('/{school_username}/inventory/{inventory_name}/settings/remove-owner/{user_id}', [
+  'uses'       => 'InventoryController@getRemoveInventoryOwner',
+  'as'         => 'get.remove.inventory.owner',
+  'middleware' => 'auth'
+]);
+
+
 Route::get('/{school_username}/inventory/{inventory_name}/{item_name}', [
   'uses'       => 'InventoryController@getItem',
   'as'         => 'get.item',

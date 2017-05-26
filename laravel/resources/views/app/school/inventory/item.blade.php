@@ -29,7 +29,6 @@
                 <option value={{$user->id}}>{{$user->name}}</option>
               @endforeach
             </select>
-            <input name="received_date" type="date" class="form-control input-sm" style="margin-bottom: 5px;" value="{{ old('received_date') }}">
             <input name="return_date" type="date" class="form-control input-sm" style="margin-bottom: 5px;" value="{{ old('received_date') }}">
             <button type="submit" class="pull-right btn btn-primary">Lend</button>
             {{ csrf_field() }}

@@ -52,6 +52,7 @@
         </div><!-- .panel-body -->
       </div><!-- .panel -->
 
+      <p class="card-title" style="padding-left: 0px;"><a href="{{route('get.inventory.settings', [Auth::User()->school->username, $inventory->name])}}">Settings</a></p>
       <p class="card-title" style="padding-left: 0px;">Actions</p>
       <ul class="list-unstyled">
         <li><a href="#" data-toggle="modal" style="margin-bottom: 20px;" data-target="#addItemModal">Add item</a></li>

@@ -61,6 +61,76 @@ class InventoryController extends Controller
       return view('app.school.inventory.inventory')->with(['inventory' => $inventory, 'items' => $items]);
     }
 
+    public function getInventorySettings($school_username, $inventory_name)
+    {
+      $inventory = Inventory::where('name', $inventory_name)->first();
+      return view('app.school.inventory.settings.all')->with(['inventory' => $inventory]);
+    }
+
+    public function postUpdateInventoryName(Request $request, $school_username, $inventory_name)
+    {
+      $inventory = Inventory::where('name', $inventory_name)->first();
+
+      $authorized = 0;
+      foreach($inventory->users as $user) {
+        if(Auth::User()->id == $user->id) {
+          $authorized = 1;
+          break;
+        }
+      }
+
+      if(!$authorized) {
+        return redirect()->route('get.inventories', [Auth::User()->school->username])->with(['message' => 'You are not authorized', 'status' => 'alert-danger', 'dismiss' => true]);
+      }
+
+      $name = strtolower($request['name']);
+      //Make alphanumeric (removes all other characters)
+      $name = preg_replace("/[^a-z0-9_\s-]/", "", $request['name']);
+      //Clean up multiple dashes or whitespaces
+      $name = preg_replace("/[\s-]+/", " ", $request['name']);
+      //Convert whitespaces and underscore to dash
+      $name = preg_replace("/[\s_]/", "-", $request['name']);
+      $request['name'] = $name;
+
+      $this->validate($request, [
+        'name' => 'required|unique:inventories'
+      ]);
+
+      $inventory->name = $request['name'];
+      $inventory->update();
+      return redirect()->route('get.inventory', [Auth::User()->school->username, $inventory->name]);
+    }
+
+    public function getRemoveInventoryOwner($school_username, $inventory_name, $user_id)
+    {
+      $inventory = Inventory::where('name', $inventory_name)->first();
+
+      $matchThese = ['inventory_id' => $inventory->id, 'user_id' => $user_id];
+      DB::table('inventory_user')->where($matchThese)->delete();
+      return redirect()->route('get.inventory.settings', [Auth::User()->school->username, $inventory->name]);
+    }
+
+    public function postDeleteInventory(Request $request, $school_username, $inventory_name)
+    {
+      $this->validate($request, [
+        'name' => 'required'
+        ]);
+
+        if($inventory_name != $request['name']) {
+          return redirect()->back()->with(['message' => 'The inventory name you entered is incorrect.', 'status' => 'alert-danger', 'dismiss' => true]);
+        }
+
+        $inventory = Inventory::where('name', $inventory_name)->first();
+        $inventory->deleted = 1;
+        $inventory->update();
+        foreach($inventory->items as $item) {
+          $item->deleted = 1;
+          $item->update();
+        }
+
+        return redirect()->route('get.inventories', [Auth::User()->school->username])->with(['message' => 'Inventory deleted.', 'status' => 'alert-success', 'dismiss' => true]);
+    }
+
     public function getUserAllocatedCosts($school_username, $user_username)
     {
       $user = User::where('username', $user_username)->first();
@@ -261,13 +331,18 @@ class InventoryController extends Controller
         }
       }
 
-      if(!$authorized) {
+      /*if(!$authorized) {
         return redirect()->route('get.inventories', [Auth::User()->school->username])->with(['message' => 'You are not authorized', 'status' => 'alert-danger', 'dismiss' => true]);
-      }
+      }*/
 
       $item = Item::where('name', $item_name)->first();
+      
+      if($item->stock == 0) {
+        return redirect()->back()->with(['message' => 'This item is out of stock.', 'status' => 'alert-danger', 'dismiss' => true]);
+      }
+
       DB::table('item_user')->insert([
-            ['item_id' => $item->id, 'user_id' => $request['user'], 'received_date' => $request['received_date'], 'return_date' => $request['return_date']]
+            ['item_id' => $item->id, 'user_id' => $request['user'], 'received_date' => date('Y-m-d'), 'return_date' => $request['return_date']]
         ]);
       $item->stock -= 1;
       $item->update();
