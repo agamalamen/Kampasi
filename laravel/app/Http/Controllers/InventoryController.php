@@ -322,6 +322,10 @@ class InventoryController extends Controller
 
     public function postLendItem(Request $request, $school_username, $inventory_name, $item_name)
     {
+      $currentDate = date('Y-m-d');
+      $this->validate($request, [
+          'return_date' => 'required|after:' . $currentDate
+        ]);
       $inventory = Inventory::where('name', $inventory_name)->first();
       $authorized = 0;
       foreach($inventory->users as $user) {
@@ -396,6 +400,11 @@ class InventoryController extends Controller
       $matchThese = ['item_id' => $request['item'], 'user_id' => $request['user']];
       DB::table('item_user')->where($matchThese)->delete();
       return redirect()->back();
+    }
+
+    public function getInventoriesSettings()
+    {
+      return 'hi';
     }
 
     public function postItemPaid(Request $request)

@@ -39,6 +39,7 @@
   @include('includes.modals.create-inventory-modal')
   <div class="row">
     <div class="col-md-3">
+      <p class="card-title" style="padding-left: 0px;"><a href="{{route('get.inventories.settings', [Auth::User()->school->username])}}">Settings</a></p>
       <p class="card-title" style="padding-left: 0px;">Actions</p>
           <ul class="list-unstyled">
             @if(Auth::User()->authority)
@@ -85,11 +86,27 @@
       @foreach(Auth::User()->school->inventories as $inventory)
         <div class="col-md-6">
           <div class="panel panel-primary" style="border: 0px; border-radius: 5px;">
-            <div class="panel-header">
-              <img src="{{URL::to('src/img/resources/'. $inventory->color .'.png')}}" style="height: 25%; width: 100%">
+            <div class="panel-header" style="height: 170px;" style="background-image: url('{{URL::to("src/img/resources/green.png")}}')">
+
+            <style>
+              .panel-header {
+                background-image: url('{{URL::to('src/img/resources/green.png')}}');
+              }
+            </style>
+
+              <p style="position: absolute; padding-left: 15px; font-size: 24px; top:40%; font-family: timeburner; font-weight: bold;"><a style= "color: white;"href="{{route('get.inventory', [Auth::User()->school->username, $inventory->name])}}">{{$inventory->name}}</a></p>
+              <!--<img src="{{URL::to('src/img/resources/'. $inventory->color .'.png')}}" style="height: 25%; width: 100%">-->
             </div><!-- .panel-header -->
             <div class="panel-body">
-              <p class="card-title" style="padding-left: 0px; font-style: normal;"><a href="{{route('get.inventory', [Auth::User()->school->username, $inventory->name])}}">{{$inventory->name}}</a></p>
+              <ul class="list-unstyled list-inline">
+              <li style="color: grey; font-style: italic;">Recent:</li>
+              @foreach($inventory->recentItems as $item)
+                <li><a href="{{route('get.item', [Auth::User()->school->username, $inventory->name, $item->name])}}">{{$item->name}}</a></li>
+              @endforeach
+              </ul>
+              <!--<div class="form-group">
+                <input id="search-single-inventory-input" style="border-radius: 5px; -webkit-box-shadow: none !important;-moz-box-shadow: none !important;box-shadow: none !important;" type="text" class="form-control" placeholder="Search for items in {{$inventory->name}}">
+              </div>--><!-- .form-group -->
               <hr>
               <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> {{$inventory->items->count()}}
               <p class="pull-right"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> {{$inventory->views}}</p>

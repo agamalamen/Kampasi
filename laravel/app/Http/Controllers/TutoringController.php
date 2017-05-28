@@ -29,6 +29,9 @@ class TutoringController extends Controller
 
     public function getTutors($school_username)
     {
+      /*if(Auth::User()->role == 'student') {
+        return redirect()->route('get.tutoring', $school_username)->with(['message' => 'You are not autorized', 'status' => 'alert-danger', 'dismiss' => true]);
+      }*/
       $school = School::where('username', $school_username)->first();
       return view('app.school.tutoring.tutors')->with(['school' => $school]);
     }

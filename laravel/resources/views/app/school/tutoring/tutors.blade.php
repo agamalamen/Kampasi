@@ -2,16 +2,18 @@
 @section('title') Tutors @endsection
 @section('app-content')
 
-  <form action="{{route('post.tutor', [Auth::user()->school->id])}}" method="post" class="form-inline text-center">
-    <select name="tutor" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput">
-      @foreach(Auth::User()->school->students as $student)
-      <option value={{$student->id}}>{{$student->name}}</option>
-      @endforeach
-    </select>
+  @if(Auth::User()->role != 'student')
+    <form action="{{route('post.tutor', [Auth::user()->school->id])}}" method="post" class="form-inline text-center">
+      <select name="tutor" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput">
+        @foreach(Auth::User()->school->students as $student)
+        <option value={{$student->id}}>{{$student->name}}</option>
+        @endforeach
+      </select>
 
-    <button type="submit" class="btn btn-primary">Add tutor</button>
-    {{csrf_field()}}
-  </form>
+      <button type="submit" class="btn btn-primary">Add tutor</button>
+      {{csrf_field()}}
+    </form>
+  @endif
 
   <div class="row">
     @foreach($school->tutors as $tutor)
@@ -27,16 +29,18 @@
                 <li>{{$subject->tutoringSubject->name}}</li>
               @endforeach
             </ul>
-            <form action="{{route('post.tutor.subject', [Auth::user()->school->id])}}" method="post" class="form-inline">
-              <select name="tutoringSubject" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput">
-                @foreach(Auth::User()->school->tutoringSubjects as $subject)
-                <option value={{$subject->id}}>{{$subject->name}}</option>
-                @endforeach
-              </select>
-              <input type="hidden" value={{$tutor->id}} name="tutor">
-              <button type="submit" class="btn btn-primary">Add subject</button>
-              {{csrf_field()}}
-            </form>
+            @if(Auth::User()->role != 'student')
+              <form action="{{route('post.tutor.subject', [Auth::user()->school->id])}}" method="post" class="form-inline">
+                <select name="tutoringSubject" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput">
+                  @foreach(Auth::User()->school->tutoringSubjects as $subject)
+                  <option value={{$subject->id}}>{{$subject->name}}</option>
+                  @endforeach
+                </select>
+                <input type="hidden" value={{$tutor->id}} name="tutor">
+                <button type="submit" class="btn btn-primary">Add subject</button>
+                {{csrf_field()}}
+              </form>
+            @endif
           </div><!-- .media-body -->
         </div><!-- .media -->
       </div><!-- .col-md-4 -->

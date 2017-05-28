@@ -14,10 +14,7 @@
 
   <div class="row">
     <div class="col-md-3">
-      <p class="card-title" style="padding-left: 0px;">Actions</p>
-      <ul class="list-unstyled">
-        <li><a href="#" data-toggle="modal" style="margin-bottom: 20px;" data-target="#createInventoryModal">Create inventory</a></li>
-      </ul>
+      <p style="margin-top: 0px; margin-bottom: 15px;"><a href="{{route('get.inventories', Auth::User()->school->username)}}"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Back to all inventories</a></p>
     </div><!-- .col-md-3 -->
     <div class='col-md-9'>
       <ul class="list-group" style="color: #333;">

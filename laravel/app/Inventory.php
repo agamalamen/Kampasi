@@ -15,6 +15,10 @@ class Inventory extends Model
     {
       return $this->hasMany('App\Item')->where('deleted', 0);
     }
+    public function recentItems()
+    {
+      return $this->hasMany('App\Item')->where('deleted', 0)->limit(3)->orderBy('id', 'DESC');
+    }
 
     public function attributes()
     {

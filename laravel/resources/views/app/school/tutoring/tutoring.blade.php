@@ -30,6 +30,9 @@
         <div class="row" style="color: #333;">
         <h2 style="font-size: 24px; font-family: lato; padding-bottom: 15px;">'. $textDate .'</h2>
         ';
+        if($school->tutorings->count() == 0) {
+          echo '<p style="color: grey; font-style: italic;">No tutoring slots were added for this day.</p>';
+        }
         foreach($school->tutorings as $tutoring) {
           if($tutoring->date == $date) {
             echo '

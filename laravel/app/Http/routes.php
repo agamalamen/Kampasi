@@ -35,6 +35,12 @@ Route::post('/{school_username}/inventory', [
   'middleware' => 'auth'
 ]);
 
+Route::get('/{school_username}/inventory/settings', [
+  'uses'       => 'InventoryController@getInventoriesSettings',
+  'as'         => 'get.inventories.settings',
+  'middleware' => 'auth'
+]);
+
 Route::get('/{school_username}/inventory/{name}', [
   'uses'       => 'InventoryController@getInventory',
   'as'         => 'get.inventory',
