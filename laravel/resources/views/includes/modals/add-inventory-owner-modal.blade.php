@@ -12,9 +12,7 @@
             <div class="form-group">
               <select name="user" class="form-control input-lg">
                 @foreach(Auth::User()->school->users as $user)
-                  @if($user->role != 'student')
                   <option value={{$user->id}}>{{$user->name}}</option>
-                  @endif
                 @endforeach
               </select>
               <input type="hidden" name="inventory" value="{{$inventory->id}}">

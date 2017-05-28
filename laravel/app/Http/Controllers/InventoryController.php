@@ -64,6 +64,16 @@ class InventoryController extends Controller
     public function getInventorySettings($school_username, $inventory_name)
     {
       $inventory = Inventory::where('name', $inventory_name)->first();
+      $authorized = 0;
+      foreach($inventory->users as $user) {
+        if(Auth::User()->id == $user->id) {
+          $authorized = 1;
+          break;
+        }
+      }
+      if(!$authorized && !Auth::User()->authority->inventory) {
+        return redirect()->route('get.inventories', [$school_username])->with(['message' => 'You are not authorized', 'status' => 'alert-danger', 'dismiss' => true]);
+      }
       return view('app.school.inventory.settings.all')->with(['inventory' => $inventory]);
     }
 
@@ -369,7 +379,7 @@ class InventoryController extends Controller
 
     public function getTrackItems()
     {
-      if(Auth::User()->role == 'student') {
+      if(!Auth::User()->authority->track_items) {
         return redirect()->route('get.inventories', [Auth::User()->school->username])->with(['message' => 'You are not authorized', 'status' => 'alert-danger', 'dismiss' => true]);
       }
 

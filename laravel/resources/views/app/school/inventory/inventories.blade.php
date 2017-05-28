@@ -47,7 +47,9 @@
                 <li><a href="#" data-toggle="modal" style="margin-bottom: 20px;" data-target="#createInventoryModal">Create inventory</a></li>
               @endif
             @endif
-            <li><a href="{{route('get.track.items', Auth::User()->school->username)}}">Track items</a></li>
+            @if(Auth::User()->authority->track_items)
+              <li><a href="{{route('get.track.items', Auth::User()->school->username)}}">Track items</a></li>
+            @endif
           </ul>
       <p class="card-title" style="padding-left: 0px;">Your invenvtory</p>
           <ul class="list-unstyled" style="color: #333;">
@@ -100,8 +102,18 @@
             <div class="panel-body">
               <ul class="list-unstyled list-inline">
               <li style="color: grey; font-style: italic;">Recent:</li>
+              @if($inventory->recentItems->count() == 0)
+                <li>No items were added.</li>
+              @endif
               @foreach($inventory->recentItems as $item)
-                <li><a href="{{route('get.item', [Auth::User()->school->username, $inventory->name, $item->name])}}">{{$item->name}}</a></li>
+                <?php
+                  if (strlen($item->name) > 15) {
+                            $item_name = substr($item->name, 0, 15) . '...';
+                          } else {
+                            $item_name = $item->name;
+                          }
+                  ?>
+                <li><a href="{{route('get.item', [Auth::User()->school->username, $inventory->name, $item->name])}}">{{$item_name}}</a></li>
               @endforeach
               </ul>
               <!--<div class="form-group">

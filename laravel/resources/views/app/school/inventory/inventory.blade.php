@@ -7,7 +7,7 @@
 
   <p style="margin-top: 0px; margin-bottom: 15px;"><a href="{{route('get.inventories', Auth::User()->school->username)}}"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Back to all inventories</a></p>
 
-  <div class="panel panel-primary">
+  <!--<div class="panel panel-primary">
     <div class="panel-body">
       <form id="search-items-form" style="margin-bottom: 0px;">
         <input type="text" id="search-items-input" style="margin-bottom: 0px; border-radius: 3px;" placeholder="Search for items..." class="form-control" >
@@ -16,12 +16,22 @@
       var searchItemsRoute = "{{route('get.search.inventory', [Auth::User()->school->username, $inventory->name])}}";
       var itemsLoading = "{{URL::to('src/img/loading/rolling.gif')}}";
       </script>
-    </div><!-- .panel-body -->
-  </div><!-- .panel -->
+    </div><!-- .panel-body 
+  </div>--><!-- .panel -->
 
   <div id="style-1">
 
   </div><!-- .style-1 -->
+
+      <?php
+        $authorized = 0;
+        foreach($inventory->users as $user) {
+          if(Auth::User()->id == $user->id) {
+            $authorized = 1;
+            break;
+          }
+        }
+      ?>
 
   <div class="row">
     <div class="col-md-3">
@@ -33,7 +43,10 @@
           <p class="card-title" style="padding-left: 0px; font-style: normal;"><a href="{{route('get.inventory', [Auth::User()->school->username, $inventory->name])}}">{{$inventory->name}}</a></p>
           <ul class="list-unstyled list-inline">
             @if($inventory->users->count() == 0)
-              <li style="color: grey; font-style: italic;">No owners were added. <a href="#" data-toggle="modal" data-target="#addInvnetoryOwnerModal">Add owner</a></li>
+              <li style="color: grey; font-style: italic;">No owners were added. 
+              @if(Auth::User()->authority->add_inventory_owner)
+                  <a href="#" data-toggle="modal" data-target="#addInvnetoryOwnerModal">Add owner</a></li>
+              @endif
             @endif
             @if($inventory->users->count() > 3)
               @foreach($inventory->recentUsers as $user)
@@ -52,11 +65,17 @@
         </div><!-- .panel-body -->
       </div><!-- .panel -->
 
-      <p class="card-title" style="padding-left: 0px;"><a href="{{route('get.inventory.settings', [Auth::User()->school->username, $inventory->name])}}">Settings</a></p>
+      @if($authorized || Auth::User()->authority->inventory)
+          <p class="card-title" style="padding-left: 0px;"><a href="{{route('get.inventory.settings', [Auth::User()->school->username, $inventory->name])}}">Settings</a></p>
+      @endif
       <p class="card-title" style="padding-left: 0px;">Actions</p>
       <ul class="list-unstyled">
-        <li><a href="#" data-toggle="modal" style="margin-bottom: 20px;" data-target="#addItemModal">Add item</a></li>
-        <li><a href="#" data-toggle="modal" style="margin-bottom: 20px;" data-target="#addInvnetoryOwnerModal">Add owner</a></li>
+        @if($authorized)
+            <li><a href="#" data-toggle="modal" style="margin-bottom: 20px;" data-target="#addItemModal">Add item</a></li>
+        @endif
+        @if(Auth::User()->authority->add_inventory_owner)
+            <li><a href="#" data-toggle="modal" style="margin-bottom: 20px;" data-target="#addInvnetoryOwnerModal">Add owner</a></li>
+        @endif
       </ul>
       <p class="card-title" style="padding-left: 0px;">Attributes</p>
       <ul class="list-unstyled" style="color: #333;">
@@ -66,12 +85,17 @@
         @foreach($inventory->attributes as $attribute)
         <li>{{$attribute->name}}</li>
         @endforeach
-        <li><a href="#" data-toggle="modal" style="margin-bottom: 20px;" data-target="#addInventoryAttributeModal">Add attributes</a></li>
+        @if($authorized)
+            <li><a href="#" data-toggle="modal" style="margin-bottom: 20px;" data-target="#addInventoryAttributeModal">Add attributes</a></li>
+        @endif
       </ul>
     </div><!-- .col-md-3 -->
     <div class="col-md-9">
       @if($items->count() == 0)
-        <p style="color: grey; font-style: italic;" class="text-center">No items were added. <a href="#" data-toggle="modal" data-target="#addItemModal">Add item</a></p>
+        <p style="color: grey; font-style: italic;" class="text-center">No items were added. 
+        @if($authorized)
+            <a href="#" data-toggle="modal" data-target="#addItemModal">Add item</a></p>
+        @endif
       @endif
       @foreach(array_chunk($items->getCollection()->all(), 2) as $row)
         <div class="row">
@@ -88,15 +112,17 @@
                       <p>In stock: {{$item->stock}}</p>
                     </div><!-- .col-md-8 -->
                   </div><!-- .row -->
-                  <div class="dropdown pull-right">
-                    <a href="#" style="color: #333;" id="itemSettingsMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                      <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="itemSettingsMenu">
-                      <li><a href="{{route('delete.item', [Auth::User()->school->username, $item->id])}}">Delete item</a></li>
-                      <li><a href="{{route('get.edit.item', [Auth::User()->school->username, $item->inventory->name, $item->name])}}">Edit item</a></li>
-                    </ul>
-                  </div><!-- .drop-down -->
+                  @if($authorized)
+                    <div class="dropdown pull-right">
+                      <a href="#" style="color: #333;" id="itemSettingsMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="itemSettingsMenu">
+                        <li><a href="{{route('delete.item', [Auth::User()->school->username, $item->id])}}">Delete item</a></li>
+                        <li><a href="{{route('get.edit.item', [Auth::User()->school->username, $item->inventory->name, $item->name])}}">Edit item</a></li>
+                      </ul>
+                    </div><!-- .drop-down -->
+                  @endif
                 </div><!-- .panel-body -->
               </div><!-- .panel -->
             </div><!-- .col-md-6 -->
