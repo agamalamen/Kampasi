@@ -1,6 +1,8 @@
 @extends('layouts.school')
 @section('title') Tutoring program @endsection
 @section('app-content')
+  <p class="pull-right" style="margin-top: 0px; margin-bottom: 15px;"><a href="{{route('get.tutors', Auth::User()->school->username)}}">Go to tutors page <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></p>
+
   @if(Auth::User()->tutor)
   <form action="{{route('post.tutoring', [Auth::user()->school->id])}}" method="post" class="form-inline text-center">
     <select name="subject" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput">

@@ -1,6 +1,7 @@
 @extends('layouts.school')
 @section('title') Tutors @endsection
 @section('app-content')
+    <p style="margin-top: 0px; margin-bottom: 15px;"><a href="{{route('get.tutoring', Auth::User()->school->username)}}"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Back to the tutoring page</a></p>
 
   @if(Auth::User()->role != 'student')
     <form action="{{route('post.tutor', [Auth::user()->school->id])}}" method="post" class="form-inline text-center">
