@@ -414,7 +414,12 @@ class InventoryController extends Controller
 
     public function getInventoriesSettings()
     {
-      return 'hi';
+      return view('app.school.inventory.settings.inventories-settings');
+    }
+
+    public function postInventoryAdmin(Request $request, $school_username)
+    {
+      return 'hello worlld!';
     }
 
     public function postItemPaid(Request $request)

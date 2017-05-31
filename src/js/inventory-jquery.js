@@ -17,4 +17,8 @@ $('document').ready(function () {
         xmlhttp.send();
     }
   });
+
+    $("#search-single-inventory-input").focus(function(){
+        alert('hi!');
+    });
 });

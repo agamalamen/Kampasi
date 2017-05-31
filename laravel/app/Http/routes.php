@@ -59,6 +59,12 @@ Route::get('/{school_username}/inventory/tools/delete-item/{item_id}', [
   'middleware' => 'auth'
 ]);
 
+Route::post('/{school_username}/inventory/tools/add-inventory-admin', [
+  'uses'       => 'InventoryController@postInventoryAdmin',
+  'as'         => 'post.inventory.admin',
+  'middleware' => 'auth'
+]);
+
 Route::get('/{school_username}/inventory/tools/undo-delete-item/{item_id}', [
   'uses'       => 'InventoryController@getUndoDeleteItem',
   'as'         => 'get.undo.delete.item',
