@@ -37,7 +37,7 @@
     <div class="col-md-3">
       <div class="panel panel-primary" style="border: 0px;">
         <div class="panel-header">
-          <img src="{{URL::to('src/img/resources/'. $inventory->color .'.png')}}" style="height: 25%; width: 100%">
+          <img src="{{URL::to('src/img/resources/green.png')}}" style="height: 25%; width: 100%">
         </div><!-- .panel-header -->
         <div class="panel-body">
           <p class="card-title" style="padding-left: 0px; font-style: normal;"><a href="{{route('get.inventory', [Auth::User()->school->username, $inventory->name])}}">{{$inventory->name}}</a></p>
