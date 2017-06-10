@@ -36,19 +36,19 @@
           				<a href="{{route('dashboard', [$user->username])}}">{{$user->name}}</a>
           				<ul class="list-inline" style="padding-top: 10px;">
           					@if($user->authority->create_inventory)
-          						<li style="color: #27ae60"><i class="fa fa-check-circle" aria-hidden="true"></i> Create inventory</li>
+          						<li style="color: #27ae60"><i class="fa fa-check-circle" aria-hidden="true"></i> <a href="{{route('post.track.items.authority', [Auth::User()->school->username, $user->id, 'create_inventory'])}}">Create inventory</a></li>
           					@else
-          						<li style="color: grey"><i class="fa fa-times-circle" aria-hidden="true"></i> Create inventory</li>
+          						<li style="color: grey"><i class="fa fa-times-circle" aria-hidden="true"></i> <a href="{{route('post.track.items.authority', [Auth::User()->school->username, $user->id, 'create_inventory'])}}">Create inventory</a></li>
           					@endif
-          					@if($user->authority->create_inventory)
-          						<li style="color: #27ae60"><i class="fa fa-check-circle" aria-hidden="true"></i> Add inventory owner</li>
+          					@if($user->authority->add_inventory_owner)
+          						<li style="color: #27ae60"><i class="fa fa-check-circle" aria-hidden="true"></i> <a href="{{route('post.track.items.authority', [Auth::User()->school->username, $user->id, 'add_inventory_owner'])}}">Add inventory owner</a></li>
           					@else
-          						<li style="color: grey"><i class="fa fa-times-circle" aria-hidden="true"></i> Add inventory owner</li>
+          						<li style="color: grey"><i class="fa fa-times-circle" aria-hidden="true"></i> <a href="{{route('post.track.items.authority', [Auth::User()->school->username, $user->id, 'add_inventory_owner'])}}">Add inventory owner</a></li>
           					@endif
-          					@if($user->authority->create_inventory)
-          						<li style="color: #27ae60"><i class="fa fa-check-circle" aria-hidden="true"></i> Track items</li>
+          					@if($user->authority->track_items)
+          						<li style="color: #27ae60"><i class="fa fa-check-circle" aria-hidden="true"></i><a href="{{route('post.track.items.authority', [Auth::User()->school->username, $user->id, 'track_items'])}}">Track items</a></li>
           					@else
-          						<li style="color: grey"><i class="fa fa-times-circle" aria-hidden="true"></i> Track items</li>
+          						<li style="color: grey"><i class="fa fa-times-circle" aria-hidden="true"></i> <a href="{{route('post.track.items.authority', [Auth::User()->school->username, $user->id, 'track_items'])}}">Track items</a></li>
           					@endif
           				</ul>
           			</li>

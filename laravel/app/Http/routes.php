@@ -65,6 +65,12 @@ Route::post('/{school_username}/inventory/tools/add-inventory-admin', [
   'middleware' => 'auth'
 ]);
 
+Route::get('/{school_username}/inventory/tools/track-items-authority/{user_id}/{authority}', [
+  'uses'       => 'InventoryController@postTrackItemsAuthority',
+  'as'         => 'post.track.items.authority',
+  'middleware' => 'auth'
+]);
+
 Route::get('/{school_username}/inventory/tools/undo-delete-item/{item_id}', [
   'uses'       => 'InventoryController@getUndoDeleteItem',
   'as'         => 'get.undo.delete.item',

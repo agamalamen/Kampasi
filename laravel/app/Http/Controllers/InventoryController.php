@@ -431,6 +431,22 @@ class InventoryController extends Controller
       return redirect()->back()->with(['message' => 'User was successfully added.', 'status' => 'alert-success', 'dismiss' => true]);
     }
 
+    public function postTrackItemsAuthority($school_username, $user_id, $authority)
+    {
+      if(Auth::User()->role == 'student') {
+        return redirect()->back()->with(['message'=> 'You are not authorized.', 'status'=> 'alert-danger', 'dismiss'=> true]);
+      }
+      $user = User::find($user_id);
+      if($user->authority->$authority) {
+        $user->authority->$authority = 0;
+      } else {
+        $user->authority->$authority = 1;
+      }
+
+      $user->authority->update();
+      return redirect()->back();
+    }
+
     public function postItemPaid(Request $request)
     {
       if(Auth::User()->role == 'student') {
