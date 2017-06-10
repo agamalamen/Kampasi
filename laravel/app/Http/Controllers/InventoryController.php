@@ -519,9 +519,9 @@ class InventoryController extends Controller
       // lookup all hints from array if $q is different from ""
       if ($q !== "") {
       $q = strtolower($q);
-        
+      $len=strlen($q);
         foreach(Auth::User()->school->items as $item) {
-          if (strpos($item->name, $q) !== false) {
+          if (stristr($q, substr($item->name, 0, $len))) {
               if ($hint === "") {
                   $hint = '
                   <div class="col-md-6">
