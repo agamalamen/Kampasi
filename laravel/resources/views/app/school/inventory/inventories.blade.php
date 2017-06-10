@@ -53,6 +53,9 @@
           </ul>
       <p class="card-title" style="padding-left: 0px;">Your invenvtory</p>
           <ul class="list-unstyled" style="color: #333;">
+            @if(Auth::User()->items->count() == 0)
+              <li>No items.</li>
+            @endif
             @foreach(Auth::User()->items as $item)
             <li>{{$item->name}}</li>
             @endforeach
