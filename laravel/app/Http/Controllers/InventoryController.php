@@ -419,7 +419,14 @@ class InventoryController extends Controller
 
     public function postInventoryAdmin(Request $request, $school_username)
     {
-      return 'hello worlld!';
+      $user = User::find($request['user']);
+      $user->authority->inventory = 1;
+      $user->authority->create_inventory = 1;
+      $user->authority->add_inventory_owner = 1;
+      $user->authority->track_items = 1;
+      $user->update();
+      return redirect()->back()->with(['message' => 'User was successfully added.', 'status' => 'alert-success', 'dismiss' => true]);
+
     }
 
     public function postItemPaid(Request $request)
