@@ -414,6 +414,9 @@ class InventoryController extends Controller
 
     public function getInventoriesSettings()
     {
+      if(!Auth::User()->authority->inventory) {
+        return redirect()->back()->with(['message' => 'You are not authorized', 'status' => 'alert-danger', 'dismiss' => true]);
+      }
       return view('app.school.inventory.settings.inventories-settings');
     }
 
@@ -424,9 +427,8 @@ class InventoryController extends Controller
       $user->authority->create_inventory = 1;
       $user->authority->add_inventory_owner = 1;
       $user->authority->track_items = 1;
-      $user->update();
+      $user->authority->update();
       return redirect()->back()->with(['message' => 'User was successfully added.', 'status' => 'alert-success', 'dismiss' => true]);
-
     }
 
     public function postItemPaid(Request $request)

@@ -42,7 +42,7 @@
         {{ csrf_field() }}
       </form>
       <!--<div class="g-signin2" data-width="330" data-height="45" style="margin-bottom: 10px;" data-onsuccess="onSignIn"></div>-->
-      <a href="{{route('get.forgot.password')}}">Forgot your password?</a>
+      <!--<a href="{{route('get.forgot.password')}}">Forgot your password?</a>-->
     </div><!-- .col-md-6 -->
   </div><!-- .row -->
 </div><!-- .container -->
