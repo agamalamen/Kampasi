@@ -39,44 +39,41 @@
   @include('includes.modals.create-inventory-modal')
   <div class="row">
     <div class="col-md-3">
-      <p class="card-title" style="padding-left: 0px;"><a href="{{route('get.inventories.settings', [Auth::User()->school->username])}}">Settings</a></p>
-      <p class="card-title" style="padding-left: 0px;">Actions</p>
-          <ul class="list-unstyled">
-            @if(Auth::User()->authority)
-              @if(Auth::User()->authority->create_inventory)
-                <li><a href="#" data-toggle="modal" style="margin-bottom: 20px;" data-target="#createInventoryModal">Create inventory</a></li>
-              @endif
-            @endif
-            @if(Auth::User()->authority->track_items)
-              <li><a href="{{route('get.track.items', Auth::User()->school->username)}}">Track items</a></li>
-            @endif
-          </ul>
-      <p class="card-title" style="padding-left: 0px;">Your invenvtory</p>
-          <ul class="list-unstyled" style="color: #333;">
-            @if(Auth::User()->items->count() == 0)
-              <li>No items.</li>
-            @endif
-            @foreach(Auth::User()->items as $item)
-            <li>{{$item->name}}</li>
-            @endforeach
-            <li><a href="{{route('get.user.inventory', [Auth::User()->school->username, Auth::User()->username])}}">See all</a></li>
-          </ul>
-
-      <p class="card-title" style="padding-left: 0px;">Allocated costs</p>
-      <ul style="color: #333; padding-left: 0px;">
-        @foreach(Auth::User()->allocatedCosts as $cost)
-        <li>R{{$cost->item->cost}} - {{$cost->item->name}}</li>
-        @endforeach
-        <?php
-          $total = 0;
-          foreach(Auth::User()->allocatedCosts as $cost) {
-            $total += $cost->item->cost;
+      
+      <div class="panel-primary" style="background-color: white; border-radius: 5px;">
+        <div class="panel-body">
+          <ul id="inventory-sidebar" class="list-unstyled">
+          <style>
+          #inventory-sidebar li {
+            padding-bottom: 10px;
           }
-         ?>
-        <li>Total: R{{$total}}</li>
-        <li style="list-style: none;"><a href="{{route('get.user.allocated.costs', [Auth::User()->school->username, Auth::User()->username])}}">See all</a></li>
-      </ul>
+          #inventory-sidebar li a{
+            color: #333;
+          }
+          </style>
 
+          <li class="card-title" style="padding-left: 0px;"><a href="{{route('get.inventories.settings', [Auth::User()->school->username])}}">Settings <i class="fa fa-cog pull-right" aria-hidden="true"></i></a></li>
+          @if(Auth::User()->authority)
+            @if(Auth::User()->authority->create_inventory)
+              <li class="card-title" style="padding-left: 0px;"><a href="#" data-toggle="modal" data-target="#createInventoryModal">Create inventory <i class="fa fa-plus-circle pull-right" aria-hidden="true"></i></a></li>
+            @endif
+          @endif
+          @if(Auth::User()->authority->track_items)
+            <li class="card-title" style="padding-left: 0px;"><a href="{{route('get.track.items', Auth::User()->school->username)}}">Track items <i class="fa fa-map-marker pull-right" aria-hidden="true"></i></a></li>
+          @endif
+
+          <li class="card-title" style="padding-left: 0px;"><a href="{{route('get.user.inventory', [Auth::User()->school->username, Auth::User()->username])}}">Your invenvtory ({{Auth::User()->items->count()}}) <i class="fa fa-tags pull-right" aria-hidden="true"></i></a></li>
+          <?php
+            $total = 0;
+            foreach(Auth::User()->allocatedCosts as $cost) {
+              $total += $cost->item->cost;
+            }
+           ?>
+          <li class="card-title" style="padding-left: 0px;"><a href="{{route('get.user.allocated.costs', [Auth::User()->school->username, Auth::User()->username])}}">Allocated costs (R{{$total}}) <i class="pull-right fa fa-usd" aria-hidden="true"></i></a></li>
+
+          </ul>
+        </div><!-- .panel-body -->
+      </div><!-- .panel -->
     </div><!-- .col-md-3 -->
 
     <div class="col-md-9" id="inventories">
