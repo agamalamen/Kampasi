@@ -182,6 +182,15 @@ class OffCampusController extends Controller
             'chaperoneRadio'=> 'required'
       ]);
 
+      $departure_day = date("D", strtotime($request['departureTime']));
+      //return $departure_day . date('D');
+      
+      if(date("D") == 'Fri' || date("D") == 'Sat' || date("D") == 'Sun') {
+        if($departure_day == 'Fri' || $departure_day == 'Sat' || $departure_day == 'Sun') {
+          return redirect()->back()->with(['message' => 'Sorry you cannot submit a request at this time', 'status' => 'alert-danger', 'dismiss' => true]);
+        }
+      }
+
       $offCampusRequest = new OffCampusRequest();
 
       if($request['chaperoneRadio'] == 'internal') {

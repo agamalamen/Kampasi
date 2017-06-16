@@ -849,11 +849,11 @@ Route::get('/tools/schedule/mentors', [
   'middleware' => 'auth'
 ]);
 
-Route::get('/tools/schedule/classrooms', [
+/*Route::get('/tools/schedule/classrooms', [
   'uses' => 'ClassroomController@getClassrooms',
   'as' => 'get.classrooms',
   'middleware' => 'auth'
-]);
+]);*/
 
 Route::get('/tools/schedule/days', [
   'uses' => 'ScheduleController@getScheduleDays',

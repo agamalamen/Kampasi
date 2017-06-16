@@ -20,7 +20,7 @@ class EnrolledToClassroom
     {
         $classroom = Classroom::where('username', $request->classroom_username)->first();
         if(!Auth::User()->classrooms->find($classroom->id)) {
-          return redirect()->route('get.classrooms', $request->username);
+          return redirect()->route('get.classrooms', $request->username)->with(['message' => 'Sorry you are not enrolled to this classroom.', 'status' => 'alert-danger', 'dismiss' => true]);
         }
         return $next($request);
     }

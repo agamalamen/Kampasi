@@ -6,9 +6,9 @@
   <div class="row">
     @foreach($school->classrooms as $classroom)
     <div class="col-md-4">
-      <div class="default panel-default">
-        <div class="panel-body" style="border: 1px solid #ddd; border-radius: 3px;">
-          <h2 style="margin: 0px;">{{$classroom->name}}<h2>
+      <div class="panel panel-primary">
+        <div class="panel-body">
+          <h2 style="margin: 0px;"><a href="{{route('get.classroom', [$school->username, $classroom->username])}}">{{$classroom->name}}</a><h2>
           <ul class="list-inline">
             <li><img class="img-circle" src="{{URL::to('src/img/testimonials/bill-gates.jpeg')}}"</li>
             <li><img class="img-circle" src="{{URL::to('src/img/testimonials/bill-gates.jpeg')}}"</li>
