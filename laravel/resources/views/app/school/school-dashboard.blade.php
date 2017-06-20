@@ -53,6 +53,7 @@
       </div>
     </div><!-- .printable-card -->
     <hr>
+    <a href="{{route('get.inventories', Auth::User()->school->username)}}">Go to inventory</a>
     <button onclick="printExitCard()" class="btn btn-primary pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</button>
     </div><!-- .panel-body -->
   </div><!-- .panel -->
