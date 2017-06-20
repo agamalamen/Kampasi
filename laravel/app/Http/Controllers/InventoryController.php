@@ -510,6 +510,32 @@ class InventoryController extends Controller
       return redirect()->back();
     }
 
+    public function postDateDeparting(Request $request) 
+    {
+      $this->validate($request, [
+          'date_departing' => 'required'
+        ]);
+
+      $user = Auth::User();
+      $user->date_departing = $request['date_departing'];
+      $user->update();
+
+      return redirect()->back();
+    }
+
+    public function postTimeDeparting(Request $request) 
+    {
+      $this->validate($request, [
+          'time_departing' => 'required'
+        ]);
+
+      $user = Auth::User();
+      $user->time_departing = $request['time_departing'];
+      $user->update();
+
+      return redirect()->back();
+    }
+
     public function getSearchInventory()
     {
       // get the q parameter from URL

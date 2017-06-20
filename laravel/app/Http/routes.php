@@ -631,6 +631,19 @@ Route::get('/tools/masterpieces/{id}', [
 
 
 //User dashboard routing
+Route::post('/actions/exit-card/date-departing', [
+  'uses' => 'InventoryController@postDateDeparting',
+  'as' => 'post.date.departing',
+  'middleware' => 'auth'
+]);
+
+Route::post('/actions/exit-card/time-departing', [
+  'uses' => 'InventoryController@postTimeDeparting',
+  'as' => 'post.time.departing',
+  'middleware' => 'auth'
+]);
+
+
 Route::get('/actions/get-avatar/{avatar_name}', [
   'uses' => 'UserController@getAvatar',
   'as' => 'get.avatar'

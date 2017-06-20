@@ -11,6 +11,71 @@
 </style>
 
 <div class="row">
+  <div class="col-md-12">
+  <p class="card-title">Inventory</p>
+  @if(Auth::User()->role == 'student' && Auth::User()->items->count() == 0)
+  <div class="panel panel-primary">
+    <div style="margin-left: 12%; margin-top: 20px;" class="panel-body">
+    <div id="printable-card">
+      <div class="row">
+          <div class="col-md-4" style="margin-left: 20px; height: 300px; background-color: #27ae60;">
+              <p class="text-center"><img id="avatar" class="img-circle" style="width: 80px; height: 80px; margin-top: 50px;" src="{{route('get.avatar', Auth::User()->avatar)}}"></p>
+              <p class="text-center" style="color: white; font-size: 21px; font-family: timeburner">{{Auth::User()->name}} <span class="visible-print" style="font-family: arial; font-size: 12px;">(Verified)</span></p>
+          </div><!-- .col-md-4 -->
+          <div class="col-md-6">
+              <div id="tile" style="background-color: #34495E; color: white; padding: 22px;">
+                <p>This Card serves to confirm that the above named student has completed the clearance procedures for exiting the Academy.</p>
+                <p>This card must be presented at the Gate on leaving together with Room Key.</p>
+              </div><!-- .tile -->
+              <div class="row" style="margin-top: 23px;">
+                  <div class="col-md-6">
+                    <div id="tile" style="background-color: #2980B9; color: white; padding: 10px;">
+                        <p class="text-center">Date departing</p>
+                          <form method="post" action="{{route('post.date.departing')}}">
+                            <input name="date_departing" type="date" value="{{Auth::User()->date_departing}}" class="form-control">
+                            <button type="submit" style="margin-top: 5px;" class="btn btn-default no-print">Update</button>
+                            {{ csrf_field() }}
+                          </form>
+                    </div><!-- .tile -->  
+                  </div><!-- .col-md-6 -->                  
+                  <div class="col-md-6">
+                    <div id="tile" style="background-color: #2980B9; color: white; padding: 10px;">
+                        <p class="text-center">Time leaving campus</p>
+                        <form method="post" action="{{route('post.time.departing')}}">
+                            <input name="time_departing" type="time" value="{{Auth::User()->time_departing}}" class="form-control">
+                            <button type="submit" style="margin-top: 5px;" class="btn btn-default no-print">Update</button>
+                            {{ csrf_field() }}
+                        </form>
+                    </div><!-- .tile -->
+                  </div><!-- .col-md-6 -->
+              </div><!-- .row -->
+          </div><!-- .col-md-8 -->
+      </div>
+    </div><!-- .printable-card -->
+    <hr>
+    <button onclick="printExitCard()" class="btn btn-primary pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</button>
+    </div><!-- .panel-body -->
+  </div><!-- .panel -->
+  @else
+  <div class="panel panel-primary">
+    <div class="panel-body">
+      <div class="row">
+        @foreach(Auth::User()->items as $item)
+          <div class='col-md-4'>
+            <a href="{{route('get.item', [Auth::User()->school->username, $item->inventory->name, $item->name])}}">{{$item->name}}</a> 
+            <p><b>Return date:</b> <span style="color: red;">{{$item->pivot->return_date}}</span></p>
+          </div><!-- .col-md-4 -->
+        @endforeach
+      </div><!-- .row -->
+      <hr>
+      <a href="{{route('get.inventories', Auth::User()->school->username)}}">Go to inventory</a>
+    </div><!-- .panel-body -->
+  </div><!-- .panel -->
+  @endif
+  </div><!-- .col-md-12 -->
+</div><!-- .row -->
+
+<div class="row">
   <div class="col-md-4">
     <p class="card-title">Prep signup</p>
     <div class="panel panel-primary" style="border: 0px;">
@@ -261,7 +326,7 @@
 
 <div class="row">
   <div class="col-md-6">
-    <p class="card-title">Tutoring program <span style="color: #f1c40f;"><i class="fa fa-star" aria-hidden="true"></i> New</span></p>
+    <p class="card-title">Tutoring program</p>
     <div class="panel panel-primary">
       <div class="panel-body">
           @if(Auth::User()->school->todayTutorings == '[]')
