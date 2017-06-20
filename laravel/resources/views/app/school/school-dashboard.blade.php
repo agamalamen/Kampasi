@@ -74,6 +74,9 @@
   @else
   <div class="panel panel-primary">
     <div class="panel-body">
+      @if(Auth::User()->items->count() == 0)
+        <p style="color: grey; font-style: italic;">You have no items in your inventory.</p>
+      @endif
       <div class="row">
         @foreach(Auth::User()->items as $item)
           <div class='col-md-4'>
