@@ -17,11 +17,11 @@
     <div class='col-md-8 col-md-offset-2'>
       <select onchange="location = this.value;" data-live-search="true" name="user" class="selectpicker">
         <option>{{$user->name}}</option>
-        @foreach(Auth::User()->school->users as $user)
-          <option value={{route('get.user.allocated.costs', [Auth::User()->school->username, $user->username])}}>{{$user->name}}</option>
+        @foreach(Auth::User()->school->users as $selectUser)
+          <option value={{route('get.user.allocated.costs', [Auth::User()->school->username, $selectUser->username])}}>{{$selectUser->name}}</option>
         @endforeach
       </select>
-      <ul class="list-group" style="color: #333;">
+      <ul class="list-group" style="color: #333; margin-top: 10px;">
         @foreach($user->allocatedCosts as $cost)
           <li class="list-group-item">
             <p style="display: inline; font-size: 18px;"><b>R{{$cost->item->cost}}</b></p>
