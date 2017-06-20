@@ -144,7 +144,7 @@ Route::get('/{school_username}/inventory/users/my-allocated-costs/{user_username
   'middleware' => 'auth'
 ]);
 
-Route::get('/{school_username}/inventory/tools/track/items', [
+Route::get('/{school_username}/inventory/tools/track/{item_id}', [
   'uses'       => 'InventoryController@getTrackItems',
   'as'         => 'get.track.items',
   'middleware' => 'auth'

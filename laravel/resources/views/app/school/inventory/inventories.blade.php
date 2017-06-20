@@ -59,7 +59,7 @@
             @endif
           @endif
           @if(Auth::User()->authority->track_items)
-            <li class="card-title" style="padding-left: 0px;"><a href="{{route('get.track.items', Auth::User()->school->username)}}">Track items <i class="fa fa-map-marker pull-right" aria-hidden="true"></i></a></li>
+            <li class="card-title" style="padding-left: 0px;"><a href="{{route('get.track.items', [Auth::User()->school->username, 'all'])}}">Track items <i class="fa fa-map-marker pull-right" aria-hidden="true"></i></a></li>
           @endif
 
           <li class="card-title" style="padding-left: 0px;"><a href="{{route('get.user.inventory', [Auth::User()->school->username, Auth::User()->username])}}">Your invenvtory ({{Auth::User()->items->count()}}) <i class="fa fa-tags pull-right" aria-hidden="true"></i></a></li>

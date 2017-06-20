@@ -377,13 +377,19 @@ class InventoryController extends Controller
       return view('app.school.inventory.my-inventory')->with(['user' => $user]);
     }
 
-    public function getTrackItems()
+    public function getTrackItems($school_username, $item_id)
     {
       if(!Auth::User()->authority->track_items) {
         return redirect()->route('get.inventories', [Auth::User()->school->username])->with(['message' => 'You are not authorized', 'status' => 'alert-danger', 'dismiss' => true]);
       }
 
-      return view('app.school.inventory.track-items');
+      if($item_id == 'all') {
+        $filterItem = '';
+      } else {
+        $filterItem = Item::find($item_id);
+      }
+
+      return view('app.school.inventory.track-items')->with(['filterItem' => $filterItem]);
     }
 
     public function postItemReturned(Request $request)
