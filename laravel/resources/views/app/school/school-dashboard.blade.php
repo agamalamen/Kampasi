@@ -42,6 +42,7 @@
                     <div id="tile" style="background-color: #2980B9; color: white; padding: 10px;">
                         <p class="text-center">Time leaving campus</p>
                         <p>See Ms. Chomba for this piece of information.</p>
+                        <p class="visible-print">Strategic relations signature</p>
                         <!--<form method="post" action="{{route('post.time.departing')}}">
                             <input name="time_departing" type="time" value="{{Auth::User()->time_departing}}" class="form-control">
                             <button type="submit" style="margin-top: 5px;" class="btn btn-default no-print">Update</button>
