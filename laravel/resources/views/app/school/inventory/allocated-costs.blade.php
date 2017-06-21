@@ -33,6 +33,7 @@
           <li class="list-group-item">
             <p style="display: inline; font-size: 18px;"><b>R{{$cost->item->cost}}</b></p>
             <a style="display: inline;" class="pull-right" href="{{route('get.item', [Auth::User()->school->username, $cost->item->inventory->name, $cost->item->name])}}">{{$cost->item->name}}</a>
+            <p>{{$cost->user->name}}</p>
             @if($user)
               <form action="{{route('post.item.paid', Auth::User()->school->username)}}" method="post">
                 <input type="hidden" name="item" value={{$cost->item->id}}>
