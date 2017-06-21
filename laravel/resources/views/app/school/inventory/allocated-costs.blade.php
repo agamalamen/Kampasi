@@ -53,7 +53,7 @@
           Total: R{{$total}}
           @if($user)
             <form class="pull-right" action="{{route('post.all.items.paid', Auth::User()->school->username)}}" method="post">
-              <input type="hidden" name="user" value={{$cost->user->id}}>
+              <input type="hidden" name="user" value={{$user->id}}>
               <button type="submit" class="btn btn-sm">All paid</button>
               {{csrf_field()}}
             </form>
