@@ -74,16 +74,17 @@
   @else
   <div class="panel panel-primary">
     <div class="panel-body">
-      @if(Auth::User()->items->count() == 0)
-        <p style="color: grey; font-style: italic;">You have no items in your inventory.</p>
+      @if(Auth::User()->allocatedCosts->count() == 0)
+        <p style="color: grey; font-style: italic;">You have no allocated costs.</p>
       @endif
       <div class="row">
-        @foreach(Auth::User()->items as $item)
+        @foreach(Auth::User()->allocatedCosts as $cost)
           <div class='col-md-4'>
-            <a href="{{route('get.item', [Auth::User()->school->username, $item->inventory->name, $item->name])}}">{{$item->name}}</a> 
-            <p><b>Return date:</b> <span style="color: red;">{{$item->pivot->return_date}}</span></p>
+            <a href="{{route('get.item', [Auth::User()->school->username, $cost->item->inventory->name, $cost->item->name])}}">{{$cost->item->name}}</a> 
+            <p><b>Cost:</b> R{{$cost->item->cost}}</p>
           </div><!-- .col-md-4 -->
         @endforeach
+        <p style="color: red; margin-left: 10px; margin-bottom: 0px;">You have to go to finance and clear your account in order to get your exit card.</p>
       </div><!-- .row -->
       <hr>
       <a href="{{route('get.inventories', Auth::User()->school->username)}}">Go to inventory</a>

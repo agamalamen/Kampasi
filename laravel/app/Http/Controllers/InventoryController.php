@@ -143,13 +143,22 @@ class InventoryController extends Controller
 
     public function getUserAllocatedCosts($school_username, $user_username)
     {
-      $user = User::where('username', $user_username)->first();
-
-      if(Auth::User()->role == 'student' && Auth::User() != $user) {
+      $user = '';
+      if($user_username == 'all') {
+        $allocatedCosts = Auth::User()->school->allocatedCosts;        
+        if(Auth::User()->role == 'student') {
+          return redirect()->route('get.inventories', [Auth::User()->school->username])->with(['message' => 'You are not authorized', 'status' => 'alert-danger', 'dismiss' => true]);
+        }
+      } else {
+        $user = User::where('username', $user_username)->first();
+        if(Auth::User()->role == 'student' && Auth::User()->id != $user->id) {
         return redirect()->route('get.inventories', [Auth::User()->school->username])->with(['message' => 'You are not authorized', 'status' => 'alert-danger', 'dismiss' => true]);
+        }
+
+        $allocatedCosts = $user->allocatedCosts;
       }
 
-      return view('app.school.inventory.allocated-costs')->with(['user' => $user]);
+      return view('app.school.inventory.allocated-costs')->with(['allocatedCosts' => $allocatedCosts, 'user' => $user]);
     }
 
     public function postItem(Request $request, $school_username, $name, $inventory_id)
