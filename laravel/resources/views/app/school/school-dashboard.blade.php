@@ -43,7 +43,7 @@
                         <p class="text-center">Time leaving campus</p>
                         <p class="no-print">See Ms. Chomba for this piece of information.</p>
                         <input type="time" class="form-control visible-print">
-                        <p class="visible-print">Strategic relations signature</p>
+                        <p class="visible-print" style="margin-top: 50px;">Strategic relations signature</p>
                         <!--<form method="post" action="{{route('post.time.departing')}}">
                             <input name="time_departing" type="time" value="{{Auth::User()->time_departing}}" class="form-control">
                             <button type="submit" style="margin-top: 5px;" class="btn btn-default no-print">Update</button>
