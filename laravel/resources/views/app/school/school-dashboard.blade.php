@@ -13,7 +13,7 @@
 <div class="row">
   <div class="col-md-12">
   <p class="card-title">Inventory</p>
-  @if(Auth::User()->role == 'student' && Auth::User()->items->count() == 0 && Auth::User()->allocatedCosts->count == 0)
+  @if(Auth::User()->role == 'student' && Auth::User()->items->count() == 0 && Auth::User()->allocatedCosts->count() == 0)
   <div class="panel panel-primary">
     <div style="margin-left: 12%; margin-top: 20px;" class="panel-body">
     <div id="printable-card">
