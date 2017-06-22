@@ -238,6 +238,6 @@ class School extends Model
 
     public function allocatedCosts()
     {
-      return $this->hasMany('App\UserAllocatedCost');
+      return $this->hasMany('App\UserAllocatedCost')->where('paid', 0);
     }
 }

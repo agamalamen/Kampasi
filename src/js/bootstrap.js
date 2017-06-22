@@ -8,6 +8,19 @@ if (typeof jQuery === 'undefined') {
   throw new Error('Bootstrap\'s JavaScript requires jQuery')
 }
 
+function printExitCard() {
+  var printContents = document.getElementById("printable-card").innerHTML;
+
+     var originalContents = document.body.innerHTML;
+
+     document.body.innerHTML = printContents;
+
+     window.print();
+
+     document.body.innerHTML = originalContents;
+}
+
+
 +function ($) {
   'use strict';
   var version = $.fn.jquery.split(' ')[0].split('.')
