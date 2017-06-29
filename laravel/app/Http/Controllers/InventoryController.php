@@ -636,4 +636,22 @@ class InventoryController extends Controller
 
       })->export('xls');
     }
+
+    public function getExportInventories()
+    {
+      return 'hi';
+      /*Excel::create("Inventories", function($excel) {
+
+      foreach(Auth::User()->school->inventories as $inventorry) {
+
+        $excel->sheet($inventory->name, function($sheet) use($data) {
+
+        $sheet->fromArray(array('hi'));
+
+        });
+
+      }
+
+      })->export('xls');*/
+    }
 }

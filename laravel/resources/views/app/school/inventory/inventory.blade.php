@@ -5,6 +5,8 @@
   @include('includes.modals.add-inventory-attribute-modal')
   @include('includes.modals.add-inventory-owner-modal')
 
+  <a href="{{route('get.export.inventory', [Auth::User()->school, $inventory->name])}}" class="btn btn-primary pull-right" style="margin-bottom: 10px;"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span> Export {{$inventory->name}}</a>
+
   <p style="margin-top: 0px; margin-bottom: 15px;"><a href="{{route('get.inventories', Auth::User()->school->username)}}"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Back to all inventories</a></p>
 
   <!--<div class="panel panel-primary">
