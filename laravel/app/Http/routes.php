@@ -53,6 +53,12 @@ Route::post('/{school_username}/inventory/{name}/add-item/{inventory_id}', [
   'middleware' => 'auth'
 ]);
 
+Route::get('/{school_username}/inventory/{name}/export', [
+  'uses'       => 'InventoryController@getExportInventory',
+  'as'         => 'get.export.inventory',
+  'middleware' => 'auth'
+]);
+
 Route::get('/{school_username}/inventory/tools/delete-item/{item_id}', [
   'uses'       => 'InventoryController@deleteItem',
   'as'         => 'delete.item',

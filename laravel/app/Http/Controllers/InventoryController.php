@@ -607,18 +607,32 @@ class InventoryController extends Controller
 
     }
 
-    public function exportExcel()
+    public function getExportInventory($school_username, $inventory_name)
     {
-      Excel::create('Filename', function($excel) {
+      $inventory = Inventory::where('name', $inventory_name)->first();
 
-          $excel->sheet('Sheetname', function($sheet) {
+      $attributes_array = array('Name', 'Stock', 'Cost');
+      foreach($inventory->attributes as $attribute) {
+        array_push($attributes_array, $attribute->name);
+      }
 
-              $sheet->fromArray(array(
-                  array('data1', 'data2'),
-                  array('data3', 'data4')
-              ));
+      $data = array($attributes_array);
 
-          });
+      foreach($inventory->items as $item) {
+        $item_array = array($item->name, $item->stock, $item->cost);
+        foreach($item->itemAttributes as $item_attribute) {
+          array_push($item_array, $item_attribute->value);
+        }
+        array_push($data, $item_array);
+      }
+
+      Excel::create($inventory->name, function($excel) use($data) {
+
+      $excel->sheet('Stock', function($sheet) use($data) {
+
+      $sheet->fromArray($data);
+
+      });
 
       })->export('xls');
     }
