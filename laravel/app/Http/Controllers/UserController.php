@@ -292,6 +292,68 @@ class UserController extends Controller
       return route('home');
     }
 
+    public function getCreateUserManually()
+    {
+      return view('app.school.admin.create-user-manually');
+    }
+
+    public function postCreateUserManually(Request $request)
+    {
+
+      $this->validate($request, [
+        'name' => 'required|min:3',
+        'username' => 'required|unique:users|unique:schools',
+        'email' => 'required|email|unique:users',
+        'role' => 'required',
+      ]);
+
+      $password = 'AliensExist' . strval(rand(100, 999)) . '195' . strval(rand(100, 999));
+
+      $user = new User();
+      $user->name = $request['name'];
+      $user->username = $request['username'];
+      $user->email = $request['email'];
+      $user->school_id = Auth::User()->school->id;
+      $user->password = bcrypt($password);
+      $user->save();
+
+      DB::table('authorities')->insert([
+            ['user_id' => $user->id]
+        ]);
+
+      $to = $user->email;
+          $from = "ahmed@kampasi.com";
+          $subject = "Kampasi - Your account was successfully created!";
+
+          //begin of HTML message
+          $message ="
+          <html>
+          <body>
+          <h1></h1>
+          <p>
+          Hi ". $user->name .", <br>
+          Welcome to Kampasi! <br>
+          Someone just created an account for you on our platform.
+          <br>Your logging credentials:<br>
+          <b>Username:</b> ". $user->username ."
+          <b>Temporary password: </b> ". $password ." <br>
+
+          You can login from <a style=\"text-decoration:none;color:#246;\" href=\"". route('get.login') ."\">here</a>
+
+          <br>
+
+          Cheers,<b>
+          Ahmed
+          </p>
+          </body>
+          </html>";
+          //end of message
+          $headers  = "From: $from\r\n";
+          $headers .= "Content-type: text/html\r\n";
+
+          mail($to, $subject, $message, $headers);
+    }
+
     public function postGoogleSignup(Request $request)
     {
       $user = DB::table('users')->where('email', $request['email'])->first();

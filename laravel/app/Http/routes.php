@@ -621,6 +621,18 @@ Route::get('/data/members/{filter}', [
   'middleware' => 'auth'
 ]);
 
+Route::get('/data/members/all/create', [
+  'uses' => 'UserController@getCreateUserManually',
+  'as' => 'get.create.user.manually',
+  'middleware' => 'auth'
+]);
+
+Route::post('/data/members/all/create', [
+  'uses' => 'UserController@postCreateUserManually',
+  'as' => 'post.create.user.manually',
+  'middleware' => 'auth'
+]);
+
 //Ms. T routing
 Route::post('/actions/upload/masterpiece', [
   'uses' => 'MasterpieceController@postMasterpiece',
