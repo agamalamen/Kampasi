@@ -623,8 +623,7 @@ Route::get('/data/members/{filter}', [
 
 Route::get('/data/members/all/create', [
   'uses' => 'UserController@getCreateUserManually',
-  'as' => 'get.create.user.manually',
-  'middleware' => 'auth'
+  'as' => 'get.create.user.manually'
 ]);
 
 Route::post('/data/members/all/create', [

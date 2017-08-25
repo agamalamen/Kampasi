@@ -1,7 +1,10 @@
 @extends('layouts.school')
 @section('title') Members @endsection
 @section('app-content')
-  <h1 class="text-center" style="color: #333; font-family: lato;">{{Auth::User()->school->name}} members <span class="badge">{{$members->count()}}</span></h1>
+  <h1 class="text-center" style="color: #333; font-family: lato;">
+  <span class="badge"><a style="color: white;" href="{{route('get.create.user.manually')}}">Create</a></span>
+  {{Auth::User()->school->name}} members <span class="badge">{{$members->count()}}</span>
+  </h1>
   <div class="row" style="color: #333; padding-top: 20px;">
     @foreach($members as $user)
       <div class="col-md-4">

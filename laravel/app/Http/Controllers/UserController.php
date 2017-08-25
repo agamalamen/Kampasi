@@ -294,6 +294,9 @@ class UserController extends Controller
 
     public function getCreateUserManually()
     {
+      if(Auth::User()->role != 'staffulty') {
+        return redirect()->back()->with(['message' => 'Sorry! You do not have access to this page.', 'dismiss' => 'true', 'status' => 'alert-danger']);
+      }
       return view('app.school.admin.create-user-manually');
     }
 
@@ -313,7 +316,9 @@ class UserController extends Controller
       $user->name = $request['name'];
       $user->username = $request['username'];
       $user->email = $request['email'];
+      $user->role = $request['role'];
       $user->school_id = Auth::User()->school->id;
+      $user->avatar = 'default_' . rand(1, 13) . '.png';
       $user->password = bcrypt($password);
       $user->save();
 
@@ -352,6 +357,7 @@ class UserController extends Controller
           $headers .= "Content-type: text/html\r\n";
 
           mail($to, $subject, $message, $headers);
+          return redirect()->back()->with(['message' => 'User account created.', 'status' => 'alert-success', 'dismiss' => true]);
     }
 
     public function postGoogleSignup(Request $request)
