@@ -285,6 +285,11 @@ Route::get('/testing/url', [
   'as' => 'testing.url'
 ]);
 
+Route::get('/testing/fake-login', [
+  'uses' => 'TestingController@fakeLogin',
+  'as' => 'fake.login'
+]);
+
 //terms and privacy
 Route::get('/info/privacy-policy', function(){
   return view('about.privacy-policy');
@@ -624,6 +629,12 @@ Route::get('/data/members/{filter}', [
 Route::get('/data/members/all/create', [
   'uses' => 'UserController@getCreateUserManually',
   'as' => 'get.create.user.manually'
+]);
+
+Route::get('/data/members/all/Manage', [
+  'uses' => 'AdminController@getManageUsers',
+  'as' => 'get.manage.users',
+  'middleware' => 'auth'
 ]);
 
 Route::post('/data/members/all/create', [

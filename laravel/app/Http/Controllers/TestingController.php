@@ -34,4 +34,14 @@ class TestingController extends Controller
         }
       }*/
     }
+
+    public function fakeLogin()
+    {
+      if (Auth::attempt(['email' => 'afarag16@alastudents.org', 'password' => 'Youyugi195'])) 
+      {
+          return redirect()->route('dashboard', Auth::User()->school->username);
+      } else {
+        return 'wrong something';
+      }
+    }
 }

@@ -1,10 +1,3 @@
-<nav class="navbar" style="background-color: #34495e; padding: 0px; margin: 0px; border-radius: 0px;">
-    <p class="text-center" style="padding-top: 13px; font-size: 16px; text-align: center;"><i class="fa fa-dollar" aria-hidden="true"></i>
-      Help Brima Bangura to attend Embry-Riddle Aeronautical University. <i class="fa fa-dollar" aria-hidden="true"></i>
-      <a class="btn btn-default"  target="_blank" href="https://www.gofundme.com/bbangura?rcid=cd77233214a44b31801c36fcafe6a186" style="border: 0px; border-radius: 15px; background-color: #2980b9;">Campaign page</a>
-    </p>
-</nav>
-
 <?php
 $birthday_guys = '';
 foreach(Auth::User()->school->users as $user) {

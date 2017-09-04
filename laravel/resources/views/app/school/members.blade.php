@@ -2,7 +2,9 @@
 @section('title') Members @endsection
 @section('app-content')
   <h1 class="text-center" style="color: #333; font-family: lato;">
-  <span class="badge"><a style="color: white;" href="{{route('get.create.user.manually')}}">Create</a></span>
+  @if(Auth::User()->role == 'staffulty')
+    <span class="badge"><a style="color: white;" href="{{route('get.create.user.manually')}}">Create</a></span>
+  @endif
   {{Auth::User()->school->name}} members <span class="badge">{{$members->count()}}</span>
   </h1>
   <div class="row" style="color: #333; padding-top: 20px;">
@@ -19,6 +21,8 @@
               $role = $user->role;
               if($user->role == 'student_life') {
                 $role = 'Student life';
+              } elseif($user->role == 'alumni') {
+                  $role = 'Alumni';
               } elseif($user->role == 'student') {
                 if($user->hall) {
                   $role = $user->hall->name;
