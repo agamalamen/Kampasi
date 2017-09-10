@@ -407,6 +407,7 @@ class UserController extends Controller
       $this->validate($request, [
         'email' => 'required'
       ]);
+
       $user = User::where('email', $request['email'])->get()->first();
       if($user == '[]') {
         return redirect()->back()->with(['message'=> 'There is no account with this email', 'status' => 'alert-danger', 'dismiss' => true]);
@@ -431,8 +432,8 @@ class UserController extends Controller
       <h1></h1>
       <p>
       Hello ". $user->name .", <br>
-      Please follow the link below to reset your password. <br>
-      <a style=\"text-decoration:none;color:#246;\" href=\"". route('get.reset.password', $randomString) ."\">Reset password</a>
+      Please follow the link below to and enter this code <b>". $randomString ."</b> reset your password. <br>
+      <a style=\"text-decoration:none;color:#246;\" href=\"". route('get.reset.password') ."\">Reset password</a>
       </p>
       </body>
       </html>";
@@ -440,29 +441,25 @@ class UserController extends Controller
       $headers  = "From: $from\r\n";
       $headers .= "Content-type: text/html\r\n";
       mail($to, $subject, $message, $headers);
-      return redirect()->back()->with(['message' => 'Please check your email for your reset password link. It may take a few minutes!']);
+      return redirect()->route('get.reset.password');
     }
 
-    public function getResetPassword($code)
+    public function getResetPassword()
     {
-      /*if($code == 0) {
-        return redirect()->route('get.forgot.password')->with(['message' => 'Please enter your email first.', 'status' => 'alert-info', 'dismiss' => true]);
-      }*/
-      $user = User::where('reset_password_code', $code)->get()->first();
-      if($user == '[]') {
-        return redirect()->route('get.forgot.password')->with(['message' => 'Please enter your email first.', 'status' => 'alert-info', 'dismiss' => true]);
-      } else {
-        return view('account.reset-password')->with(['code' => $code]);
-      }
+      return view('account.reset-password');
     }
 
-    public function postResetPassword(Request $request, $code)
+    public function postResetPassword(Request $request)
     {
       $this->validate($request, [
+        'code' => 'required|size:10',
         'password' => 'required|min:6',
         'confirm_password' => 'required|same:password'
       ]);
-      $user = User::where('reset_password_code', $code)->get()->first();
+      $user = User::where('reset_password_code', $request['code'])->get()->first();
+      if($user == '') {
+        return redirect()->back()->with(['message' => 'Sorry! this code does not belong to any account']);
+      }
       $user->password = bcrypt($request['password']);
       $user->reset_password_code = 0;
       $user->update();

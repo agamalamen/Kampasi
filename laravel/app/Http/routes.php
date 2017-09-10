@@ -710,7 +710,7 @@ Route::post('/account/login', [
   'middleware' => 'guest'
 ]);
 
-Route::get('/account/signup', [
+Route::get('/account/signupjadsfaldfa', [
   'uses' => 'UserController@getSignup',
   'as' => 'get.signup',
   'middleware' => 'guest'
@@ -746,13 +746,13 @@ Route::post('/account/forgot-password', [
   'middleware' => 'guest'
 ]);
 
-Route::get('/account/reset-password/{code}', [
+Route::get('/account/reset-password/', [
   'uses' => 'UserController@getResetPassword',
   'as' => 'get.reset.password',
   'middleware' => 'guest'
 ]);
 
-Route::post('/account/reset-password/{code}', [
+Route::post('/account/reset-password/', [
   'uses' => 'UserController@postResetPassword',
   'as' => 'post.reset.password',
   'middleware' => 'guest'
