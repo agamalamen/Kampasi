@@ -710,7 +710,7 @@ Route::post('/account/login', [
   'middleware' => 'guest'
 ]);
 
-Route::get('/account/signupjadsfaldfa', [
+Route::get('/account/signup', [
   'uses' => 'UserController@getSignup',
   'as' => 'get.signup',
   'middleware' => 'guest'

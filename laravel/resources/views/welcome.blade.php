@@ -33,7 +33,7 @@
           <a class="btn btn-default btn-lg" href="{{route('logout')}}">Logout</a>
           @else
           <a class="btn btn-primary btn-lg" href="{{route('get.login')}}">Login</a>
-          <a class="btn btn-default btn-lg" href="{{route('about.us')}}">About us</a>
+          <a class="btn btn-default btn-lg" href="{{route('get.signup')}}">Signup</a>
           <!--<a class="btn btn-default btn-lg" href="{{route('get.signup')}}">Signup</a>-->
           @endif
         </div><!-- .home-buttons -->
