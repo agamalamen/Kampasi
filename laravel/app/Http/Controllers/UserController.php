@@ -279,6 +279,7 @@ class UserController extends Controller
       $user->phone = $request['phone'];
       $user->school_id = 1;
       $user->password = bcrypt($request['password']);
+      $user->avatar = 'default_' . str(rand(1,12)) . '.png';
       $user->save();
       DB::table('authorities')->insert([
             ['user_id' => $user->id]
