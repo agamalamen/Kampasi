@@ -292,6 +292,47 @@ class UserController extends Controller
       return route('home');
     }
 
+    public function getStaffultySignup()
+    {
+      return view('account.staffulty-signup');
+    }
+
+    public function postStaffultySignup(Request $request)
+    {
+      $this->validate($request, [
+        'name' => 'required|min:3',
+        'username' => 'required|min:3|unique:users|unique:schools',
+        'email' => 'required|email|unique:users',
+        'phone' => 'required|digits:10',
+        'password' => 'required|min:6',
+        'code'     => 'required'
+      ]);
+
+      if($request['code'] != '1infiniteLoop') {
+        return redirect()->back()->with(['message' => 'The code you entered is not correct!', 'status' => 'alert-danger', 'dismiss' => 'true']);
+      }
+
+      $user = new User();
+      $user->name = $request['name'];
+      $user->username = $request['username'];
+      $user->email = $request['email'];
+      $user->phone = $request['phone'];
+      $user->school_id = 1;
+      $user->password = bcrypt($request['password']);
+      $user->role = 'staffulty';
+      $user->save();
+      DB::table('authorities')->insert([
+            ['user_id' => $user->id]
+        ]);
+      $notification = new Notification();
+      $notification->user_id = $user->id;
+      $notification->message = 'Congratulations! You have successfully created your account.';
+      $notification->route = route('dashboard', [$user->username]);
+      $notification->save();
+      Auth::login($user);
+      return redirect()->route('home');
+    }
+
     public function getCreateUserManually()
     {
       if(Auth::User()->role != 'staffulty') {

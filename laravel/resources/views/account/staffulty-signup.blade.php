@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title') Signup @endsection
+@section('title') Staffulty Signup @endsection
 <nav class="navbar navbar-default navbar-static-top">
   <div class="container">
     <div class="navbar-header">
@@ -20,39 +20,33 @@
 </nav>
 
 <div class="container">
+  @include('includes.errors-block')
+  @include('includes.message-block')
   <div class="row">
     <div class="col-md-4 col-md-offset-4 login-container">
       <p>Already registered? <a href="{{route('get.login')}}">Login to your account</a><p>
-      <form id="signup-form" action="{{route('post.signup')}}" method="post">
+      <form action="{{route('post.staffulty.signup')}}" method="post">
         <div class="form-group">
-          <input id="fullName" type="text" class="form-control input-lg" placeholder="Full name">
-          <label class="control-label text-danger" id="fullNameError"></label>
+          <input name="name" type="text" class="form-control input-lg" placeholder="Full name">
         </div>
         <div class="form-group">
-          <input id="username" type="text" class="form-control input-lg" placeholder="Username">
-          <label class="control-label text-danger" id="usernameError"></label>
+          <input name="username" type="text" class="form-control input-lg" placeholder="Username">
         </div>
         <div class="form-group">
-          <input id="email" type="text" class="form-control input-lg" placeholder="Email">
-          <label class="control-label text-danger" id="emailError"></label>
+          <input name="email" type="text" class="form-control input-lg" placeholder="Email">
         </div>
         <div class="form-group">
-          <input id="phone" type="number" class="form-control input-lg" placeholder="Phone number">
-          <label class="control-label text-danger" id="phoneError"></label>
+          <input name="phone" type="number" class="form-control input-lg" placeholder="Phone number">
         </div>
         <div class="form-group">
-          <input id="password" type="password" class="form-control input-lg" placeholder="Password">
-          <label class="control-label text-danger" id="passwordError"></label>
+          <input name="password" type="password" class="form-control input-lg" placeholder="Password">
         </div>
-        <input id="request" type="hidden" value="suborah">
-        <button id="signupButton" type="submit" class="btn btn-primary btn-block btn-lg">Signup</button>
+        <div class="form-group">
+          <input name="code" type="text" class="form-control input-lg" placeholder="Code">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block btn-lg">Signup</button>
         {{ csrf_field() }}
       </form>
-      <p>Are you staffulty? <a href="{{route('get.staffulty.signup')}}">Please signup from here</a><p>
-      <!--
-      <p class="text-center">Or</p>
-      <div class="g-signin2" data-width="330" data-height="45" style="margin-bottom: 10px;" data-onsuccess="onSignIn"></div>
-      -->
     </div><!-- .col-md-6 -->
   </div><!-- .row -->
 </div><!-- .container -->

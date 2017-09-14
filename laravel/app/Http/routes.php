@@ -722,6 +722,18 @@ Route::post('/account/signup', [
   'middleware' => 'guest'
 ]);
 
+Route::get('/account/staffulty-signup', [
+  'uses' => 'UserController@getStaffultySignup',
+  'as' => 'get.staffulty.signup',
+  'middleware' => 'guest'
+]);
+
+Route::post('/account/staffulty-signup', [
+  'uses' => 'UserController@postStaffultySignup',
+  'as' => 'post.staffulty.signup',
+  'middleware' => 'guest'
+]);
+
 Route::post('account/google-signup', [
   'uses' => 'UserController@postGoogleSignup',
   'as' => 'post.google.signup',
