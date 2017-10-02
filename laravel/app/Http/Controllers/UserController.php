@@ -272,6 +272,8 @@ class UserController extends Controller
         'password' => 'required|min:6'
       ]);
 
+      
+
       $user = new User();
       $user->name = $request['fullName'];
       $user->username = $request['username'];
@@ -279,6 +281,8 @@ class UserController extends Controller
       $user->phone = $request['phone'];
       $user->school_id = 1;
       $user->password = bcrypt($request['password']);
+      $random_avatar = strval(rand(1,12));
+      $user->avatar = 'default_' . $random_avatar . '.png';
       $user->save();
       DB::table('authorities')->insert([
             ['user_id' => $user->id]
@@ -473,7 +477,7 @@ class UserController extends Controller
       <h1></h1>
       <p>
       Hello ". $user->name .", <br>
-      Please enter this code <b>". $randomString ."</b> in the reset password code field. <br>
+      Please copy and paste this code <b>". $randomString ."</b> in the reset password code field. <br>
       <a style=\"text-decoration:none;color:#246;\" href=\"". route('get.reset.password') ."\">Reset password</a>
       </p>
       </body>
@@ -483,7 +487,7 @@ class UserController extends Controller
       $headers .= "Content-type: text/html\r\n";
       mail($to, $subject, $message, $headers);
       
-      return redirect()->route('get.reset.password')->with(['message' => 'You will receive an email with your reset password code. It might take a few momonets. Please be patient!', 'status' => 'alert-info']);
+      return redirect()->route('get.reset.password')->with(['message' => 'You will receive an email with your reset password code. It might take a few moments. Please be patient!', 'status' => 'alert-info']);
     }
 
     public function getResetPassword()
