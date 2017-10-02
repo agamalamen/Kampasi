@@ -473,7 +473,7 @@ class UserController extends Controller
       <h1></h1>
       <p>
       Hello ". $user->name .", <br>
-      Please follow the link below to and enter this code <b>". $randomString ."</b> reset your password. <br>
+      Please enter this code <b>". $randomString ."</b> in the reset password code field. <br>
       <a style=\"text-decoration:none;color:#246;\" href=\"". route('get.reset.password') ."\">Reset password</a>
       </p>
       </body>
@@ -482,7 +482,8 @@ class UserController extends Controller
       $headers  = "From: $from\r\n";
       $headers .= "Content-type: text/html\r\n";
       mail($to, $subject, $message, $headers);
-      return redirect()->route('get.reset.password');
+      
+      return redirect()->route('get.reset.password')->with(['message' => 'You will receive an email with your reset password code. It might take a few momonets. Please be patient!', 'status' => 'alert-info']);
     }
 
     public function getResetPassword()
@@ -523,6 +524,23 @@ class UserController extends Controller
       $user->update();
       $message = 'Your password has been successfully changed.';
       return redirect()->back()->with(['message' => $message, 'status' => 'alert-success', 'dismiss' => true]);
+    }
+
+    public function postUpdateEmail(Request $request)
+    {
+      if(!Hash::check($request['password'], Auth::User()->password)) {
+        return redirect()->back()->with(['message' => 'Your password is not correct!', 'status' => 'alert-danger', 'dismiss' => true]);
+      }
+
+      $this->validate($request, [
+          'email' => 'required|unique:users',
+          'password' => 'required|min:6'
+        ]);
+
+      $user = Auth::User();
+      $user->email = $request['email'];
+      $user->update();
+      return redirect()->back()->with(['message' => 'Your email was updated successfully!', 'status' => 'alert-success', 'dismiss' => true]);
     }
 
     public function getOffCampusUsersDuringPrep()

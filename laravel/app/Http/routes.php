@@ -789,6 +789,13 @@ Route::post('/account/change-password', [
 ]);
 
 
+Route::post('/account/update-password', [
+  'uses' => 'UserController@postUpdateEmail',
+  'as' => 'post.update.email',
+  'middleware' => 'auth'
+]);
+
+
 //Notification routing
 Route::post('/account/proccess-notification', [
   'uses' => 'NotificationController@proccessNotification',

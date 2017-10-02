@@ -26,7 +26,7 @@
     <div class="col-md-4 col-md-offset-4 login-container">
       <form action="{{route('post.reset.password')}}" method="post">
         <div class="form-group">
-          <input type="text" name="code" class="form-control input-lg" placeholder="Reset code">
+          <input type="text" name="code" class="form-control input-lg" placeholder="Reset password code">
         </div>
         <div class="form-group">
           <input type="password" name="password" class="form-control input-lg" placeholder="New password">

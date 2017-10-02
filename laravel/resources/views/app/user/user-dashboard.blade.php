@@ -67,6 +67,24 @@
       </div>
     </div> -->
 
+    <p class="card-title">Update email</p>
+    <div class="panel panel-primary">
+      <div class="panel-body">
+        <form action="{{route('post.update.email')}}" method="post">
+          <div class="form-group">
+            <input type="email" class="form-control input-lg" placeholder="Email"
+            value="{{$user->email}}" name="email">
+          </div><!-- .form-group -->
+          <div class="form-group">
+            <input type="password" class="form-control input-lg" placeholder="Enter your password to confirm" name="password">
+          </div><!-- .form-group -->
+          <input class="btn btn-primary btn-lg pull-right" style="font-family: lato;" type="submit" value="Update email" >
+          {{csrf_field()}}
+        </form>
+      </div><!-- .panel-body -->
+    </div><!-- .panel-default -->
+
+    <p class="card-title">Update password</p>
     <div class="panel panel-primary">
       <div class="panel-body">
         <form action="{{route('change.password')}}" method="post">

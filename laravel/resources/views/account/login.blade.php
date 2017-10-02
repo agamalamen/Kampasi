@@ -23,6 +23,7 @@
   @include('includes.message-block')
   <div class="row">
     <div class="col-md-4 col-md-offset-4 login-container">
+      <p>Don't have an account? <a href="{{route('get.signup')}}">Signup form here</a><p>
       <form id="loginForm" action="{{route('post.login')}}" method="post">
         <div class="form-group">
           <input id="usernameOrEmail" type="text" class="form-control input-lg" placeholder="Username or Email">

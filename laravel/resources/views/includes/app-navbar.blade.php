@@ -96,9 +96,9 @@ $birthday_guys = substr($birthday_guys, 0, strlen($birthday_guys) - 2);
             <ul class="nav navbar-nav navbar-right visible-lg visible-md visible-sm">
                 <!--<li><a href="{{route('change.language', 'en')}}">En</a></li>
                 <li style="margin-right: 50px;"><a href="{{route('change.language', 'fr')}}">Fr</a></li>-->
-              <li>
+              <!--<li>
                 <img style="cursor: pointer; padding-top: 9px; padding-right: 20px;" class="dropdown-toggle" data-toggle="dropdown" src="{{URL::to('src/img/icons/settings.svg')}}" style="width: 25px; height: 25px;">
-              </li>
+              </li>-->
               <li>
                 <div class="dropdown">
                   @if(Auth::User()->unseenNotifications == '[]')
