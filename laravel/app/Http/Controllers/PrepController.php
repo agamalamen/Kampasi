@@ -53,9 +53,9 @@ class PrepController extends Controller
 
   public function getPrep($place)
   {
-    if(Date('D') != 'Fri' || Date('D') != 'Sat') {
+    /*if(Date('D') != 'Fri' || Date('D') != 'Sat') {
       $this->postMassPrep();
-    }
+    }*/
     if($place == 'all') {
       $todayPreps = Auth::User()->school->todayPreps;
     } elseif ($place == 'Dorms') {
@@ -89,8 +89,9 @@ class PrepController extends Controller
       $phpObj =  json_decode($json);
       var_dump($phpObj);*/
 
-      if(Date('D') == 'Fri') {
-        return redirect()->back()->with(['message' => 'Sorry there is no prep for today', 'status' => 'alert-info', 'dismiss' => true]);
+
+      if(Date('D') == 'Fri' || Date('D') == 'Sat') {
+        return redirect()->back()->with(['message' => 'There is no prep today. Go get a life!', 'status' => 'alert-info', 'dismiss' => true]);
       }
       $prepStarts ="19:05:00";
       $prepEnds = "21:00:00";
@@ -113,10 +114,7 @@ class PrepController extends Controller
         $prepSignup->save();
       }
       $prepSignup->place = $request['place'];
-      if (time() > strtotime($prepStarts))
-      {
-        $prepSignup->late = 1;
-      }
+      $prepSignup->late = 0;
       $prepSignup->update();
       if(!$prepSignup->late) {
         return redirect()->back();

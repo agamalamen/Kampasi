@@ -176,7 +176,9 @@
                 <label style="color: #333;">Where do you want to prep?</label>
                 <select name="place" type="text" class="form-control input-lg" placeholder="Username or Email">
                   @foreach(Auth::User()->school->prepPlaces as $place)
-                    <option value="{{$place->id}}">{{$place->name}}</option>
+                    @if($place->available)
+                      <option value="{{$place->id}}">{{$place->name}}</option>
+                    @endif
                   @endforeach
                 </select>
               </div>
@@ -214,7 +216,7 @@
       </div><!-- .col-md-6 -->
 
       <div class="col-md-6">
-        <div class="panel panel-primary" style="border: 0px;">
+        <!--<div class="panel panel-primary" style="border: 0px;">
           <div class="panel-body">
             You marked
             <select class="prep-default">
@@ -230,7 +232,7 @@
               @endforeach
             </select>
             as your default place for prep. <span id="updatePrepPlaceStatus" style="display:none; color: #27ae60"></span>
-          </div><!-- .panel-body -->
+          </div><!-- .panel-body 
 
           <script>
             var updatePrepPlaceRoute = "{{route('update.prep.place')}}";

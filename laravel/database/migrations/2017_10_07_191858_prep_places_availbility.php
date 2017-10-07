@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class DateDeparting extends Migration
+class PrepPlacesAvailbility extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,9 @@ class DateDeparting extends Migration
      */
     public function up()
     {
-      Schema::table('users', function ($table){
-      /*$table->date('date_departing');
-      $table->time('time_departing');*/
-      });
-
+        Schema::table('prep_places', function ($table){
+        $table->boolean('available');
+        });
     }
 
     /**
