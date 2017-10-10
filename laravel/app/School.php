@@ -203,7 +203,7 @@ class School extends Model
 
     public function tutors()
     {
-      return $this->hasMany('App\Tutor')->orderBy('id', 'DESC');
+      return $this->hasMany('App\Tutor')->orderBy('id', 'DESC')->where('hidden', 0);
     }
 
     public function tutorings()

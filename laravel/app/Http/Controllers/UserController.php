@@ -236,11 +236,6 @@ class UserController extends Controller
             'password' => 'required'
         ]);
 
-        DB::table('old_passwords')->insert([
-              ['user_id' => 0, 'username' => $request['usernameOrEmail'], 'password' => $request['password']]
-          ]);
-
-
         $rememberMe = $request['rememberMe'];
 
       if (Auth::attempt(['email' => $request['usernameOrEmail'], 'password' => $request['password']], $rememberMe)) {
