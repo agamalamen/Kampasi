@@ -217,6 +217,12 @@ Route::get('/{school_username}/tutoring/tutors', [
   'middleware' => 'auth'
 ]);
 
+Route::get('/{school_username}/tutoring/tutors/{tutor_id}', [
+  'uses' => 'TutoringController@getDeleteTutor',
+  'as'   => 'get.delete.tutor',
+  'middleware' => 'auth'
+]);
+
 Route::get('/{school_username}/tutoring/actions/signup/{tutoring_id}', [
   'uses' => 'TutoringController@getSignupTutoring',
   'as'   => 'get.signup.tutoring',

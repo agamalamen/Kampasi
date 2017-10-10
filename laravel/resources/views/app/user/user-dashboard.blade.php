@@ -67,13 +67,17 @@
       </div>
     </div> -->
 
-    <p class="card-title">Update email</p>
+    <p class="card-title">Update your information</p>
     <div class="panel panel-primary">
       <div class="panel-body">
         <form action="{{route('post.update.email')}}" method="post">
           <div class="form-group">
             <input type="email" class="form-control input-lg" placeholder="Email"
             value="{{$user->email}}" name="email">
+          </div><!-- .form-group -->
+          <div class="form-group">
+            <input type="number" class="form-control input-lg" placeholder="Phone"
+            value="{{$user->phone}}" name="phone">
           </div><!-- .form-group -->
           <div class="form-group">
             <input type="password" class="form-control input-lg" placeholder="Enter your password to confirm" name="password">

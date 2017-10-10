@@ -537,14 +537,22 @@ class UserController extends Controller
       }
 
       $this->validate($request, [
-          'email' => 'required|unique:users',
+          'email' => 'required',
+          'phone' => 'required|digits:10',
           'password' => 'required|min:6'
         ]);
 
+      foreach(Auth::User()->school->users as $user) {
+        if($request['email'] == $user->email && Auth::User()->id != $user->id) {
+          return 'Email has already been taken.';
+        }
+      }
+
       $user = Auth::User();
       $user->email = $request['email'];
+      $user->phone = $request['phone'];
       $user->update();
-      return redirect()->back()->with(['message' => 'Your email was updated successfully!', 'status' => 'alert-success', 'dismiss' => true]);
+      return redirect()->back()->with(['message' => 'Your information was updated successfully!', 'status' => 'alert-success', 'dismiss' => true]);
     }
 
     public function getOffCampusUsersDuringPrep()

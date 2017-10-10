@@ -97,6 +97,11 @@ class TutoringController extends Controller
       return redirect()->back()->with(['message' => 'You added a new tutor successfully!', 'status' => 'alert-success', 'dismiss' => true]);
     }
 
+    public function getDeleteTutor($tutor_id)
+    {
+      return 'hi';
+    }
+
     public function postTutorSubject(Request $request)
     {
       $matchThese = ['tutor_id' => $request['tutor'], 'tutoring_subject_id' => $request['tutoringSubject']];

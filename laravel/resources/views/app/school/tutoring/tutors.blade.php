@@ -41,6 +41,7 @@
                 <button type="submit" class="btn btn-primary">Add subject</button>
                 {{csrf_field()}}
               </form>
+              <a href="{{route('get.delete.tutor', [$tutor->user->school->id, $tutor->id])}}" style="color: red;">Delete</a>
             @endif
           </div><!-- .media-body -->
         </div><!-- .media -->
