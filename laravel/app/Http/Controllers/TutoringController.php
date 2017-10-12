@@ -100,9 +100,10 @@ class TutoringController extends Controller
     public function getDeleteTutor($tutor_id)
     {
       $tutor = Tutor::find($tutor_id);
-      $tutor->hidden = 1;
+      return $tutor;
+      /*$tutor->hidden = 1;
       $tutor->update();
-      return redirect()->back()->with(['message' => 'Tutor was deleted.', 'status' => 'alert-success', 'dismiss' => true]);
+      return redirect()->back()->with(['message' => 'Tutor was deleted.', 'status' => 'alert-success', 'dismiss' => true]);*/
     }
 
     public function postTutorSubject(Request $request)
