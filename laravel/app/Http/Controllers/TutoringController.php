@@ -97,14 +97,12 @@ class TutoringController extends Controller
       return redirect()->back()->with(['message' => 'You added a new tutor successfully!', 'status' => 'alert-success', 'dismiss' => true]);
     }
 
-    public function getDeleteTutor($tutor_id)
+    public function getDeleteTutor($school_username, $tutor_id)
     {
-      return $tutor_id;
-      //$tutor = Tutor::find($tutor_id);
-      //return $tutor;
-      /*$tutor->hidden = 1;
+      $tutor = Tutor::find($tutor_id);
+      $tutor->hidden = 1;
       $tutor->update();
-      return redirect()->back()->with(['message' => 'Tutor was deleted.', 'status' => 'alert-success', 'dismiss' => true]);*/
+      return redirect()->back()->with(['message' => 'Tutor was deleted.', 'status' => 'alert-success', 'dismiss' => true]);
     }
 
     public function postTutorSubject(Request $request)
