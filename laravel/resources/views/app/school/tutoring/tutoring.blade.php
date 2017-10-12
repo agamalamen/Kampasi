@@ -4,21 +4,23 @@
   <p class="pull-right" style="margin-top: 0px; margin-bottom: 15px;"><a href="{{route('get.tutors', Auth::User()->school->username)}}">Go to tutors page <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></p>
 
   @if(Auth::User()->tutor)
-  <form action="{{route('post.tutoring', [Auth::user()->school->id])}}" method="post" class="form-inline text-center">
-    <select name="subject" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput">
-      @foreach(Auth::User()->tutor->subjects as $subject)
-        <option value={{$subject->id}}>{{$subject->tutoringSubject->name}}</option>
-      @endforeach
-    </select>
-    <input name="date" type="date" class="form-control mb-2 mr-sm-2 mb-sm-0">
-    <select name="tutoringPeriod" class="form-control mb-2 mr-sm-2 mb-sm-0">
-      @foreach(Auth::User()->school->tutoringPeriods as $tutoringPeriod)
-      <option value={{$tutoringPeriod->id}}>{{$tutoringPeriod->from}} to {{$tutoringPeriod->to}}</option>
-      @endforeach
-    </select>
-    <button type="submit" class="btn btn-primary">Submit</button>
-    {{csrf_field()}}
-  </form>
+    @if(!Auth::User()->tutor->hidden)
+      <form action="{{route('post.tutoring', [Auth::user()->school->id])}}" method="post" class="form-inline text-center">
+        <select name="subject" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput">
+          @foreach(Auth::User()->tutor->subjects as $subject)
+            <option value={{$subject->id}}>{{$subject->tutoringSubject->name}}</option>
+          @endforeach
+        </select>
+        <input name="date" type="date" class="form-control mb-2 mr-sm-2 mb-sm-0">
+        <select name="tutoringPeriod" class="form-control mb-2 mr-sm-2 mb-sm-0">
+          @foreach(Auth::User()->school->tutoringPeriods as $tutoringPeriod)
+          <option value={{$tutoringPeriod->id}}>{{$tutoringPeriod->from}} to {{$tutoringPeriod->to}}</option>
+          @endforeach
+        </select>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        {{csrf_field()}}
+      </form>
+    @endif
   @endif
 
     <?php
@@ -32,7 +34,7 @@
         <div class="row" style="color: #333;">
         <h2 style="font-size: 24px; font-family: lato; padding-bottom: 15px;">'. $textDate .'</h2>
         ';
-        if($school->tutorings->count() == 0) {
+        if($school->givenDaytutorings(date('Y-m-d', $mydate))->count() == 0) {
           echo '<p style="color: grey; font-style: italic;">No tutoring slots were added for this day.</p>';
         }
         foreach($school->tutorings as $tutoring) {
@@ -51,17 +53,17 @@
               if(Auth::User()->id != $tutoring->tutor->user->id && Auth::User()->role == 'student') {
                 echo '
                 <hr>
-                <a class="btn btn-primary btn-sm pull-right" href="' . route("get.signup.tutoring", [Auth::User()->school->id, $tutoring->id]) . '">signup</a>';
+                <a class="btn btn-primary btn-sm pull-right" href="' . route("get.signup.tutoring", [Auth::User()->school->id, $tutoring->id]) . '">Got tutored</a>';
               } else {
                 echo '
                 <hr>
-                <p style="color: grey; font-style: italic;">No one signed up for your slot.</p>';
+                <p style="color: grey; font-style: italic;">No one got tutored by you.</p>';
               }
             } else {
                 echo '
                 <hr>
                 <img id="user-avatar" class="img-responsive img-circle" style="display: inline; cursor: pointer; height: 35px; width: 35px;" src="' . route('get.avatar', $tutoring->tutee->user->avatar) . '">
-                <h4 style="display: inline; font-size: 14px;"><a href="#">' . $tutoring->tutee->user->name . '</a> signed up for this slot.</h4>';
+                <h4 style="display: inline; font-size: 14px;"><a href="#">' . $tutoring->tutee->user->name . '</a> got tutored.</h4>';
                 if($userWatchingToday) {
                   echo '<hr>';
                   if($tutoring->tutor_here) {

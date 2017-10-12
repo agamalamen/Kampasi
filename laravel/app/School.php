@@ -216,6 +216,11 @@ class School extends Model
       return $this->hasMany('App\Tutoring')->where('date', date('Y-m-d'))->orderBy('date', 'ASEC');
     }
 
+    public function givenDayTutorings($date)
+    {
+      return $this->hasMany('App\Tutoring')->where('date', $date)->orderBy('date', 'ASEC');
+    }
+
     public function tutoringPeriods()
     {
       return $this->hasMany('App\TutoringPeriod');
