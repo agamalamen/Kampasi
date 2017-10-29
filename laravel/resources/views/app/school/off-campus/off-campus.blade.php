@@ -47,6 +47,7 @@
       </tr>
       @if (Auth::User()->role != 'student')
         @foreach($requests as $request)
+          @if($request->user)
           <tr>
             <td class="visible-lg visible-md">{{$request->id}}</td>
             <td>{{$request->user->name}}</td>
@@ -72,6 +73,7 @@
             </td>
             <td><a href="{{route('get.off.campus.request', $request->id)}}">See details</a></td>
           </tr>
+          @endif
         @endforeach
       @else
           @foreach(Auth::User()->offCampusRequests as $request)
