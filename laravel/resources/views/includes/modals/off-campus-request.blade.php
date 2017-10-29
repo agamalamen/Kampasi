@@ -43,7 +43,7 @@
               <select class="form-control input-lg" name="internalChaperone">
                 <option value=0></option>
                 @foreach(Auth::User()->school->users as $user)
-                  @if($user->role != "student")
+                  @if($user->role == "staffulty")
                     <option value={{$user->id}}>{{$user->name}}</option>
                   @endif
                 @endforeach
