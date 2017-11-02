@@ -3,7 +3,7 @@
 @section('app-content')
   <h1 class="text-center" style="color: #333; font-family: lato;">
   @if(Auth::User()->role == 'staffulty')
-    <span class="badge"><a style="color: white;" href="{{route('get.create.user.manually')}}">Create</a></span>
+    <span class="badge"><a style="color: white;" href="{{route('get.manage.users')}}">Manage</a></span>
   @endif
   {{Auth::User()->school->name}} members <span class="badge">{{$members->count()}}</span>
   </h1>

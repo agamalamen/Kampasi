@@ -11,6 +11,14 @@
 |
 */
 
+//Survey monkey
+
+Route::get('/apis/survey-monkey', [
+  'uses' => 'APIController@getSurveyMonkey',
+  'as'   => 'get.survey.monkey'
+  ]);
+
+
 //Anzisha prize
 Route::get('/anzisha/twitter', function() {
   return view('anzisha.twitter');
@@ -637,9 +645,15 @@ Route::get('/data/members/all/create', [
   'as' => 'get.create.user.manually'
 ]);
 
-Route::get('/data/members/all/Manage', [
+Route::get('/data/members/all/manage', [
   'uses' => 'AdminController@getManageUsers',
   'as' => 'get.manage.users',
+  'middleware' => 'auth'
+]);
+
+Route::get('/data/members/all/manage/{username}', [
+  'uses' => 'AdminController@getManageUser',
+  'as' => 'get.manage.user',
   'middleware' => 'auth'
 ]);
 

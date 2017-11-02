@@ -20,6 +20,9 @@ class UserController extends Controller
 {
     public function deleteAccount($id)
     {
+      if(Auth::User()->role != 'staffulty') {
+        return redirect()->back()->with(['message' => 'User account was deleted successfuly!', 'status' => 'alert-success', 'dismiss' => true]);
+      }
       $user = User::find($id);
       foreach($user->endorsements as $endorsement) {
         $endorsement->delete();
@@ -34,7 +37,7 @@ class UserController extends Controller
       }
 
       $user->delete();
-      return 'User account was deleted';
+      return redirect()->route('get.manage.users')->with(['message' => 'User account was deleted successfuly!', 'status' => 'alert-success', 'dismiss' => true]);
     }
 
     public function postBirthdate(Request $request)

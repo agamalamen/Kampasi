@@ -102,7 +102,6 @@
     <p class="card-title">Prep signup</p>
     <div class="panel panel-primary" style="border: 0px;">
       <div class="panel-body">
-
         @if(Auth::User()->role != 'student')
         <div class="row text-center">
           <div class="col-xs-4">
