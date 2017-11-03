@@ -11,6 +11,13 @@
 |
 */
 
+//Survey
+Route::get('/tools/surveys', [
+  'uses' => 'SurveyController@getSurveys',
+  'as'   => 'get.surveys',
+  'middleware' => 'auth'
+  ]);
+
 //Survey monkey
 
 Route::get('/apis/survey-monkey', [

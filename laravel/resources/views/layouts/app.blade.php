@@ -53,6 +53,7 @@
     <!-- Bootstrap Javascript -->
     <script src="{{ URL::to('src/js/bootstrap.js') }}"></script>
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <script src="https://surveyjs.azureedge.net/0.12.35/survey.jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
 
   </body>

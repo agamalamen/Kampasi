@@ -21,7 +21,9 @@
             </h3>
             <p style="margin-bottom: -2px; color: grey; font-style: italic;">{{$chaperone->phone}}</p>
             <p style="margin-bottom: -2px; color: grey; font-style: italic;">{{$chaperone->email}}</p>
-            <p style="color: grey; font-style: italic;">Submited by: <a href="{{route('dashboard', $chaperone->user->username)}}">{{$chaperone->user->name}}</a></p>
+            @if($chaperone->user)
+              <p style="color: grey; font-style: italic;">Submited by: <a href="{{route('dashboard', $chaperone->user->username)}}">{{$chaperone->user->name}}</a></p>
+            @endif
           </li>
         @endforeach
         </ul>

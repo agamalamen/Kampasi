@@ -31,13 +31,15 @@
         <input name="phone" type="number" class="form-control input-md" placeholder="Phone number" value="{{$user->phone}}">
       </div>
 
-      <div class="form-group">
-        <select name="hall" class="form-control input-md" placeholder="Hall">
-        @foreach(Auth::User()->school->halls as $hall)
-          <option value="{{$hall->id}}">{{$hall->name}}</option>
-        @endforeach
-        </select>
-      </div>
+      @if($user->role == 'student')
+        <div class="form-group">
+          <select name="hall" class="form-control input-md" placeholder="Hall">
+          @foreach(Auth::User()->school->halls as $hall)
+            <option value="{{$hall->id}}">{{$hall->name}}</option>
+          @endforeach
+          </select>
+        </div>
+      @endif
 
       <div class="form-group">
         <input name="room" type="text" class="form-control input-md" placeholder="Room" value="{{$user->room}}">
