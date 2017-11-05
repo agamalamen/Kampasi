@@ -23,7 +23,8 @@ class PrepController extends Controller
   public function getPrepReports($date) 
   {
     $preps = Prep::all()->where('date', $date);
-    return view('app.school.prep.report')->with(['preps' => $preps]);
+    return $preps;
+    //return view('app.school.prep.report')->with(['preps' => $preps]);
   }
 
   public function getRedirectPrepDate(Request $request)
