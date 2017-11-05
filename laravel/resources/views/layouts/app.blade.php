@@ -50,6 +50,8 @@
     <script src="{{ URL::to('src/js/animation-jquery.js') }}"></script>
     <script src="{{ URL::to('src/js/ajax-validation.js') }}"></script>
     <script src="{{ URL::to('src/js/inventory-jquery.js') }}"></script>
+    <script src="{{ URL::to('src/js/vue.min.js') }}"></script>
+    <script src="{{ URL::to('src/js/survey-jquery.js') }}"></script>
     <!-- Bootstrap Javascript -->
     <script src="{{ URL::to('src/js/bootstrap.js') }}"></script>
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>

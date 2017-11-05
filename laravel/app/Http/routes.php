@@ -14,8 +14,7 @@
 //Survey
 Route::get('/tools/surveys', [
   'uses' => 'SurveyController@getSurveys',
-  'as'   => 'get.surveys',
-  'middleware' => 'auth'
+  'as'   => 'get.surveys'
   ]);
 
 //Survey monkey
@@ -585,6 +584,12 @@ Route::get('/tools/prep-signup/report/{date}', [
   'middleware' => 'auth'
 ]);
 
+Route::get('/tools/prep-signup/reports/{date}', [
+  'uses' => 'PrepController@getPrepReports',
+  'as' => 'get.prep.reports',
+  'middleware' => 'auth'
+]);
+
 Route::get('/tools/prep-signup/report/actions/redirect-prep-date', [
   'uses' => 'PrepController@getRedirectPrepDate',
   'as' => 'get.redirect.prep.date',
@@ -663,6 +668,12 @@ Route::get('/data/members/all/manage/{username}', [
   'as' => 'get.manage.user',
   'middleware' => 'auth'
 ]);
+
+Route::post('/data/members/all/manage/{username}/update', [
+    'uses' => 'AdminController@postUpdateUser',
+    'as'   => 'post.update.user',
+    'middleware' => 'auth'
+  ]);
 
 Route::post('/data/members/all/create', [
   'uses' => 'UserController@postCreateUserManually',

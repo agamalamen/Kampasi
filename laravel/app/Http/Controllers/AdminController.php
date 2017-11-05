@@ -30,4 +30,22 @@ class AdminController extends Controller
     	$user = User::where('username', $username)->first();
     	return view('app.school.admin.manage-user')->with(['user' => $user]);
     }
+
+    public function postUpdateUser($username, Request $request)
+    {
+        $this->validate($request, [
+        'name' => 'required|min:3',
+        'username' => 'required|min:3|unique:users|unique:schools',
+        'email' => 'required|email|unique:users',
+        'phone' => 'required|digits:10'
+        ]);
+
+        $user = User::where('username', $username)->first();
+        $user->name = $request['name'];
+        $user->username = $request['username'];
+        $user->email = $request['email'];
+        $user->phone = $request['number'];
+        $user->update();
+        return redirect()->back()->with(['message' => 'User account was updated successfully.']);
+    }
 }

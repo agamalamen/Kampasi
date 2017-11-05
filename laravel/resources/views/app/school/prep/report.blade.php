@@ -20,9 +20,11 @@
                   if($user->role == 'student') {
                     $prepped = 0;
                     foreach($preps as $prep) {
-                      if($prep->user->id == $user->id) {
-                        $prepped = 1;
-                        break;
+                      if($prep->user) {
+                        if($prep->user->id == $user->id) {
+                          $prepped = 1;
+                          break;
+                        } 
                       }
                     }
                     if(!$prepped) {

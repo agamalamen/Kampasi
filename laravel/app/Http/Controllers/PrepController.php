@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Prep;
+use DB;
 use App\User;
 use App\prepPlace;
 use App\NightWatcher;
@@ -13,15 +14,21 @@ use App\Http\Requests;
 class PrepController extends Controller
 {
 
-  public function getPrepReport($date)
+  /*public function getPrepReport($date)
+  {
+    $preps = Auth::User()->school->dated_preps($date);
+    return view('app.school.prep.report')->with(['preps' => $preps, 'date' => $date]);
+  }*/
+
+  public function getPrepReports($date) 
   {
     $preps = Prep::all()->where('date', $date);
-    return view('app.school.prep.report')->with(['preps' => $preps, 'date' => $date]);
+    return view('app.school.prep.report')->with(['preps' => $preps]);
   }
 
   public function getRedirectPrepDate(Request $request)
   {
-    return redirect()->route('get.prep.report', $request['date']);
+    return redirect()->route('get.prep.reports', $request['date']);
   }
 
   public function postMassPrep()

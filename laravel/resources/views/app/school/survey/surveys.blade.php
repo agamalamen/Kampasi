@@ -1,20 +1,17 @@
-@extends('layouts.school')
-@section('title') Surveys @endsection
-@section('app-content')
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vue</title>
+</head>
+<body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{{ URL::to('src/js/vue.min.js') }}"></script>
+    <script src="{{ URL::to('src/js/survey-jquery.js') }}"></script>
 
-<p id="hello" style="color: #333;">hello</p>
+	<div id="app">
+		<p>@{{ message }}</p>
+	</div><!-- app -->
 
-<div id="surveyContainer"></div>
 
-<script type="text/javascript">
-	var survey = new Survey.Model(surveyJSON);
-$("#surveyContainer").Survey({
-    model:survey,
-    onComplete:sendDataToServer
-});
-	
-</script>
-
-<script src="{{ URL::to('src/js/survey-jquery.js') }}"></script>
-
-@endsection
+</body>
+</html>

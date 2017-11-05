@@ -63,6 +63,11 @@ class School extends Model
       return $this->hasMany('App\Prep')->orderBy('date', date('Y-m-d'));
     }
 
+    public function dated_preps($date)
+    {
+      return $this->hasMany('App\Prep')->where('date', $date);
+    }
+
     public function recentPreps()
     {
       return $this->hasMany('App\Prep')->orderBy('date', date('Y-m-d'))->limit(10);

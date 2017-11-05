@@ -4,7 +4,7 @@
 
 <div class="row">
   <div class="col-md-6">
-    <form action="{{route('post.create.user.manually')}}" method="post" enctype="multipart/form-data">
+    <form action="{{route('post.update.user', $user->username)}}" method="post" enctype="multipart/form-data">
 
       <div class="form-group">
         <input name="name" type="text" class="form-control input-md" placeholder="Name" value="{{$user->name}}">
