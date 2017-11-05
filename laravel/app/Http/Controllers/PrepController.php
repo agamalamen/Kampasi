@@ -14,6 +14,12 @@ use App\Http\Requests;
 class PrepController extends Controller
 {
 
+  public function reporting()
+  {
+    $preps = Prep::all()->where('date', '2017-10-29');
+    return $preps;
+  }
+
   /*public function getPrepReport($date)
   {
     $preps = Auth::User()->school->dated_preps($date);

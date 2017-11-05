@@ -570,7 +570,11 @@ Route::get('/tools/off-campus/{request_id}/not-return/{user_id}', [
 ]);
 
 
-//Route::get('/tools/testing')
+Route::get('/tools/reporting', [
+    'uses' => 'PrepController@reporting',
+    'as' => 'reporting',
+    'middleware' => 'auth'
+  ]);
 
 //Prep routing
 Route::get('/tools/prep-signup/{place}', [
