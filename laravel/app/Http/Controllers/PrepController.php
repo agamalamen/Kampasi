@@ -16,9 +16,11 @@ class PrepController extends Controller
 
   public function reporting()
   {
-    $preps = Auth::User()->school->limitPreps;
+    $preps = Auth::User()->school->limitPreps('2017-10-29');
     //$preps = Prep::all()->where('date', '2017-10-29');
-    return $preps;
+    foreach($preps as $prep) {
+      echo $prep;
+    }
   }
 
   /*public function getPrepReport($date)
@@ -30,8 +32,7 @@ class PrepController extends Controller
   public function getPrepReports($date) 
   {
     $preps = Prep::all()->where('date', $date);
-    return $preps;
-    //return view('app.school.prep.report')->with(['preps' => $preps]);
+    return view('app.school.prep.report')->with(['preps' => $preps]);
   }
 
   public function getRedirectPrepDate(Request $request)

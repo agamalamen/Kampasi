@@ -73,9 +73,10 @@ class School extends Model
       return $this->hasMany('App\Prep')->orderBy('date', date('Y-m-d'))->limit(10);
     }
 
-    public function limitPreps()
+    public function limitPreps($date)
     {
-      return $this->hasMany('App\Prep')->orderBy('date', date('Y-m-d'))->limit(500);
+      $matchThese = ['date' => $date];
+      return $this->hasMany('App\Prep')->where($matchThese)->limit(500);
     }
 
     public function todayPreps()
