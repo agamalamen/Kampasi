@@ -124,13 +124,13 @@ class PrepController extends Controller
       }
 
       $prepSignup->place = $request['place'];
-      $prepSignup->update();
       if (time() > strtotime($prepStarts))
         {
           $prepSignup->late = 1;
         } else {
           $prepSignup->late = 0;
         }
+      $prepSignup->update();
 
       if(!$prepSignup->late) {
         return redirect()->back();
