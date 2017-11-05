@@ -94,44 +94,44 @@ class PrepController extends Controller
 
   public function postPrep(Request $request)
     {
-      /*$BASE_URL = "http://query.yahooapis.com/v1/public/yql";
-      $yql_query = 'select item.condition from weather.forecast where woeid in (select woeid from geo.places(1586976) where text="johannesburg, sa")';
-      $yql_query_url = $BASE_URL . "?q=" . urlencode($yql_query) . "&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
-      // Make call with cURL
-      $session = curl_init($yql_query_url);
-      curl_setopt($session, CURLOPT_RETURNTRANSFER,true);
-      $json = curl_exec($session);
-      // Convert JSON to PHP object
-      $phpObj =  json_decode($json);
-      var_dump($phpObj);*/
-
 
       if(Date('D') == 'Fri' || Date('D') == 'Sat') {
         return redirect()->back()->with(['message' => 'There is no prep today. Go get a life!', 'status' => 'alert-info', 'dismiss' => true]);
       }
-      $prepStarts ="19:05:00";
+
+      $prepStarts ="18:55:00";
       $prepEnds = "21:00:00";
+
       if (time() > strtotime($prepEnds)) {
         return redirect()->back()->with(['message' => 'Sorry signing for prep is over!', 'status' => 'alert-info', 'dismiss' =>true]);
       }
 
       $matchThese = ['user_id' => Auth::User()->id, 'date' => date('Y-m-d')];
       $prepSignup = Prep::where($matchThese)->first();
+      
       if($prepSignup == '')
       {
         $prepSignup = new Prep();
         $prepSignup->user_id = Auth::User()->id;
         $prepSignup->date = date('Y-m-d');
         $prepSignup->place = $request['place'];
+        $prepSignup->late = 0;
         if (time() > strtotime($prepStarts))
         {
           $prepSignup->late = 1;
         }
         $prepSignup->save();
       }
+
       $prepSignup->place = $request['place'];
-      $prepSignup->late = 0;
       $prepSignup->update();
+      if (time() > strtotime($prepStarts))
+        {
+          $prepSignup->late = 1;
+        } else {
+          $prepSignup->late = 0;
+        }
+
       if(!$prepSignup->late) {
         return redirect()->back();
       } else {
