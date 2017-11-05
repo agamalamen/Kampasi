@@ -16,7 +16,8 @@ class PrepController extends Controller
 
   public function reporting()
   {
-    $preps = Prep::all()->where('date', '2017-10-29');
+    $preps = Auth::User()->school->limitPreps;
+    //$preps = Prep::all()->where('date', '2017-10-29');
     return $preps;
   }
 
