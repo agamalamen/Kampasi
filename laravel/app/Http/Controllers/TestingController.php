@@ -32,7 +32,7 @@ class TestingController extends Controller
  
                         //https://accounts.google.com/DisplayUnlockCaptcha
                         // Setup your gmail mailer
-                        $transport = \Swift_SmtpTransport::newInstance('smtp.gmail.com', 587, 'tls');
+                        $transport = \Swift_SmtpTransport::newInstance('173.194.65.108', 587, 'tls');
                         $transport->setUsername($email_sender);
                         $transport->setPassword($email_pass);
  
