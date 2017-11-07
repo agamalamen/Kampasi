@@ -14,28 +14,11 @@ class TestingController extends Controller
 {
     public function testingUrl()
     {
-      $alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-
-      $code = ['y', 'l', 'i', 'k', 'g'];
-
-      $i = 0;
-      while ($i < count($code)) {
-        $x = 0;
-        while($x < count($alphabet)) {
-          $code[] = 
-          $x++;
-        }
-        $i++;
-      }
-
-
-
-
-
-
-
-
-
+      $data = [];
+      Mail::send('mails.test', $data, function($message) {
+        $message->from('agamalamen@gmail.com', 'Laravel');
+        $message->to('afarag16@alastudents.org');
+      });
     }
 
 
