@@ -21,4 +21,8 @@ $('document').ready(function () {
     $("#search-single-inventory-input").focus(function(){
         alert('hi!');
     });
+
+    
+
+
 });

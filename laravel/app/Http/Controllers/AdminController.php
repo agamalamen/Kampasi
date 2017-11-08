@@ -33,19 +33,41 @@ class AdminController extends Controller
 
     public function postUpdateUser($username, Request $request)
     {
+        $user = User::where('username', $username)->first();
+
         $this->validate($request, [
         'name' => 'required|min:3',
-        'username' => 'required|min:3|unique:users|unique:schools',
-        'email' => 'required|email|unique:users',
         'phone' => 'required|digits:10'
         ]);
 
-        $user = User::where('username', $username)->first();
+        if($user->username != $request['username']) {
+            $this->validate($request, [
+                'username' => 'required|min:3|unique:users|unique:schools',
+            ]);            
+        }
+
+        if($user->email != $request['email']) {
+            $this->validate($request, [
+                'username' => 'required|email|unique:users',
+            ]);            
+        }
+
+        if($request['password'] != '') {
+            $this->validate($request, [
+                'password' => 'min:6',
+            ]);
+            $user->password = bcrypt($request['password']);
+        }
+
         $user->name = $request['name'];
         $user->username = $request['username'];
         $user->email = $request['email'];
-        $user->phone = $request['number'];
+        $user->role = $request['role'];
+        $user->phone = $request['phone'];
+        $user->hall_id = $request['hall'];
+        $user->room = $request['room'];
         $user->update();
-        return redirect()->back()->with(['message' => 'User account was updated successfully.']);
+        
+        return redirect()->back()->with(['message' => 'User account was updated successfully.', 'status' => 'alert-success']);
     }
 }

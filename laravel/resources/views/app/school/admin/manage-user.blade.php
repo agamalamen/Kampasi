@@ -31,9 +31,17 @@
         <input name="phone" type="number" class="form-control input-md" placeholder="Phone number" value="{{$user->phone}}">
       </div>
 
+      <div class="form-group">
+        <input name="password" type="password" class="form-control input-md" placeholder="Password">
+      </div>
+
       @if($user->role == 'student')
         <div class="form-group">
           <select name="hall" class="form-control input-md" placeholder="Hall">
+            @if($user->hall)
+              <option value="{{$user->hall->id}}">{{$user->hall->name}}</option>
+            @endif
+            <option value="0">None</option>
           @foreach(Auth::User()->school->halls as $hall)
             <option value="{{$hall->id}}">{{$hall->name}}</option>
           @endforeach
