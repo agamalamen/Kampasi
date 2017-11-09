@@ -61,11 +61,11 @@ class ElectionsController extends Controller
       }
 
       $date = date('m/d/Y h:i:s a', time());
-      $startDate = "04/09/2017 09:00:00 am";
-      $endDate = "04/09/2017 01:30:00 pm";
+      $startDate = "11/12/2017 09:00:00 am";
+      $endDate = "11/12/2017 01:30:00 pm";
 
       if(strtotime($date) < strtotime($startDate)) {
-        return redirect()->back()->with(['message' => 'Voting did not start yet! Come back on 9th April at 9 AM', 'status' => 'alert-danger', 'dismiss' => true]);
+        return redirect()->back()->with(['message' => 'Voting did not start yet! Come back on 12th April at 9 AM', 'status' => 'alert-danger', 'dismiss' => true]);
       }
 
       if(strtotime($date) > strtotime($endDate)) {
