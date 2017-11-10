@@ -100,13 +100,13 @@
             <div class="row">
               @foreach($position->candidates as $candidate)
                 <?php
-                  $won = 1;
+                  /*$won = 1;
                   foreach($position->candidates as $current_candidate) {
                     if ($candidate->votes < $current_candidate->votes) {
                       $won = 0;
                       break;
                     }
-                  }
+                  }*/
 
                  ?>
                 <div class="col-md-4 text-center">
