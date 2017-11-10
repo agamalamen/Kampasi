@@ -16,7 +16,16 @@ use Illuminate\Support\Facades\Auth;
 use Crypt;
 class TestingController extends Controller
 {
-    public function testingUrl()
+    public function testingURL()
+    {
+      foreach(Auth::User()->school->users as $user) {
+        $user->voted = 0;
+        $user->update();
+      }
+    }
+
+
+    public function testingUrl2()
     {
         $data_toview = array();
             $data_toview['bodymessage'] = "Hello send test email";
