@@ -116,7 +116,7 @@
                   @if($won)
                     <p style="color: #d35400;"><i class="fa fa-bolt" aria-hidden="true"></i> Leading</p>
                   @endif
-                  @if(Auth::User()->username == 'Afarag16' || Auth::User()->username == 'OJafter16')
+                  @if(Auth::User()->username == 'Afarag16' || Auth::User()->username == 'OJafter16' || Auth::User()->username == 'PGadri17')
                     {{$candidate->votes}}
                   @endif
 

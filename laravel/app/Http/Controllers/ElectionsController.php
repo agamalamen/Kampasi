@@ -61,7 +61,7 @@ class ElectionsController extends Controller
       }
 
       $date = date('m/d/Y h:i:s a', time());
-      $startDate = "11/12/2017 09:00:00 am";
+      $startDate = "11/11/2017 09:00:00 am";
       $endDate = "11/12/2017 01:30:00 pm";
 
       if(strtotime($date) < strtotime($startDate)) {
