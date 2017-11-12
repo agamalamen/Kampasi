@@ -420,6 +420,12 @@ Route::get('/tools/elections/{date}/{candidate_username}', [
   'middleware' => 'auth'
  ]);
 
+Route::get('/tools/elections/{date}/report/votes', [
+  'uses' => 'ElectionsController@getReport',
+  'as'   => 'get.elections.report',
+  'middleware' => 'auth'
+ ]);
+
 
 //FaceSwap routing
 Route::get('/{username}/itrep', [

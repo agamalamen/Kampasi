@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use DB;
 use App\Http\Requests;
 use App\School;
+use App\Vote;
 use App\Candidate;
 use App\Election;
-use App\Vote;
 use App\User;
 use App\ElectionsComment;
 use Illuminate\Support\Facades\Auth;
@@ -96,6 +96,12 @@ class ElectionsController extends Controller
       $user->voted = 1;
       $user->update();
       return redirect()->back()->with(['message' => 'Thanks for voting!', 'status' => 'alert-success', 'dismiss' => true]);
+    }
+
+    public function getReport()
+    {
+      $users = User::all()->where('voted', 1);
+      return view('app.school.elections.elections-report')->with(['users' => $users]);
     }
 
     public function getCandidate($date, $candidate_username) {
