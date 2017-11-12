@@ -5,8 +5,10 @@
   <div class="row">
     <div class="col-md-6">
       <ul style="color: #333">
-        @foreach($users as $user)
+        @foreach(Auth::User()->school->users as $user)
+          @if($user->voted)
           <li>{{$user->name}}</li>
+          @endif
         @endforeach
       </ul>
     </div><!-- .col-md-6 -->

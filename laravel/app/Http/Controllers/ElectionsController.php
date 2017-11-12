@@ -101,8 +101,7 @@ class ElectionsController extends Controller
     public function getReport()
     {
       $users = User::all()->where('voted', 1);
-      return $users;
-      //return view('app.school.elections.elections-report')->with(['users' => $users]);
+      return view('app.school.elections.elections-report')->with(['users' => $users]);
     }
 
     public function getCandidate($date, $candidate_username) {
