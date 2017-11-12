@@ -8,9 +8,11 @@
         @foreach(Auth::User()->school->users as $user)
           @if($user->voted)
             @foreach(Auth::User()->school->users as $other_user)
-              @if($other_user->id != $user->id)
-                @if($user->name == $other_user->name)
-                  <li>{{$user->name}} , {{$other_user->name}}</li>
+              @if($other_user->voted)
+                @if($other_user->id != $user->id)
+                  @if($user->name == $other_user->name)
+                    <li>{{$user->name}} , {{$other_user->name}}</li>
+                  @endif
                 @endif
               @endif
             @endforeach
