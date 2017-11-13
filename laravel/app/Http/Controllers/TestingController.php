@@ -23,7 +23,6 @@ class TestingController extends Controller
           if($user->offCampusRequests != '[]') {
             echo '<li>' . $user->name . '</li>';
           }
-          }
         }
       echo '</ol>';
     }
