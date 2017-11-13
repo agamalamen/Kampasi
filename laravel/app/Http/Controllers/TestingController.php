@@ -18,10 +18,14 @@ class TestingController extends Controller
 {
     public function testingURL()
     {
-      foreach(Auth::User()->school->users as $user) {
-        $user->voted = 0;
-        $user->update();
-      }
+      echo '<ol style="color:33">';
+        foreach(Auth::User()->school->users as $user) {
+          if($user->offCampusRequests != '[]') {
+            echo '<li>' . $user->name . '</li>';
+          }
+          }
+        }
+      echo '</ol>';
     }
 
 
