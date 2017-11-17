@@ -9,6 +9,10 @@ $('document').ready(function () {
   });
 */
 
+  $('select').on('change', function() {
+  alert( this.value );
+  })
+
   $('#search-button').click(function () {
     event.preventDefault();
     $('.top-navbar').attr('class', 'top-navbar hide');

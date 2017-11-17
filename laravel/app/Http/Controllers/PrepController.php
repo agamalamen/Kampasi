@@ -14,6 +14,11 @@ use App\Http\Requests;
 class PrepController extends Controller
 {
 
+  public function getSaturday()
+  {
+    return view('app.school.prep.saturday.saturday');
+  }
+
   public function reporting()
   {
     $preps = Auth::User()->school->limitPreps('2017-10-29');

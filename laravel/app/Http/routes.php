@@ -575,6 +575,14 @@ Route::get('/tools/off-campus/{request_id}/not-return/{user_id}', [
   'middleware' => 'auth'
 ]);
 
+//Saturday b routing
+
+Route::get('/tools/saturday', [
+    'uses' => 'PrepController@getSaturday',
+    'as' => 'get.saturday',
+    'middleware' => 'auth'
+  ]);
+
 
 Route::get('/tools/reporting', [
     'uses' => 'PrepController@reporting',
