@@ -16,16 +16,17 @@ use Illuminate\Support\Facades\Auth;
 use Crypt;
 class TestingController extends Controller
 {
-    public function testingURL()
+
+  public function testingURL()
     {
-      $user = User::where('email', 'afarag16@alastudents.org')->first();
-      Mail::send('mails.test', ['user' => $user], function ($m) use ($user) {
+        $user = User::where('email', 'afarag16@alastudents.org')->first();
+
+        Mail::send('mails.test', ['user' => $user], function ($m) use ($user) {
             $m->from('agamalamen@gmail.com', 'Kampasi');
 
             $m->to($user->email, $user->name)->subject('Your Reminder!');
-      }
+        });
     }
-
 
     public function testingUrl2()
     {
