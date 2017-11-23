@@ -18,13 +18,11 @@ class TestingController extends Controller
 {
     public function testingURL()
     {
-      echo '<ol style="color:33">';
-        foreach(Auth::User()->school->users as $user) {
-          if($user->offCampusRequests != '[]') {
-            echo '<li>' . $user->name . '</li>';
-          }
-        }
-      echo '</ol>';
+      $user = User::where('email' => 'afarag16@alastudents.org')->first();
+      Mail::send('mails.test', ['user' => $user], function ($m) use ($user) {
+            $m->from('agamalamen@gmail.com', 'Kampasi');
+
+            $m->to($user->email, $user->name)->subject('Your Reminder!');
     }
 
 
