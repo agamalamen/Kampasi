@@ -23,6 +23,7 @@ class TestingController extends Controller
             $m->from('agamalamen@gmail.com', 'Kampasi');
 
             $m->to($user->email, $user->name)->subject('Your Reminder!');
+      }
     }
 
 
