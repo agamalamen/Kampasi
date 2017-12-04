@@ -36,6 +36,12 @@ Route::get('/pricing/packages', [
   'as' => 'get.pricing'
 ]);
 
+Route::get('/maboneng', [
+  'uses' => 'DashboardController@getMaboneng',
+  'as' => 'get.maboneng'
+]);
+
+
 //inventory routing
 Route::get('/{school_username}/inventory', [
   'uses'       => 'InventoryController@getInventories',

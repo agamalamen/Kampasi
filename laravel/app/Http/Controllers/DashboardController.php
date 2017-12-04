@@ -10,10 +10,17 @@ use App\User;
 use App\OffCampusRequest;
 use App\PrepPlace;
 use App\School;
+use App\Maboneng;
 use App\Http\Requests;
 
 class DashboardController extends Controller
 {
+    public function getMaboneng() {
+      $endorse = New maboneng();
+      $endorse->user_id = Auth::User()->id;
+      $endorse->save();
+      return redirect()->back();
+    }
     public function getWelcome()
     {
       if(Auth::User()) {
@@ -24,6 +31,7 @@ class DashboardController extends Controller
     }
 
     public function getDashboard($username) {
+      return view('maboneng');
       $user = User::where('username', $username)->first();
       $school = School::where('username', $username)->first();
       if (empty($user)) {

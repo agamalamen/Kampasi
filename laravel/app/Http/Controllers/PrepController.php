@@ -36,6 +36,7 @@ class PrepController extends Controller
 
   public function getPrepReports($date) 
   {
+    return view('maboneng');
     $preps = Prep::all()->where('date', $date);
     return view('app.school.prep.report')->with(['preps' => $preps]);
   }
@@ -74,6 +75,7 @@ class PrepController extends Controller
 
   public function getPrep($place)
   {
+    return view('maboneng');
     /*if(Date('D') != 'Fri' || Date('D') != 'Sat') {
       $this->postMassPrep();
     }*/

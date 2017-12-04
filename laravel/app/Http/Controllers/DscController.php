@@ -16,6 +16,7 @@ class DscController extends Controller
 {
     public function getDSC()
     {
+      return view('maboneng');
       $school = School::find(1);
       $updates = dscUpdate::orderBy('id', 'DESC')->get();
       return view('app.school.dsc.dsc')->with(['school' => $school, 'updates' => $updates]);
@@ -23,6 +24,7 @@ class DscController extends Controller
 
     public function getDSCUpdates()
     {
+      return view('maboneng');
       $school = School::find(1);
       $updates = dscUpdate::orderBy('id', 'DESC')->get();
       return view('app.school.dsc.updates')->with(['updates' => $updates, 'school' => $school]);
@@ -35,6 +37,7 @@ class DscController extends Controller
 
     public function getCreateDSC()
     {
+      return view('maboneng');
       return view('app.school.dsc.create-dsc');
     }
 
@@ -84,6 +87,7 @@ class DscController extends Controller
 
     public function getDSCProject($dsc_id)
     {
+      return view('maboneng');
       $dsc = DSC::find($dsc_id);
       if($dsc == '') {
         return redirect()->route('get.dsc')->with(['message' => 'Sorry! DSC project was not found.', 'status' => 'alert-info', 'dismiss' => true]);

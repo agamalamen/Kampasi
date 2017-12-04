@@ -16,6 +16,7 @@ class InventoryController extends Controller
 {
     public function getInventories()
     {
+      return view('maboneng');
       return view('app.school.inventory.inventories');
     }
 

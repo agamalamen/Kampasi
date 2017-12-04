@@ -24,6 +24,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function maboneng()
+    {
+      return $this->HasOne('App\Maboneng');
+    }
+
     public function authority()
     {
       return $this->HasOne('App\Authority');

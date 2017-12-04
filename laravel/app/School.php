@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class School extends Model
 {
+    public function mabonengs()
+    {
+      return $this->hasMany('App\Maboneng');
+    }
+
     public function users()
     {
       return $this->hasMany('App\User')->orderBy('id', 'DESC');
