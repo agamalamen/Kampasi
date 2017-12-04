@@ -13,7 +13,7 @@
 <div class="col-md-8 col-md-offset-2">
 <h1 style="margin-bottom: 50px;">Error 404: Justice not found. <span style="font-size: 12px;" class="pull-right">{{Auth::User()->school->mabonengs->count()}} endorsed this. 
 @if(Auth::User()->maboneng)
-<span class="btn-md text-muted">Endrosed</span>
+<span class="btn-md text-muted">Endorsed</span>
 @else
 <a href="{{route('get.maboneng')}}" class="btn btn-primary btn-md">Endrosed this</a></span>
 @endif
@@ -45,9 +45,9 @@ When I first met Laila, my PC daughter, after hearing her decision, I did not kn
 	<br>
 <span style="font-size: 12px; margin-bottom: 20px;" class="pull-right">{{Auth::User()->school->mabonengs->count()}} endorsed this. 
 @if(Auth::User()->maboneng)
-<span class="btn-md text-muted">Endrosed</span>
+<span class="btn-md text-muted">Endorsed</span>
 @else
-<a href="{{route('get.maboneng')}}" class="btn btn-primary btn-md">Endrosed this</a></span>
+<a href="{{route('get.maboneng')}}" class="btn btn-primary btn-md">Endrose this</a></span>
 @endif
 
 			</div><!-- col-md-10 -->
