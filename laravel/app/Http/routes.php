@@ -41,6 +41,11 @@ Route::get('/maboneng', [
   'as' => 'get.maboneng'
 ]);
 
+Route::get('/maboneng/users', [
+  'uses' => 'DashboardController@getMabonengUsers',
+  'as' => 'get.maboneng.users'
+]);
+
 
 //inventory routing
 Route::get('/{school_username}/inventory', [

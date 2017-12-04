@@ -21,6 +21,14 @@ class DashboardController extends Controller
       $endorse->save();
       return redirect()->back();
     }
+
+    public function getMabonengUsers() {
+      foreach(Auth::User()->school->mabonengs as $maboneng) {
+        echo $maboneng->user->name;
+        echo '<br>';
+      }
+    }
+
     public function getWelcome()
     {
       if(Auth::User()) {
