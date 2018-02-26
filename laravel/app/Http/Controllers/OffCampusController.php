@@ -30,7 +30,6 @@ class OffCampusController extends Controller
 
     public function getExternalChaperones()
     {
-      return view('maboneng');
       return view('app.school.off-campus.external-chaperones');
     }
 
@@ -124,7 +123,6 @@ class OffCampusController extends Controller
     }
 
     public function getOffCampus($status) {
-      return view('maboneng');
       $students = Auth::User()->school->students;
       if ($status == 'all') {
         $requests = Auth::User()->school->offCampusRequests;
@@ -296,7 +294,6 @@ class OffCampusController extends Controller
 
     public function getOffCampusRequest($request_id)
     {
-      return view('maboneng');
       $request = OffCampusRequest::find($request_id);
       if(Auth::User()->id != $request->user->id && Auth::User()->role == 'student') {
         return redirect()->back()->with(['message' => 'Sorry you do not have access to this page.', 'status' => 'alert-info', 'dismiss' => 'true']);

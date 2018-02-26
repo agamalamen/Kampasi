@@ -39,7 +39,6 @@ class ElectionsController extends Controller
 
 
     public function getElections($date) {
-      return view('maboneng');
       return view('app.school.elections.elections');
     }
 
@@ -101,7 +100,6 @@ class ElectionsController extends Controller
 
     public function getReport()
     {
-      return view('maboneng');
       $users = User::all()->where('voted', 1);
       return view('app.school.elections.elections-report')->with(['users' => $users]);
     }

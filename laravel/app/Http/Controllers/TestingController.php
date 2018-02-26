@@ -19,13 +19,14 @@ class TestingController extends Controller
 
   public function testingURL()
     {
-        $user = User::where('email', 'afarag16@alastudents.org')->first();
+        /*$user = User::where('email', 'afarag16@alastudents.org')->first();
 
         Mail::send('mails.test', ['user' => $user], function ($m) use ($user) {
             $m->from('agamalamen@gmail.com', 'Kampasi');
 
             $m->to($user->email, $user->name)->subject('Your Reminder!');
-        });
+        });*/
+        return response()->json(['id' => 1, 'name' => 'Abigail', 'description' => 'CA']);
     }
 
     public function testingUrl2()

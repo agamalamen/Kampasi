@@ -19,7 +19,6 @@ class AdminController extends Controller
 {
     public function getManageUsers()
     {
-        return view('maboneng');
     	if(Auth::User()->role != 'staffulty') {
     		return redirect()->back()->with(['message' => 'You have no access to this page', 'status' => 'alert-info', 'dismiss' =>true]);
     	}
@@ -28,7 +27,6 @@ class AdminController extends Controller
 
     public function getManageUser($username)
     {
-        return view('maboneng');
     	$user = User::where('username', $username)->first();
     	return view('app.school.admin.manage-user')->with(['user' => $user]);
     }

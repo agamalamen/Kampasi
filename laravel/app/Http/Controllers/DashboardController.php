@@ -39,7 +39,6 @@ class DashboardController extends Controller
     }
 
     public function getDashboard($username) {
-      return view('maboneng');
       $user = User::where('username', $username)->first();
       $school = School::where('username', $username)->first();
       if (empty($user)) {
