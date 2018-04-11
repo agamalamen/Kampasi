@@ -13,7 +13,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Kampasi</a><small>Alpha</small>
+        <a class="navbar-brand" href="#">Kampasi</a><small>Beta</small>
       </div>
     </div><!-- .container -->
   </nav>
@@ -33,7 +33,7 @@
           <a class="btn btn-default btn-lg" href="{{route('logout')}}">Logout</a>
           @else
           <a class="btn btn-primary btn-lg" href="{{route('get.login')}}">Login</a>
-          <a class="btn btn-default btn-lg" href="{{route('get.signup')}}">Signup</a>
+          <a class="btn btn-default btn-lg" href="{{route('get.landing.page')}}">Signup</a>
           <!--<a class="btn btn-default btn-lg" href="{{route('get.signup')}}">Signup</a>-->
           @endif
         </div><!-- .home-buttons -->
@@ -46,13 +46,6 @@
 
 </div><!-- .hr-conteinar -->
 
-<div class="socialmedia-container">
-  <div class="container text-center">
-    <ul class="list-inline slideanim">
-      <li style="font-family: lato; font-size: 36px; opacity: 0.7">"Stay focused and keep shipping"</li>
-    </ul>
-  </div><!-- .container -->
-</div><!-- .socialmedia-container -->
 
 <footer>
   <p class="text-center">&copy; 2016 All rights reserved. Kampasi</p>
