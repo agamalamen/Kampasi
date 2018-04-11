@@ -57,7 +57,7 @@ class UserController extends Controller
       $halls = $school->halls;
 
       if ($filter == 'all') {
-        $members = $school->users;
+        $members = User::paginate(90);
       } else {
         foreach($halls as $hall) {
           if($filter == $hall->name) {
@@ -258,6 +258,11 @@ class UserController extends Controller
     public function getSignup()
     {
       return view('account.signup');
+    }
+
+    public function getLandingPage()
+    {
+      return view('account.landing-page');
     }
 
     public function postSignup(Request $request)
