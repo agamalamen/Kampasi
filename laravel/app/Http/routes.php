@@ -784,6 +784,12 @@ Route::get('/account/signup', [
   'middleware' => 'guest'
 ]);
 
+Route::get('/account/landingPage', [
+  'uses' => 'UserController@getLandingPage',
+  'as' => 'get.landing.page',
+  'middleware' => 'guest'
+]);
+
 Route::post('/account/signup', [
   'uses' => 'UserController@postSignup',
   'as' => 'post.signup',
