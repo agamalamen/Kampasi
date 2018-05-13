@@ -5,7 +5,7 @@
   @if(Auth::User()->role == 'staffulty')
     <span class="badge"><a style="color: white;" href="{{route('get.manage.users')}}">Manage</a></span>
   @endif
-  {{Auth::User()->school->name}} members <span class="badge">{{$members->count()}}</span>
+  {{Auth::User()->school->name}} members <span class="badge">{{Auth::User()->school->users->count()}}</span>
   </h1>
   <div class="row" style="color: #333; padding-top: 20px;">
     @foreach($members as $user)
@@ -38,5 +38,7 @@
         </div><!-- .media -->
       </div><!-- .col-md-4 -->
     @endforeach
+
   </div><!-- .row -->
+  {{$members->links()}}
 @endsection

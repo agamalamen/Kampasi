@@ -139,6 +139,9 @@
               </li>
             @endif
 
+            
+            <!--
+
             @if($request->driver_approval == 'accepted' && $request->student_life_approval == 'accepted' && $request->security_approval == 'accepted')
 
               @if($request->departed == 0 && Auth::User()->role == 'security')
@@ -175,12 +178,44 @@
                 <i class="fa fa-circle-o-notch" aria-hidden="true"></i>
                 Returned to campus
               </li>
-              @endif
+              @endif 
+
 
             @endif
+              -->
+
           </ul>
         </div>
       </div><!-- .panel-default -->
+
+      @if($request->absences->count() != 0)
+        <p class="card-title">Absence sheet</p>
+        <div class="panel panel-primary">
+          <div class="panel-body">
+            <ul class="list-unstyled text-muted">
+            @foreach($request->absences as $absence)
+
+              @if($absence->approval == 'accepted')
+                <li style="color: #27ae60;"><i class="fa fa-check-circle" aria-hidden="true"></i> Request approved by {{$absence->user->name}}</li>
+              @elseif($absence->approval == 'declined')
+                <li style="color: #e81212;"><i class="fa fa-times" aria-hidden="true"></i> Request declined by {{$absence->user->name}}</li>
+              @else
+                <li>
+                  <i class="fa fa-circle-o-notch" aria-hidden="true"></i>
+                  Wating for approval from {{$absence->user->name}}
+                      @if(Auth::User()->id == $absence->user->id)
+                        <span class="pull-right">
+                          <a href="{{route('get.teacher.response', [$absence->id, 'accepted'])}}" style="padding-right: 5px;"><i class="fa fa-check" aria-hidden="true"></i> Accept</a>
+                          <a href="{{route('get.teacher.response', [$absence->id, 'declined'])}}"><i class="fa fa-times" aria-hidden="true"></i> Decline</a>
+                        </span>
+                      @endif
+                </li>
+              @endif           
+            @endforeach
+            </ul>
+          </div><!-- panel-body -->
+        </div><!-- panel -->
+      @endif
     </div><!-- .col-md-6 -->
   </div><!-- .row -->
 

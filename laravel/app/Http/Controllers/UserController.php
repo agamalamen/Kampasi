@@ -558,6 +558,16 @@ class UserController extends Controller
       return redirect()->back()->with(['message' => 'Your information was updated successfully!', 'status' => 'alert-success', 'dismiss' => true]);
     }
 
+    public function getPhonePrivacy()
+    {
+      $privacy = $_GET['privacy']; 
+      $user = Auth::User();
+      $user->phone_privacy = $privacy;
+      $user->update();
+      return redirect()->back()->with(['message' => 'Privacy settings were updated. Your phone number will still show on Signouts and accessed by prospected school officials.', 'status' => 'alert-success', 'dismiss' => true]);
+
+    }
+
     public function getOffCampusUsersDuringPrep()
     {
       $requests = Auth::User()->school->offCampusRequests;

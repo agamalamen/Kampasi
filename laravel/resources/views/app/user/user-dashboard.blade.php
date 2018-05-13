@@ -39,7 +39,33 @@
           @else
           <li>Not enrolled in a school. <a href="#">Join</a></li>
           @endif
-          <li>{{$user->phone}}</li>
+          
+          @if(Auth::User()->id == $user->id)
+          
+          <li>
+            @if($user->phone_privacy)
+              <b>(Private)</b>
+            @else
+              <b>(Public)</b>
+            @endif
+            {{$user->phone}}
+            <div class="dropdown" style="display: inline;">
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="{{route('get.phone.privacy')}}?privacy=0">Show</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="{{route('get.phone.privacy')}}?privacy=1">Hide</a></li>
+              </ul>
+            </div><!-- dropdown -->
+          </li>
+
+          @elseif(!$user->phone_privacy)
+            <li>{{$user->phone}}</li>
+          @endif
+
           @if($user->hall)
           <li>{{$user->hall->name}}</li>
           @endif

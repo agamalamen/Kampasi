@@ -1,4 +1,4 @@
-$(document).ready(function(){
+/*$(document).ready(function(){
 	$('a[href^="#"]').on('click',function (e) {
 	    e.preventDefault();
 
@@ -22,4 +22,4 @@ $(window).scroll(function() {
       $(this).addClass("slide");
     }
   });
-});
+});*/

@@ -46,7 +46,7 @@
     </div><!-- .row -->
   </div>
   <ul style="padding-top: 20px;" class="text-center list-inline">
-    <li>© 2017 Kampasi</li>
+    <li>© 2018 Kampasi</li>
     <li>|</li>
     <li><a href="{{route('get.terms.of.service')}}" class="text-muted">Terms of service</a></li>
     <li>|</li>

@@ -9,7 +9,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="{{route('home')}}">Kampasi</a><small>Alpha</small>
+      <a class="navbar-brand" href="{{route('home')}}">Kampasi</a><small>Beta</small>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
@@ -35,9 +35,15 @@
         <div class="form-group">
           <input name="email" type="text" class="form-control input-lg" placeholder="Email">
         </div>
+        
         <div class="form-group">
-          <input name="phone" type="number" class="form-control input-lg" placeholder="Phone number">
+          <div class="input-group">
+            <span style="border: 0px;" class="input-group-addon" id="basic-addon1">+27</span>
+            <input id="phone" name="phone" type="number" class="form-control input-lg" placeholder="Phone number" aria-describedby="basic-addon1">
+            <label class="control-label text-danger" id="phoneError"></label>
+          </div>
         </div>
+
         <div class="form-group">
           <input name="password" type="password" class="form-control input-lg" placeholder="Password">
         </div>

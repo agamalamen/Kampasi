@@ -357,4 +357,26 @@ $('input:radio[name="chaperoneRadio"]').change(
         }
     });
 
+$('input:radio[name="absenceRadio"]').change(
+    function(){
+        if ($(this).is(':checked') && $(this).val() == 'yes') {
+            $('#absenceForm').attr('class', 'form-group');
+            $('#add-people').attr('class', 'hidden');
+        } else if ($(this).is(':checked') && $(this).val() == 'no') {
+          $('#absenceForm').attr('class', 'form-group hidden');
+          $('#add-people').attr('class', '');
+        }
+    });
+
+var teacher_increment = 1000;
+
+$('#addMoreTeachers').click(
+    function() {
+      event.preventDefault();
+      var options = $('#1000').html();
+      var selectMenu = '<select>' + options + '</select>';
+      document.getElementById('insert-teachers').innerHTML += selectMenu + '<br>';
+    }
+  );
+
 });

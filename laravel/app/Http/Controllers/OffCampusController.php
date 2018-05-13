@@ -8,6 +8,7 @@ use App\User;
 use App\ExternalChaperone;
 use App\Notification;
 use App\AvailableChaperone;
+use App\Absence;
 use DB;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
@@ -125,7 +126,8 @@ class OffCampusController extends Controller
     public function getOffCampus($status) {
       $students = Auth::User()->school->students;
       if ($status == 'all') {
-        $requests = Auth::User()->school->offCampusRequests;
+        //$requests = Auth::User()->school->offCampusRequests->paginate(10);
+        $requests = OffCampusRequest::where('user_id', Auth::User()->id)->paginate(2);
       } elseif($status == 'arrived') {
         $requests = Auth::User()->school->offCampusArrivedRequests;
       } elseif ($status == 'departed') {
@@ -174,22 +176,24 @@ class OffCampusController extends Controller
 
     public function postOffCampusRequest(Request $request)
     {
+
       $this->validate($request, [
             'place'         => 'required',
             'address'       => 'required',
             'departureTime' => 'required',
             'arrivingTime'  => 'required|after:departureTime',
-            'chaperoneRadio'=> 'required'
+            'chaperoneRadio'=> 'required',
+            'absenceRadio'  => 'required'
       ]);
 
       $departure_day = date("D", strtotime($request['departureTime']));
       //return $departure_day . date('D');
       
-      if(date("D") == 'Fri' || date("D") == 'Sat' || date("D") == 'Sun') {
+      /*if(date("D") == 'Fri' || date("D") == 'Sat' || date("D") == 'Sun') {
         if($departure_day == 'Fri' || $departure_day == 'Sat' || $departure_day == 'Sun') {
           return redirect()->back()->with(['message' => 'Sorry you cannot submit a request at this time', 'status' => 'alert-danger', 'dismiss' => true]);
         }
-      }
+      }*/
 
       $offCampusRequest = new OffCampusRequest();
 
@@ -216,15 +220,59 @@ class OffCampusController extends Controller
       $offCampusRequest->status = 'hold';
       $offCampusRequest->save();
 
-      $x = 0;
-      $student_count = User::all()->where('role', 'student')->count();
-      while ($x < $student_count) {
-        if(isset($request[$x])) {
-          DB::table('off_campus_request_user')->insert([
-                ['off_campus_request_id' => $offCampusRequest->id, 'user_id' => $request[$x]]
-            ]);
+      if($request['absenceRadio'] == 'yes') {
+        
+        $i = 1;
+        while ($i < 9) {
+            if($request['teacher' . (string)$i] != 0) {
+              $absence = new Absence();
+              $absence->user_id = $request['teacher' . (string)$i];
+              $absence->off_campus_request_id = $offCampusRequest->id;
+              $absence->approval = 'hold';
+              $absence->save();
+
+              $notification = new Notification();
+              $notification->user_id = $absence->user->id;
+              $notification->message = 'New off-campus request waiting for your approval';
+              $notification->route = route('get.off.campus.request', $absence->offCampusRequest->id);
+              $notification->save();
+
+              $to = $absence->user->email;
+              $from = "no-reply@kampasi.com";
+              $subject = "Kampasi - New off-campus request!";
+
+              //begin of HTML message
+              $message ="
+              <html>
+              <body>
+              <h1></h1>
+              <p>
+              Hello ". $absence->user->name .", <br>
+              A new off-campus request was created and waiting for your approval. <br>
+              <a style=\"text-decoration:none;color:#246;\" href=\"". route('get.off.campus.request', $absence->offCampusRequest->id) ."\">View the request</a>
+              </p>
+              </body>
+              </html>";
+              //end of message
+              $headers  = "From: $from\r\n";
+              $headers .= "Content-type: text/html\r\n";
+
+              mail($to, $subject, $message, $headers);
+
+          }
+          $i++;
         }
-        $x++;
+      } else {
+        $x = 0;
+        $student_count = User::all()->where('role', 'student')->count();
+        while ($x < $student_count) {
+          if(isset($request[$x])) {
+            DB::table('off_campus_request_user')->insert([
+                  ['off_campus_request_id' => $offCampusRequest->id, 'user_id' => $request[$x]]
+              ]);
+          }
+          $x++;
+        }
       }
 
       if($offCampusRequest->chaperone_type == 'internal') {
@@ -295,6 +343,7 @@ class OffCampusController extends Controller
     public function getOffCampusRequest($request_id)
     {
       $request = OffCampusRequest::find($request_id);
+      
       if(Auth::User()->id != $request->user->id && Auth::User()->role == 'student') {
         return redirect()->back()->with(['message' => 'Sorry you do not have access to this page.', 'status' => 'alert-info', 'dismiss' => 'true']);
       }
@@ -424,6 +473,36 @@ class OffCampusController extends Controller
       // now lets send the email.
       mail($to, $subject, $message, $headers);
       return redirect()->back();
+    }
+
+    public function getTeacherResponse($absence_id, $response)
+    {
+      $absence = Absence::find($absence_id);
+
+      $absence->approval = $response;
+      $absence->update();
+
+      $to = $asbence->offCampusRequest->user->email;
+      $from = "no-reply@kampasi.com";
+      $subject = "Kampasi - Your off-campus request was ". $response ." by " . $absence->user->name;
+      //begin of HTML message
+      $message ="
+      <html>
+      <body>
+      <h1></h1>
+      <p>
+      Hello ". $absence->offCampusRequest->user->name .", <br>
+      Your off-campus request was ". $response ." by ". $absence->user->name .". <br>
+      <a style=\"text-decoration:none;color:#246;\" href=\"". route('get.off.campus.request', $absence->offCampusRequest->id) ."\">View the request</a>
+      </p>
+      </body>
+      </html>";
+      //end of message
+      $headers  = "From: $from\r\n";
+      $headers .= "Content-type: text/html\r\n";
+
+      return redirect()->back();
+
     }
 
     public function getStudentLifeResponse($request_id, $response)

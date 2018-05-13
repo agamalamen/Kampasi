@@ -158,6 +158,66 @@
         <a href="{{route('get.prep', 'all')}}">Prep signup panel</a>
       </div><!-- .panel-body -->
     </div><!-- .panel-default -->
+
+    <p class="card-title">Members</p>
+    <div class="panel panel-primary">
+      <div class="panel-body">
+        <form id="search-members-form">
+          <input type="text" id="search-members-input" style="margin-bottom: 10px; border-radius: 3px;" placeholder="Search for members..." class="form-control" >
+        </form>
+
+
+        <script>
+        var searchMembersRoute = "{{route('search.members')}}";
+        var membersLoading = "{{URL::to('src/img/loading/rolling.gif')}}";
+        </script>
+
+        <style>
+        #style-1::-webkit-scrollbar-track
+        {
+          border-radius: 10px;
+          background-color: #bdc3c7;
+        }
+
+        #style-1::-webkit-scrollbar
+        {
+          width: 8px;
+          background-color: #F5F5F5;
+        }
+
+        #style-1::-webkit-scrollbar-thumb
+        {
+          border-radius: 10px;
+          background-color: #555;
+        }
+
+        </style>
+        <ul class="list-unstyled" id="style-1" style="overflow-y: auto; overflow-x: hidden; height: 400px;">
+          @foreach($school->recentUsers as $user)
+          <li>
+            <div class="row">
+              <div class="col-xs-2">
+                <img class="img-circle" style="width: 50px; height: 50px;" src="{{route('get.avatar', $user->avatar)}}">
+              </div><!-- .col-md-4 -->
+              <div class="col-xs-8" style="text-align: left;">
+                <a href="{{route('dashboard', $user->username)}}">{{$user->name}}</a>
+                <?php
+                $bio = $user->bio;
+                if(strlen($bio) > 35) {
+                  $bio = substr($bio, 0, 35) . '...';
+                }
+                ?>
+                <p>{{$bio}}</p>
+              </div><!-- .col-md-8 -->
+            </div><!-- .row -->
+            <hr>
+          </li>
+          @endforeach
+        </ul>
+        <hr>
+        <a href="{{route('get.members', ['all'])}}">See all members</a>
+      </div><!-- .panel-body -->
+    </div><!-- .panel-default -->
   </div><!-- .col-md-4 -->
 
   <div class="col-md-8">
@@ -175,7 +235,6 @@
           @endif
           @if(Auth::User()->offCampusRequest != '[]')
           <h3 style="font-size: 30px; font-weight: light;"><a href="{{route('get.off.campus.request', $request->id)}}">{{$request->place}}</a>
-            <i class="fa fa-plane pull-right" aria-hidden="true"></i>
           </h3>
           <p>
             @if($request->arrived)
@@ -232,121 +291,7 @@
 
       </div><!-- .panel-body -->
     </div><!-- .panel-default -->
-  </div><!-- .col-md-8 -->
-</div><!-- .row -->
 
-<div class="row">
-
-  <div class="col-md-4">
-    <p class="card-title">Members</p>
-    <div class="panel panel-primary">
-      <div class="panel-body">
-        <form id="search-members-form">
-          <input type="text" id="search-members-input" style="margin-bottom: 10px; border-radius: 3px;" placeholder="Search for members..." class="form-control" >
-        </form>
-
-
-        <script>
-        var searchMembersRoute = "{{route('search.members')}}";
-        var membersLoading = "{{URL::to('src/img/loading/rolling.gif')}}";
-        </script>
-
-        <style>
-        #style-1::-webkit-scrollbar-track
-        {
-          border-radius: 10px;
-          background-color: #bdc3c7;
-        }
-
-        #style-1::-webkit-scrollbar
-        {
-          width: 8px;
-          background-color: #F5F5F5;
-        }
-
-        #style-1::-webkit-scrollbar-thumb
-        {
-          border-radius: 10px;
-          background-color: #555;
-        }
-
-        </style>
-        <ul class="list-unstyled" id="style-1" style="overflow-y: auto; overflow-x: hidden; height: 120px;">
-          @foreach($school->recentUsers as $user)
-          <li>
-            <div class="row">
-              <div class="col-xs-2">
-                <img class="img-circle" style="width: 50px; height: 50px;" src="{{route('get.avatar', $user->avatar)}}">
-              </div><!-- .col-md-4 -->
-              <div class="col-xs-8" style="text-align: left;">
-                <a href="{{route('dashboard', $user->username)}}">{{$user->name}}</a>
-                <?php
-                $bio = $user->bio;
-                if(strlen($bio) > 35) {
-                  $bio = substr($bio, 0, 35) . '...';
-                }
-                ?>
-                <p>{{$bio}}</p>
-              </div><!-- .col-md-8 -->
-            </div><!-- .row -->
-            <hr>
-          </li>
-          @endforeach
-        </ul>
-        <hr>
-        <a href="{{route('get.members', ['all'])}}">See all members</a>
-      </div><!-- .panel-body -->
-    </div><!-- .panel-default -->
-  </div><!-- .col-md-4 -->
-
-  <div class="col-md-4">
-    <p class="card-title">Feedback system</p>
-    <div class="panel panel-primary" style="border: 0px;">
-      <div class="panel-body" style="min-height: 140px;">
-        @if(Auth::User()->school->feedbacks == '[]')
-          <p style="padding-top: 50px; padding-bottom: 50px; color: grey; font-style: italic;" class="text-center">There are no feedbacks to show.</p>
-          <hr>
-        @endif
-        @foreach(Auth::User()->school->recentFeedbacks as $feedback)
-          <a href="{{route('get.feedback', $feedback->username)}}">{{$feedback->title}}</a>
-          <?php
-          $content = $feedback->content;
-          if(strlen($content) > 50) {
-            $content = substr($content, 0, 250) . '...';
-          }
-          ?>
-          <p>{{$content}}</p>
-          <hr>
-        @endforeach
-        <a href="{{route('get.feedbacks')}}">Feedback panel</a>
-      </div><!-- .panel-body -->
-    </div><!-- .panel-default -->
-  </div><!-- .col-md-4 -->
-
-
-    <div class="col-md-4">
-      <p class="card-title">Student publication</p>
-      <div class="panel panel-primary">
-        <div class="panel-body" style="min-height: 200px;">
-          <div class="container-fluid">
-            <form class="form-inline" action="{{route('post.masterpiece')}}" method="post" enctype="multipart/form-data">
-              <div class="form-group">
-                <label for="labelForFrom">Masterpiece</label>
-                <input type="file" class="form-control" name="masterpiece">
-              </div>
-              <button type="submit" style="margin-top: 10px;" class="btn btn-primary">Submit</button>
-              {{csrf_field()}}
-            </form>
-          </div><!-- .container -->
-          <hr>
-
-        </div><!-- .panel-body -->
-      </div><!-- .panel-default -->
-    </div><!-- .col-md-4 -->
-</div><!-- .row -->
-
-<div class="row">
-  <div class="col-md-6">
     <p class="card-title">Tutoring program</p>
     <div class="panel panel-primary">
       <div class="panel-body">
@@ -383,7 +328,30 @@
         <a href="{{route('get.tutoring', [Auth::User()->school->username])}}">Go to tutoring</a>
       </div><!-- .panel-body -->
     </div><!-- .panel -->
-  </div><!-- .col-md-6 -->
+
+    <p class="card-title">Feedback system</p>
+    <div class="panel panel-primary" style="border: 0px;">
+      <div class="panel-body" style="min-height: 140px;">
+        @if(Auth::User()->school->feedbacks == '[]')
+          <p style="padding-top: 50px; padding-bottom: 50px; color: grey; font-style: italic;" class="text-center">There are no feedbacks to show.</p>
+          <hr>
+        @endif
+        @foreach(Auth::User()->school->recentFeedbacks as $feedback)
+          <a href="{{route('get.feedback', $feedback->username)}}">{{$feedback->title}}</a>
+          <?php
+          $content = $feedback->content;
+          if(strlen($content) > 50) {
+            $content = substr($content, 0, 250) . '...';
+          }
+          ?>
+          <p>{{$content}}</p>
+          <hr>
+        @endforeach
+        <a href="{{route('get.feedbacks')}}">Feedback panel</a>
+      </div><!-- .panel-body -->
+    </div><!-- .panel-default -->
+
+  </div><!-- .col-md-8 -->
 </div><!-- .row -->
 
 

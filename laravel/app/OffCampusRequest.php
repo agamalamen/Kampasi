@@ -20,4 +20,9 @@ class OffCampusRequest extends Model
   {
     return $this->belongsToMany('App\User');
   }
+
+  public function absences()
+  {
+    return $this->hasMany('App\Absence');
+  }
 }

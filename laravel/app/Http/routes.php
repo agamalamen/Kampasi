@@ -556,6 +556,12 @@ Route::get('/tools/off-campus/{request_id}/student-life-response/{response}', [
   'middleware' => 'auth'
 ]);
 
+Route::get('/tools/off-campus/teacher-response/{absence_id}/{response}', [
+  'uses' => 'OffCampusController@getTeacherResponse',
+  'as' => 'get.teacher.response',
+  'middleware' => 'auth'
+]);
+
 Route::get('/tools/off-campus/{request_id}/security-response/{response}', [
   'uses' => 'OffCampusController@getSecurityResponse',
   'as' => 'security.response',
@@ -708,6 +714,12 @@ Route::post('/data/members/all/manage/{username}/update', [
 Route::post('/data/members/all/create', [
   'uses' => 'UserController@postCreateUserManually',
   'as' => 'post.create.user.manually',
+  'middleware' => 'auth'
+]);
+
+Route::get('/actions/update/phone-privacy', [
+  'uses' => 'UserController@getPhonePrivacy',
+  'as' => 'get.phone.privacy',
   'middleware' => 'auth'
 ]);
 

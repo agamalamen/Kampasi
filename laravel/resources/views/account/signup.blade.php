@@ -9,7 +9,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="{{route('home')}}">Kampasi</a><small>Alpha</small>
+      <a class="navbar-brand" href="{{route('home')}}">Kampasi</a><small>Beta</small>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
@@ -24,22 +24,30 @@
     <div class="col-md-4 col-md-offset-4 login-container">
       <p>Already registered? <a href="{{route('get.login')}}">Login to your account</a><p>
       <form id="signup-form" action="{{route('post.signup')}}" method="post">
+        
         <div class="form-group">
           <input id="fullName" type="text" class="form-control input-lg" placeholder="Full name">
           <label class="control-label text-danger" id="fullNameError"></label>
         </div>
+        
         <div class="form-group">
           <input id="username" type="text" class="form-control input-lg" placeholder="Username">
           <label class="control-label text-danger" id="usernameError"></label>
         </div>
+        
         <div class="form-group">
           <input id="email" type="text" class="form-control input-lg" placeholder="Email">
           <label class="control-label text-danger" id="emailError"></label>
         </div>
+        
         <div class="form-group">
-          <input id="phone" type="number" class="form-control input-lg" placeholder="Phone number">
-          <label class="control-label text-danger" id="phoneError"></label>
+          <div class="input-group">
+            <span style="border: 0px;" class="input-group-addon" id="basic-addon1">+27</span>
+            <input id="phone" type="number" class="form-control input-lg" placeholder="Phone number" aria-describedby="basic-addon1">
+            <label class="control-label text-danger" id="phoneError"></label>
+          </div>
         </div>
+
         <div class="form-group">
           <input id="password" type="password" class="form-control input-lg" placeholder="Password">
           <label class="control-label text-danger" id="passwordError"></label>

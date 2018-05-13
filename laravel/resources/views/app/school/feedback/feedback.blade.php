@@ -48,7 +48,7 @@
         <div class="row">
           @if(!$feedback->anonymous)
           <div class="col-md-2">
-            <img id="user-avatar" class="img-responsive img-circle" style="cursor: pointer; height: 50px; width: 50px;" src="{{route('get.avatar', Auth::User()->avatar)}}">
+            <img id="user-avatar" class="img-responsive img-circle" style="cursor: pointer; height: 50px; width: 50px;" src="{{route('get.avatar', $feedback->user->avatar)}}">
           </div><!-- .col-md-4 -->
           <div class="col-md-4">
             <a href="{{route('dashboard', $feedback->user->username)}}">{{$feedback->user->name}}</a>

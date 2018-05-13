@@ -18,7 +18,7 @@ class School extends Model
 
     public function recentUsers()
     {
-      return $this->hasMany('App\User')->orderBy('id', 'DESC')->limit(5);
+      return $this->hasMany('App\User')->orderBy('id', 'DESC')->limit(10);
     }
 
     public function students()

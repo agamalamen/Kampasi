@@ -1,7 +1,15 @@
 @extends('layouts.school')
 @section('title') Off campus @endsection
 @section('app-content')
-      <p style="color: #333;"> <a href="#" style="color: #27ae60;" id="filter-results">See more <span class="caret"></span></a> <span class="pull-right">Showing {{count($requests)}} off campus requests</span></p>
+      <p style="color: #333;"> <a href="#" style="color: #27ae60;" id="filter-results">See more <span class="caret"></span></a> 
+      @if(Auth::User()->role == 'student')
+      <button type="button" class="btn btn-primary pull-right" data-toggle="modal" style="margin-bottom: 20px;" data-target="#offCampusRequestModal">Request off-campus</button>
+      <!--<form action="{{route('post.available.chaperones')}}" method="post">
+      <button type="submit" class="btn btn-primary pull-right">Add yourself as available chaperones for today</button>
+      {{csrf_field()}}
+      </form>-->
+      @endif
+      </p>
       <div id="statuses" class="row" style="display: none;">
         @if (Auth::User()->role != 'student')
         <div class="col-sm-2">
@@ -104,15 +112,6 @@
       <p style="color:#333" class="text-center">You have nothing to show</p>
     @endif
   <!-- Trigger the modal with a button -->
-
-  @if(Auth::User()->role == 'student')
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" style="margin-bottom: 20px;" data-target="#offCampusRequestModal">Request off-campus</button>
-  @else
-    <form action="{{route('post.available.chaperones')}}" method="post">
-      <button type="submit" class="btn btn-primary btn-lg">Add yourself as available chaperones for today</button>
-      {{csrf_field()}}
-    </form>
-  @endif
 
   @include('includes.modals.off-campus-request')
 

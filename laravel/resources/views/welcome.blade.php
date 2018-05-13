@@ -48,6 +48,6 @@
 
 
 <footer>
-  <p class="text-center">&copy; 2016 All rights reserved. Kampasi</p>
+  <p class="text-center">&copy; 2018 All rights reserved. Kampasi</p>
 </footer>
 @endsection
